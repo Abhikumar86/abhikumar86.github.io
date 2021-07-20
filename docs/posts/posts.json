@@ -5,15 +5,15 @@
     "description": "Welcome to our new blog, Abhishek Kumar. We hope you enjoy \nreading what we have to say!",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Abhishek Kumar",
+        "url": "https://akumar.netlify.app"
       }
     ],
     "date": "2021-07-21",
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2021-07-21T00:08:57+05:30",
-    "input_file": {}
+    "last_modified": "2021-07-21T01:12:11+05:30",
+    "input_file": "welcome.knit.md"
   }
 ]

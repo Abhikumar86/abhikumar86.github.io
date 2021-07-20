@@ -2,8 +2,13 @@ name: "abhikumar86.github.io"
 title: "Abhishek Kumar"
 description: |
   I blog about Plant Ecology and R
+base_url: https://abhikumar86.github.io  
 output_dir: "docs"
 navbar:
+  logo:
+    image: img/icon.png
+    href: https://abhikumar86.github.io
+  search: false  
   right:
     - text: "Home"
       href: index.html
