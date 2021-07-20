@@ -1,0 +1,12 @@
+name: "abhikumar86.github.io"
+title: "Abhishek Kumar"
+description: |
+  I blog about Plant Ecology and R
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output: distill::distill_article
