@@ -5,6 +5,10 @@ description: |
 author:
   - name: Abhishek Kumar
     url: https://akumar.netlify.app
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0003-2252-7623
+    
 date: 07-21-2021
 output:
   distill::distill_article:
@@ -13,41 +17,62 @@ output:
     toc_depth: 2
     toc_float: true
     theme: pygments
-draft: true
+    code_folding: false
+    
+draft: false
 ---
 
+```{r echo=FALSE}
+knitr::include_graphics("./data/singrauli-map.png")
+```
 
 # Load the packages
 
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)
-library(grid) # arranging inset maps
-library(OpenStreetMap) # OSM Maps and data
-library(osmdata) # osm data download
-library(raster) # raster data and operations
-library(sf) # simple features for spatial data
-library(tmap) # thematic mapping
+library(grid)               # arranging inset maps
+library(OpenStreetMap)      # OSM Maps and data
+library(osmdata)            # osm data download
+library(raster)             # raster data and operations
+library(sf)                 # simple features for spatial data
+library(tmap)               # thematic mapping
 library(tmaptools) 
 ```
 
 # Prepare a base hillshade
 
-```{r hillshade}
-bb <- c(82.48, 24.1, 82.8, 24.2) # extent for target site as left, bottom, right, upper
+```{r eval=FALSE}
+# extent for target site as left, bottom, right, upper
+bb <- c(82.48, 24.1, 82.8, 24.2) 
 
-#dem <- getData(name = "SRTM", lon = 84, lat = 24, path = "./dem/") # download data from SRTM
+# download data from SRTM
+dem <- getData(name = "SRTM", lon = 84, lat = 24, path = "./dem/") 
 
-#dem_crop <- dem %>% crop(extent(82.48, 82.8, 24.1, 24.2)) # cropped to target site
-#rm(dem) # remove dem from environment
+# cropped to target site
+dem_crop <- dem %>% crop(extent(82.48, 82.8, 24.1, 24.2)) 
 
-#slope <- terrain(dem_crop, opt= "slope") # extract slope from dem_crop
-#aspect <- terrain(dem_crop, opt= "aspect") # extract aspect from dem_crop
-#dem_hs <- hillShade(slope = slope, aspect = aspect, angle = 45, direction = 315) # prepare hill shade
+# remove dem from environment
+rm(dem) 
+
+# extract slope from dem_crop
+slope <- terrain(dem_crop, opt= "slope") 
+
+# extract aspect from dem_crop
+aspect <- terrain(dem_crop, opt= "aspect")
+
+# prepare hill shade
 # 45 altitude angle and 315 azimuth angle
+dem_hs <- hillShade(slope = slope, aspect = aspect, angle = 45, direction = 315) 
 
-#writeRaster(x = dem_hs, filename = "./data/dem_hs.tif", overwrite = T) # write to local directory
-#rm(slope, aspect) # removed slope and aspect files
+# write to local directory
+writeRaster(x = dem_hs, filename = "./data/dem_hs.tif", overwrite = T) 
 
+# removed slope and aspect files
+rm(slope, aspect) 
+```
+
+
+```{r hillshade}
 hs <- raster("./data/dem_hs.tif") # read the hillshade file
 
 tm_shape(hs) + 
@@ -81,6 +106,7 @@ tm_shape(hs) +
 ## add major roads
 
 ```{r singrauli-roads, message=FALSE, warning=FALSE}
+
 #s_roads <- opq(bbox = bb) %>% # xmin, ymin, xmax, ymax
       #add_osm_feature(key = "highway", value = c("trunk")) %>% 
       #osmdata_sf()
@@ -170,6 +196,8 @@ inset_map <- tm_shape(world_adm, bbox = st_bbox(ind_adm)) +
       
       tm_layout(bg.color = "#9bbff4", frame = "grey85")
 
+tmap_options(check.and.fix = TRUE)
+inset_map
 #rm(cm, cmj, hs, ind_adm, ind_adm0, s_bb, s_roads, water, world_adm) # remove undesired files
 ```
 
@@ -231,17 +259,17 @@ main_map
 
 ## arrange and save the final maps
 
-```{reval=FALSE}
+```{r eval=FALSE}
 # Create viewport
 vp <- viewport(x = 0.115, y = 0.98, width = unit(1, "inches"), 
                height = unit(1*asp2, "inches"), just = c("left", "top"))
 
 # save the map
-tmap_save(main_map, filename = "./data/singrauli-map.png", insets_tm = inset_map, 
+tmap_save(main_map, filename = "data/singrauli-map.png", insets_tm = inset_map, 
           insets_vp = vp, height = asp*7, width = 7, units = "in", dpi = 300)
 
 # save map in pdf
-tmap_save(main_map, filename = "./data/singrauli-map.pdf", insets_tm = inset_map, 
+tmap_save(main_map, filename = "data/singrauli-map.pdf", insets_tm = inset_map, 
           insets_vp = vp, height = asp*7, width = 7, units = "in", dpi = 300)
 ```
 
