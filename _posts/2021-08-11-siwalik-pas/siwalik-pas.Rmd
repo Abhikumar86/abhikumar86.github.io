@@ -1,0 +1,70 @@
+---
+title: "siwalik-pas"
+description: |
+  Protected areas in Indian Siwaliks
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0003-2252-7623
+        
+date: 08-11-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+    code_folding: false
+---
+
+
+# load the required packages
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(osmdata)
+library(raster)
+library(rayshader)
+library(sf)
+library(tmap)
+```
+
+
+# create a outline bounding box for area of interest
+
+```{r}
+sw_bbox <- st_bbox(obj = c(xmin = 73.5, ymin = 28.4, xmax = 80.4, ymax = 34.2),
+                    crs = 4326) |> st_as_sfc()
+tm_shape(swbbox) + 
+  tm_graticules() +
+  tm_fill(col = "lightpink", alpha = 0.8) +
+    tm_borders(col = "red", lwd = 1.5)
+```
+
+```{r}
+sw <- st_read("D:/spatial-data/boundaries/siwalik/Siwalik.shp")
+
+# define a bounding box for area of interest
+osm_bbox <- c(73.5, 28.4, 80.4, 34.2) # xmin, ymin, xmax, ymax
+
+# extract boundaries for pas
+sw_pas <- opq(osm_bbox) |> 
+  add_osm_feature(key = "boundary", value = "protected_area", value_exact = F) |> 
+  osmdata_sf()
+pas <- sw_pas$osm_polygons |> st_filter(sw, .predicate = st_intersects)
+
+#st_write(pas, "data/sw_pas.gpkg")
+
+tmap_mode("plot")
+tm_shape(sw) + 
+  tm_graticules() +
+  #tm_fill(col = "lightpink", alpha = 0.8) +
+  tm_borders(col = "red", lwd = 1.5) +
+  
+  tm_shape(pas) + tm_borders(col = "darkgreen") + tm_fill(col = "lightgreen", alpha = 0.5)
+```
+

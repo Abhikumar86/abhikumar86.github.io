@@ -1,0 +1,246 @@
+---
+title: "3d-map"
+description: |
+  Preparation of real looking maps with `rayshader`
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0003-2252-7623
+    
+date: 08-21-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+    code_folding: false
+    
+draft: false
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(message = F, warning = F, layout = "l-page")
+```
+
+The R package `rayshader` uses different hill shading techniques by calculating a colour for each point on the surface using:
+
+* A direct elevation-to-colour mapping: `height_shade()`
+* The surface normals and hemispherical UV mapping: `sphere_shade()`
+* Lambert Shading Mapping by calculating the dot product between light direction and the surface normal vector: `lamb_shade()`
+* shadows calculated by Leland Brown’s “texture shading” method: `texture_shade()`. This better defines ridges and drainage networks
+* Ambient occlusion layer darkens the valleys to account for less scattered atmospheric light reaching the valley floor: `ambient_shade()`
+
+
+# load the required packages
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(osmdata)
+library(raster)
+library(rayshader)
+library(sf)
+library(tmap)
+```
+
+1. load the elevation data for area of interest and convert to a matrix
+
+```{r}
+dem <- raster("D:/spatial-data/dem/n30_e076_1arc_v3.tif") |>
+  merge(raster("D:/spatial-data/dem/n30_e077_1arc_v3.tif")) |> 
+  crop(extent(76.8, 77.1, 30.6, 30.9))
+
+dem_mat <- raster_to_matrix(dem)
+```
+
+2. Build a base map with `rayshader`
+
+```{r}
+dem_mat |> 
+  height_shade() |> 
+  plot_map()
+```
+
+3. add a spherical aspect shading colour
+
+```{r}
+dem_mat |> 
+  height_shade() |> 
+  add_overlay(
+    sphere_shade(dem_mat, texture = "desert", zscale=4, colorintensity = 5), 
+    alphalayer=0.5) |>
+  plot_map()
+```
+
+4. overlay a standard hillshade or Lambertian (cosine) shading
+
+```{r}
+dem_mat |> 
+  height_shade() |> 
+  add_overlay(
+    sphere_shade(dem_mat, texture = "desert", zscale = 4, colorintensity = 5), 
+    alphalayer = 0.5) |>
+  add_shadow(lamb_shade(dem_mat, zscale = 6), 0) |>
+  plot_map()
+```
+
+5. add shadows calculated by Leland Brown’s “texture shading” method
+
+```{r}
+dem_mat |> 
+  height_shade() |> 
+  add_overlay(
+    sphere_shade(dem_mat, texture = "desert", zscale = 4, colorintensity = 5), 
+    alphalayer = 0.5) |>
+  add_shadow(lamb_shade(dem_mat, zscale = 6), 0) |>
+  add_shadow(texture_shade(dem_mat, detail = 8/10, contrast = 9, brightness = 11), 
+             0.1) |>
+  plot_map()
+```
+
+6. add an ambient occlusion layer
+
+```{r}
+base_map <- dem_mat |> 
+  height_shade() |> 
+  add_overlay(
+    sphere_shade(dem_mat, texture = "desert", zscale = 4, colorintensity = 5), 
+    alphalayer = 0.5) |>
+  add_shadow(lamb_shade(dem_mat, zscale = 6), 0) |>
+  add_shadow(ambient_shade(dem_mat), 0) %>%
+  add_shadow(texture_shade(dem_mat, detail = 8/10, contrast = 9, brightness = 11), 
+             0.1)
+base_map |> plot_map()
+```
+
+7. extract boundaries for protected areas from `osm` and add to base-map
+
+```{r}
+# define a bounding box for area of interest
+osm_bbox <- c(76.8, 30.6, 77.1, 30.9) # xmin, ymin, xmax, ymax
+
+# extract boundaries for pas
+#dem_pas <- opq(osm_bbox) |> 
+  #add_osm_feature(key = "boundary", value = "protected_area", value_exact = F) |> 
+  #osmdata_sf()
+#pas <- dem_pas$osm_polygons |> mutate(short_name = c("MH", "BS", "SL"))
+#st_write(pas, "data/pas.gpkg")
+pas <- st_read("data/pas.gpkg")
+#rm(dem_pas) # remove dem_pas
+
+# osm extent for layers
+extent <- extent(76.8, 77.1, 30.6, 30.9)
+
+# prepare pas layer for overlaying
+pas_layer <- generate_polygon_overlay(pas, extent = extent, heightmap = dem_mat,
+                                      palette = "green")
+
+# add to base map
+base_map |>
+  add_overlay(pas_layer, alphalayer = 0.4) |>
+  plot_map()
+```
+
+8. extract rivers and streams from `osm` and add them to base-map
+
+```{r}
+# extract waterway (rivers) from osm
+#dem_water <- opq(osm_bbox) |> 
+  #add_osm_feature(key = "waterway") |> 
+  #osmdata_sf()
+
+# extract lake from osm
+#dem_lake <- opq(osm_bbox) |> 
+  #add_osm_feature(key = "natural", value = "water") |>
+  #osmdata_sf()
+
+# filter major river and streams
+#rivers <- dem_water$osm_lines |> filter(waterway == "river")
+#streams <- dem_water$osm_lines |> filter(waterway != "river")
+#lake <- dem_lake$osm_multipolygons
+#st_write(rivers, "data/rivers.gpkg")
+#st_write(streams, "data/streams.gpkg")
+#st_write(lake, "data/lake.gpkg")
+
+rivers <- st_read("data/rivers.gpkg")
+streams <- st_read("data/streams.gpkg")
+lake <- st_read("data/lake.gpkg")
+
+# remove dem_water
+#rm(dem_water)
+
+# prepare the river and stream layer for overlaying
+stream_layer <- generate_line_overlay(rivers, extent = extent,
+                          heightmap = dem_mat, linewidth = 8, color = "skyblue2") |>
+  add_overlay(
+    generate_line_overlay(streams, extent = extent,
+                          heightmap = dem_mat, linewidth = 4, color = "skyblue")) |>
+  add_overlay(
+    generate_polygon_overlay(lake, extent = extent, 
+                             heightmap = dem_mat, palette = "skyblue"))
+
+# add to base map
+base_map |>
+  add_overlay(pas_layer, alphalayer = 0.4) |>
+  add_overlay(stream_layer, alphalayer = 0.8) |>
+  plot_map()
+```
+9. extract major roads from `osm` and add them
+
+```{r}
+# extract highway from osm
+#dem_highway <- opq(osm_bbox) |> 
+  #add_osm_feature(key = "highway") |> 
+  #osmdata_sf()
+
+# filter major roads
+#trunk_roads <- dem_highway$osm_lines |> filter(highway == "trunk")
+#secondary_roads <- dem_highway$osm_lines |> filter(highway == "secondary")
+#st_write(trunk_roads, "data/trunk_road.gpkg")
+#st_write(secondary_roads, "data/secondary_road.gpkg")
+
+trunk_roads <- st_read("data/trunk_road.gpkg")
+secondary_roads <- st_read("data/secondary_road.gpkg")
+
+# remove dem_highway
+#rm(dem_highway)
+
+# prepare the road layer for overlaying
+roads_layer <- generate_line_overlay(trunk_roads, extent = extent,
+                          heightmap = dem_mat,
+                          linewidth = 5, color = "white") |>
+  add_overlay(
+    generate_line_overlay(secondary_roads, extent = extent,
+                          heightmap = dem_mat,
+                          linewidth = 2.5, color = "white"))
+# add to base map
+base_map |>
+  add_overlay(pas_layer, alphalayer = 0.4) |>
+  add_overlay(stream_layer, alphalayer = 0.8) |>
+  add_overlay(roads_layer) |>
+  plot_map()
+```
+
+9. generate and add labels
+
+```{r}
+# prepare a label layer for overlaying
+pas_name_layer <- generate_label_overlay(pas, extent = extent, heightmap = dem_mat,
+                           data_label_column = "name",
+                           text_size = 3, color = "white",
+                           halo_color = "darkgreen", halo_expand = 10, halo_alpha = 0.8,
+                           halo_blur = 20, 
+                           point_size = 2, seed = 123)
+# add to base map
+base_map |>
+  add_overlay(pas_layer, alphalayer = 0.4) |>
+  add_overlay(stream_layer, alphalayer = 0.8) |>
+  add_overlay(roads_layer) |>
+  add_overlay(pas_name_layer) |>
+  plot_map()
+```
+

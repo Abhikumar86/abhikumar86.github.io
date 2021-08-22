@@ -7,7 +7,24 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 21 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>3d-map</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-07-21-3d-map</link>
+      <description>A short description of the post.</description>
+      <guid>https://abhikumar86.github.io/posts/2021-07-21-3d-map</guid>
+      <pubDate>Sat, 21 Aug 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/posts/2021-07-21-3d-map/3d-map_files/figure-html5/unnamed-chunk-3-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+    <item>
+      <title>R packages for Ecology</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</link>
+      <description>A short description of the post.</description>
+      <guid>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</guid>
+      <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Singrauli Map</title>
       <dc:creator>Abhishek Kumar</dc:creator>

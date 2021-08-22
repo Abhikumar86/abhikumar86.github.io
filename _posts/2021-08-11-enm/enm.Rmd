@@ -1,0 +1,26 @@
+---
+title: "ENM"
+description: |
+  A short description of the post.
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0003-2252-7623
+    
+date: 08-11-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true    
+---
+
+# Install and load the required packages
+
+```{r}
+
+```
+
+
+# Download occurrence data

@@ -1,0 +1,112 @@
+---
+title: "R packages for Ecology"
+description: |
+  A short description of the post.
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0003-2252-7623
+        
+date: 08-13-2021
+
+bibliography: refs.bib
+
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+    code_folding: false
+---
+
+```{r message=FALSE, warning=FALSE, echo=FALSE, layout = "l-page"}
+library(kableExtra)
+
+rbind(
+  
+  c("`adiv`", "analyse biodiversity in ecology", "@pavoine2020", ""),
+  
+  c("`BAT`", "measurement and estimation of alpha and beta taxon, phylogenetic and functional diversity", "@cardoso2014", ""),
+  
+  c("`betapart`", "partitioning beta diversity into turnover and nestedness components", "@baselga2012", ""),
+  
+  c("`bien`", "Botanical Information and Ecology Network (BIEN) database", "@maitner2017", ""),
+  
+  c("`biodivMapR`", "mapping $\\alpha$ and $\\beta$ diversity from remotely sensed images", "@fret2019", "https://jbferet.github.io/biodivMapR/"),
+  
+  c("`biomass`", "estimating above-ground biomass and its uncertainty in tropical forests", "@rjoumchain2017", ""),
+  
+  c("`ConR`", "large-scale multispecies preliminary conservation assessments using distribution data", "@dauby2017", ""),
+  
+  c("`ecospat`", "spatial analyses and modeling of species niches and distributions", "@cola2017", "https://www.unil.ch/ecospat/home/menuguid/ecospat-resources/tools.html"),
+  
+  c("`ENMTools`", "toolbox for ecological niche modelling in comparative ecological biogeography", "@warren2021", "https://github.com/danlwarren/ENMTools"),
+  
+  c("`ForestFit`", "bayesian modeling for plant height diameter data", "@teimouri2020", ""),
+  
+  c("`ForestGapR`", "forest gap analysis from canopy height models", "@silva2019", ""),
+  
+  c("`GapAnalysis`", "calculation of conservation indicators using spatial information", "@carver2021", "https://github.com/CIAT-DAPA/GapAnalysis"),
+  
+  c("`geodiv`", "gradient surface metrics to provide continuous measures of landscape heterogeneity", "@smith2021", ""),
+  
+  c("`geoorigin`", "trait mapping and geographic provenancing of specimens without categorical constraints", "@hulme-beaman2020", ""),
+  
+  c("`GerminaR`", "germination analysis for plants", "@lozanoisla2019", ""),
+  
+  c("`Hmsc`", "Hierarchical Modelling of Species Communities with Joint species distribution models", "@tikhonov2020", "https://github.com/hmsc-r/HMSC"),
+  
+  c("`letsR`", "data handling and analysis in macroecology", "@vilela2015", ""),
+  
+  c("`MBHdesign`", "Efficient spatial survey design", "@foster2020", ""),
+  
+  c("`MIAmaxent`", "Variable transformation and model selection for species distribution models", "@vollering2019", ""),
+  
+  c("`mobsim`", "simulation and measurement of biodiversity across spatial scales", "@may2018", ""),
+  
+  c("`NicheMapR`", "biophysical modelling: the microclimate model", "@kearney2016", "https://mrke.github.io/"),
+  
+  c("`nlstimedist`", "quantification of unimodal phenology distributions", "@steer2019", ""),
+  
+  c("`ntbox`", "modelling and evaluating multidimensional ecological niches", "@osorio-olvera2020", "https://luismurao.github.io/ntbox_user_guide.html"),
+  
+  c("`phyloregion`", "biogeographical regionalization and macroecology", "@daru2020", "https://phyloregion.com/"),
+  
+  c("`phyr`", "phylogenetic species-distribution modelling in ecological communities", "@li2020", "https://daijiang.github.io/phyr/"),
+  
+  c("`R2MCDS`", "analysis of multi-species datasets collected using distance sampling", "@bolduc2018", "https://github.com/RoyChristian/R2MCDS"),
+  
+  c("`rasterdiv`", "measuring ecosystem heterogeneity from space", "@rocchini2021", "https://github.com/mattmar/rasterdiv"),
+  
+  c("`red`", "", "", ""),
+  
+  c("`sars`", "fitting, evaluating and comparing species–area relationship models", "@matthews2019", ""),
+  
+  c("`segRDA`", "piecewise redundancy analysis", "@vieira2019", ""),
+  
+  c("`spatialwarnings`", "Monitoring ecosystem degradation using spatial data", "@gnin2018", ""),
+  
+  c("`ssdm`", "predict distribution of species richness and composition based on stacked species distribution models", "@schmitt2017", "https://github.com/sylvainschmitt/SSDM"),
+  
+  c("`SSP`", "estimation of sampling effort in studies of ecological communities", "@guerracastro2021", "https://github.com/edlinguerra/SSP"),
+  
+  c("`V.PhyloMaker`", "generate very large phylogenies for vascular plants", "@jin2019", ""),
+  
+  c("`VoCC`", "velocity of climate change and related climatic metrics", "@garcamolinos2019", ""),
+  
+  c("`wallace`", "reproducible modeling of species niches and distributions", "@kass2018", "https://wallaceecomod.github.io/"),
+  
+  c("`zoon`", "reproducible and shareable species distribution modelling", "@golding2017", "")
+  
+) |> 
+  as.data.frame() |>
+  knitr::kable(col.names = c("Package", "Description", "Reference", "Links"), valign = "t") |>
+  row_spec(0, background = "#666", color = "#fff")
+```
+
+
+
