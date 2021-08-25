@@ -20,10 +20,13 @@ output:
     code_folding: false
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+``` 
 
 # load the required packages
 
-```{r}
+```{r }
 library(dplyr)
 library(ggplot2)
 library(osmdata)
@@ -39,7 +42,7 @@ library(tmap)
 ```{r}
 sw_bbox <- st_bbox(obj = c(xmin = 73.5, ymin = 28.4, xmax = 80.4, ymax = 34.2),
                     crs = 4326) |> st_as_sfc()
-tm_shape(swbbox) + 
+tm_shape(sw_bbox) + 
   tm_graticules() +
   tm_fill(col = "lightpink", alpha = 0.8) +
     tm_borders(col = "red", lwd = 1.5)
@@ -49,22 +52,25 @@ tm_shape(swbbox) +
 sw <- st_read("D:/spatial-data/boundaries/siwalik/Siwalik.shp")
 
 # define a bounding box for area of interest
-osm_bbox <- c(73.5, 28.4, 80.4, 34.2) # xmin, ymin, xmax, ymax
+#osm_bbox <- c(73.5, 28.4, 80.4, 34.2) # xmin, ymin, xmax, ymax
 
 # extract boundaries for pas
-sw_pas <- opq(osm_bbox) |> 
-  add_osm_feature(key = "boundary", value = "protected_area", value_exact = F) |> 
-  osmdata_sf()
-pas <- sw_pas$osm_polygons |> st_filter(sw, .predicate = st_intersects)
+#sw_pas <- opq(osm_bbox) |> 
+  #add_osm_feature(key = "boundary", value = "protected_area", value_exact = F) |> 
+  #osmdata_sf()
+#pas <- sw_pas$osm_polygons |> st_filter(sw, .predicate = st_intersects) |> 
+#dplyr::select(name, geom) |> filter(!is.na(name))
 
 #st_write(pas, "data/sw_pas.gpkg")
 
-tmap_mode("plot")
+sw_pas <- st_read("data/sw_pas.gpkg")
+
+
 tm_shape(sw) + 
   tm_graticules() +
   #tm_fill(col = "lightpink", alpha = 0.8) +
   tm_borders(col = "red", lwd = 1.5) +
   
-  tm_shape(pas) + tm_borders(col = "darkgreen") + tm_fill(col = "lightgreen", alpha = 0.5)
+  tm_shape(sw_pas) + tm_borders(col = "darkgreen") + tm_fill(col = "lightgreen", alpha = 0.5)
 ```
 

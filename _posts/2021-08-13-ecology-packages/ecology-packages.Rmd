@@ -23,7 +23,7 @@ output:
     code_folding: false
 ---
 
-```{r message=FALSE, warning=FALSE, echo=FALSE, layout = "l-page"}
+```{r message=FALSE, warning=FALSE, echo=FALSE, layout = "l-screen"}
 library(kableExtra)
 
 rbind(
