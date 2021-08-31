@@ -1,36 +1,53 @@
 ---
-title: "Vegetation Indices from Satellite Images"
+title: "Google Earth Engine in R"
 description: |
-  Calculating vegetation indices from remotely sensed data using Google Earth Engine in R
+  Google Earth Engine in `R` with package `rgee`
+  
 author:
   - name: Abhishek Kumar
-    url: https://akumar.netlify.app
+    url: https://akumar.netlify.app/
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in/
+    orcid_id: 0000-0003-2252-7623
+    
 date: 08-22-2021
+
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+    code_folding: true
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+```{r}
+knitr::include_graphics("data/pkl-ndvi.gif")
+```
+
+
+# Set up Google Earth Engine in R
 
 ```{r rgee-setup, eval=FALSE}
-## install the package rgee
-install.packages("rgee")
-
 ## load the package
 library(rgee)
 
 ## initially run once to set up rgee
 ee_install(py_env = "rgee")
 
+#reticulate::py_install(packages = 'earthengine-api', 
+#envname = 'C:/Users/ARVIND/AppData/Local/r-miniconda/envs/rgee')
+
 ## check for proper set up for rgee installation and dependencies
 ee_check() # Check non-R dependencies
-ee_clean_credentials() # Remove credentials of a specific user
+#ee_clean_credentials() # Remove credentials of a specific user
 ee_clean_pyenv() # Remove reticulate system variables
 
 ## Initialize Earth Engine!
@@ -39,7 +56,7 @@ ee_Initialize()
 srtm <- ee$Image("USGS/SRTMGL1_003") 
 ```
 
-# Extract climate data from TerraClimate
+# Precipitation from TerraClimate
 
 ```{r}
 library(rgee)
@@ -49,7 +66,7 @@ library(tidyverse)
 ee_Initialize()
 
 ## read the boundary for MHWLS (area of interest)
-mwls <- st_read("data/pas.gpkg") |> filter(short_name == "MH") |> sf_as_ee()
+mwls <- st_read("data/elev_band.gpkg") |> sf_as_ee()
 
 ## Map each image from 2019 to extract the monthly precipitation (Pr)
 terraclimate <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE") |>
@@ -61,33 +78,39 @@ terraclimate <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE") |>
   ee$ImageCollection$map(function(x) x$select("pr")) |> 
   
   ## from imagecollection to image
-  ee$ImageCollection$toBands() |> 
+  ee$ImageCollection$toBands()
   
   ## rename the bands of an image
-  ee$Image$rename(sprintf("PP_%02d", 1:12))
+  #ee$Image$rename(sprintf("PP_%02d", 1:12))
 
 ## extract precipitation values for area of interest
 ee_mwls_rain <- ee_extract(x = terraclimate, y = mwls, sf = FALSE)
 
 
 ee_mwls_rain |>
-  pivot_longer(-c(1:6), names_to = "month", values_to = "pr") |>
-  mutate(month, month = gsub("PP_", "", month)) |>
-  ggplot(aes(x = month, y = pr, group = name, color = pr)) +
-  geom_line(alpha = 0.4, lwd = 2.5) +
-  xlab("Month") +
+  pivot_longer(-c(1:2), names_to = "date", values_to = "pr") |>
+  mutate(date = gsub("_pr", "", date)) |>
+  mutate(date = gsub("X", "", date)) |>
+  mutate(year = substr(date, 1, 4), month = substr(date, 5, 6)) |>
+  mutate(date = paste(year, month, "01", sep = "-")) |>
+  ggplot(aes(x = as.Date(date), y = pr, group = elev_zone, color = elev_zone)) +
+  geom_line(alpha = 0.4, lwd = 1) +
+  scale_color_discrete(name = "Elevation (m)") +
+  #facet_wrap(.~elev_zone) +
+  xlab("Time") +
   ylab("Precipitation (mm)") +
-  theme_minimal()
+  theme_bw() #+
+  #theme(legend.position = c(0.85, 0.25))
+
+rm(list = ls())
 ```
 
-# Create an NDVI-animation
+# NDVI animation from MODIS
 
 ```{r eval=FALSE}
-library(magick)
-
 ## Define the regional bounds of animation frames and a mask to clip the NDVI data by.
-mwls <- st_read("data/pas.gpkg") |> filter(short_name == "MH") |> sf_as_ee()
-region <- mwls$geometry()$bounds()
+pkl <- st_read("data/Panchkula.gpkg") |> sf_as_ee()
+region <- pkl$geometry()$bounds()
 
 ## Retrieve the MODIS Terra Vegetation Indices 16-Day Global 1km dataset as 
 ## an ee.ImageCollection and select the NDVI band.
@@ -98,7 +121,7 @@ col <- col$map(function(img) {
   doy <- ee$Date(img$get('system:time_start'))$getRelative('day', 'year')
   img$set('doy', doy)
 })
-distinctDOY <- col$filterDate('2013-01-01', '2014-01-01')
+distinctDOY <- col$filterDate('2019-01-01', '2020-01-01')
 
 ## Define a filter that identifies which images from the complete collection
 ## match the DOY from the distinct DOY collection.
@@ -132,7 +155,7 @@ visParams = list(
 ## Create RGB visualization images for use as animation frames.
 rgbVis <- comp$map(function(img) {
   do.call(img$visualize, visParams) |>
-    ee$Image$clip(mwls)
+    ee$Image$clip(pkl)
 })
 
 ## Define GIF visualization parameters.
@@ -152,27 +175,15 @@ dates_modis_mabbr <- distinctDOY |>
   mutate(months = month.abb[month]) |>
   select(months)
 
-## Use ee_utils_gif_* functions to render the GIF animation and add some texts.
-ee_utils_creat
-
-animation <- ee_utils_gif_creator(rgbVis, gifParams, mode = "wb")
-animation |>
-  ee_utils_gif_annotate(
-    text = "NDVI: MODIS/006/MOD13A2",
-    size = 15, color = "white",
-    location = "+10+10"
-  ) |>
-  ee_utils_gif_annotate(
-    text = dates_modis_mabbr,
-    size = 30,
-    location = "+290+350",
-    color = "white",
-    font = "arial",
-    boxcolor = "#000000"
-  ) # -> animation_wtxt
-
-#ee_utils_gif_save(animation_wtxt, path = "raster_as_ee.gif")
-
-print(rgbVis.getVideoThumbURL(gifParams));
+# url for animation
+print(rgbVis$getVideoThumbURL(gifParams))
 ```
 
+```{r}
+knitr::include_graphics("data/pkl-ndvi.gif")
+```
+
+# Acknowledgements
+
+* https://csaybar.github.io/rgee-examples/
+* https://r-spatial.github.io/rgee/

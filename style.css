@@ -1,0 +1,35 @@
+/* title and background */
+/* #115f5b, #e9fbfa, #159957 */
+.distill-site-nav {
+    --text-size: 18px;
+    color: #115f5b;
+    background-color: #e9fbfa;
+}
+
+/* hover color in nav bar */
+.distill-site-nav a:hover {
+    color: #383838;
+}
+
+/* Change appearance of headers */
+h1, h2, h3, h4, h5 {
+    font-family: 'Fira Mono', sans-serif;
+    color: #159957;
+}
+
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+
+/* Change bullets */
+ul > li::marker {
+  font-size: 1.125em;
+  color: #ff414b;
+}
+
+/* Change link appearance */
+d-article a {
+  border-bottom: 1px solid #159957;
+  color: #159957;
+  text-decoration: none;
+}

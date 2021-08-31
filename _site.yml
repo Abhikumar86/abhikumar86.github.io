@@ -1,21 +1,40 @@
 name: "abhikumar86.github.io"
+
 title: "Abhishek Kumar"
+
 description: |
   I blog about Plant Ecology and R
-base_url: https://abhikumar86.github.io
-repository_url: https://github.com/abhikumar86/abhikumar86.github.io
+  
+base_url: https://abhikumar86.github.io/
+
+repository_url: https://github.com/abhikumar86/abhikumar86.github.io/
+
+collections:
+  posts:
+    categories: true
+    categories_metadata: false
+    authors_metadata: false
+    share: [twitter, linkedin]  
+
 output_dir: "docs"
+
 creative_commons: CC BY
+
 twitter:
   site: "@abkumar_"
+  
 navbar:
   logo:
     image: img/icon.png
     href: https://abhikumar86.github.io
-  search: true  
+  search: false  
   right:
     - text: "Home"
       href: index.html
     - text: "About"
       href: about.html
-output: distill::distill_article
+    - icon: fa fa-twitter
+      href: https://twitter.com/abkumar_
+      
+output: 
+  distill::distill_article

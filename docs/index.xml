@@ -2,12 +2,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>Abhishek Kumar</title>
-    <link>https://abhikumar86.github.io</link>
+    <link>https://abhikumar86.github.io/</link>
     <atom:link href="https://abhikumar86.github.io/index.xml" rel="self" type="application/rss+xml"/>
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 21 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Morni Hills (Khol-Hi-Raitan) Wildlife Sanctuary</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-08-27-mwls</link>
+      <description>A short description and introduction.</description>
+      <guid>https://abhikumar86.github.io/posts/2021-08-27-mwls</guid>
+      <pubDate>Fri, 27 Aug 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Google Earth Engine in R</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-08-22-rgee-veg-indices</link>
+      <description>Google Earth Engine in `R` with package `rgee`</description>
+      <guid>https://abhikumar86.github.io/posts/2021-08-22-rgee-veg-indices</guid>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/posts/2021-08-22-rgee-veg-indices/rgee-veg-indices_files/figure-html5/unnamed-chunk-2-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>3d-map</title>
       <dc:creator>Abhishek Kumar</dc:creator>
@@ -23,7 +40,7 @@
       <link>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</link>
       <description>A list of useful `R` packages for ecology, biodiversity and conservation.</description>
       <guid>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</guid>
-      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Singrauli Map</title>

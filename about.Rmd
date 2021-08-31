@@ -1,9 +1,33 @@
 ---
-title: "About this blog"
-description: |
-  Some additional details about the blog
+title: "Abhishek Kumar"
+image: "abhi.jpg"
+links:
+  - label: Twitter
+    url: "https://twitter.com/abkumar_/"
+  - label: GitHub
+    url: "https://github.com/abhikumar86/"
+  - label: Email
+    url: "mailto:abhikumar.pu@gmail.com"
+output:
+  postcards::trestles
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+## Bio
+
+[Abhishek Kumar](https://akumar.netlify.app/) is a classically trained botanist 
+and plant ecologist living in Chandigarh. 
+His research focuses the patterns and processes of plant distribution and diversity 
+in Indian Siwaliks. He frequently collaborates with researchers who study plant ecology, 
+community ecology, and biogeography.
+
+## Education
+
+**Panjab University** | Chandigarh, IN
+
+PhD in Botany (Plant Ecology) | December 2017 - Present
+
+
+**Panjab University** | Chandigarh, IN
+
+MSc in Botany | July 2015 - May 2017
+

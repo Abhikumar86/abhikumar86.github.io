@@ -1,5 +1,6 @@
 ---
-title: "morni-plants"
+name: "morni-plants"
+title: "A"
 description: |
   A short description of the post.
 author:
