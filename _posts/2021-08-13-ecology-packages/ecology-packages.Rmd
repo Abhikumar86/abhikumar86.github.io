@@ -58,6 +58,8 @@ rbind(
   
   c("`GerminaR`", "germination analysis for plants", "@lozanoisla2019", ""),
   
+  c("`HistMapR`", "Rapid digitization of historical land-use maps in R", "@auffret2017", "https://github.com/AGAuffret/HistMapR"),
+  
   c("`Hmsc`", "Hierarchical Modelling of Species Communities with Joint species distribution models", "@tikhonov2020", "https://github.com/hmsc-r/HMSC"),
   
   c("`letsR`", "data handling and analysis in macroecology", "@vilela2015", ""),
@@ -79,6 +81,8 @@ rbind(
   c("`phyr`", "phylogenetic species-distribution modelling in ecological communities", "@li2020", "https://daijiang.github.io/phyr/"),
   
   c("`R2MCDS`", "analysis of multi-species datasets collected using distance sampling", "@bolduc2018", "https://github.com/RoyChristian/R2MCDS"),
+  
+  c("`RangeShiftR`", "individual-based simulation of spatial eco-evolutionary dynamics and species' responses to environmental changes", "@malchow2021", "https://rangeshifter.github.io/RangeshiftR-tutorials/"),
   
   c("`rasterdiv`", "measuring ecosystem heterogeneity from space", "@rocchini2021", "https://github.com/mattmar/rasterdiv"),
   

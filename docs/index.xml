@@ -7,7 +7,7 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 26 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Aug 2021 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Morni Hills (Khol-Hi-Raitan) Wildlife Sanctuary</title>
       <dc:creator>Abhishek Kumar</dc:creator>
@@ -16,8 +16,8 @@
       <category>protected areas</category>
       <category>siwaliks</category>
       <guid>https://abhikumar86.github.io/posts/2021-08-27-mwls</guid>
-      <pubDate>Thu, 26 Aug 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://abhikumar86.github.io/posts/2021-08-27-mwls/mwls_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+      <pubDate>Fri, 27 Aug 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/posts/2021-08-27-mwls/data/map.png" medium="image" type="image/png" width="2400" height="1800"/>
     </item>
     <item>
       <title>Google Earth Engine in R</title>

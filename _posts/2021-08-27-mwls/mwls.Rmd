@@ -5,6 +5,8 @@ title: "Morni Hills (Khol-Hi-Raitan) Wildlife Sanctuary"
 categories:
   - protected areas
   - siwaliks
+  - morni hills
+  - khol hi-raitan wildlife sanctuary
 
 description: |
   A short description and introduction.
@@ -33,12 +35,12 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 # Abstract
 
-```{r}
+```{r results='hide'}
 library(dplyr)
 library(raster)
 library(sf)
@@ -88,7 +90,7 @@ hs <- hillShade(
 	angle = 45, direction = 315)
 
 # make the map
-tm_shape(hs) + 
+mymap <- tm_shape(hs) + 
 	tm_raster(palette = "-Greys", n = 100, style = "cont", #alpha = 0.7, 
             legend.show = FALSE) +
 	
@@ -124,15 +126,39 @@ tm_shape(hs) +
             main.title.position = "center",
             legend.text.size = 0.85)
 
-#tmap_save(filename = "map.pdf", height = 6, width = 8, units = "in")
+#tmap_save(mymap, filename = "map.pdf", height = 6, width = 8, units = "in")
+#tmap_save(mymap, filename = "data/map.png", height = 6, width = 8, units = "in", dpi = 300)
 ```
+
+
+```{r}
+knitr::include_graphics("data/map.png")
+```
+
 
 
 # Introduction
 
-Morni Hills
-Introduction
+
 Various developmental activities and requirements of local people have brought significant ecological changes and degradation in the Siwalik Hills of the Inter State Chandigarh Region.
+
+```{r fig.cap="Figure from http://haryanaforest.gov.in/Portals/0/morni-sanctuary.jpg", layout = "l-body", out.extra="class=external", out.width="100%"}
+knitr::include_graphics("data/morni-sanctuary.jpg")
+```
+
+
+```{r fig.cap="Figure from https://parivesh.nic.in/writereaddata/ENV/Eco-sensitiveZone/16.pdf", layout = "l-body", out.extra="class=external", out.width="100%"}
+knitr::include_graphics("data/mwls-notification.pdf")
+```
+
+
+```{r fig.cap="Figure from http://moef.gov.in/wp-content/uploads/2019/10/Map-of-ESZ-of-Khol-Hi-Ratan-WLS-Haryana.pdf", layout = "l-body", out.extra="class=external", out.width="100%"}
+knitr::include_graphics("data/mwls-esz.pdf")
+```
+
+
+* http://haryanaforest.gov.in/en-us/Wild-Life/Protected-Area
+
 
 Review of literature
 Ecology
@@ -163,6 +189,7 @@ Climate is monsoonal, average rainfall of the area is 1069 mm and major portion 
 Results
 Discussions
 Conclusion
+
 References
 Balkrishna A, Srivastava A, Shukla B, et al (2018) Medicinal Plants of Morni Hills, Shivalik Range, Panchkula, Haryana. J Non-Timber For Prod 25:1–14
 Chand P (2015) Local people’s perceptions toward tourism: a case study of Morni hills (Haryana). Asia Pacific J Res 1:70–77

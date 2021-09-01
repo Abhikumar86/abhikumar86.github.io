@@ -103,9 +103,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description and introduction."/>
 <meta property="og:url" content="https://abhikumar86.github.io/posts/2021-08-27-mwls/"/>
-<meta property="og:image" content="https://abhikumar86.github.io/posts/2021-08-27-mwls/mwls_files/figure-html5/unnamed-chunk-1-1.png"/>
-<meta property="og:image:width" content="1248"/>
-<meta property="og:image:height" content="768"/>
+<meta property="og:image" content="https://abhikumar86.github.io/posts/2021-08-27-mwls/data/map.png"/>
+<meta property="og:image:width" content="2400"/>
+<meta property="og:image:height" content="1800"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Abhishek Kumar"/>
 
@@ -114,9 +114,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta property="twitter:title" content="Abhishek Kumar: Morni Hills (Khol-Hi-Raitan) Wildlife Sanctuary"/>
 <meta property="twitter:description" content="A short description and introduction."/>
 <meta property="twitter:url" content="https://abhikumar86.github.io/posts/2021-08-27-mwls/"/>
-<meta property="twitter:image" content="https://abhikumar86.github.io/posts/2021-08-27-mwls/mwls_files/figure-html5/unnamed-chunk-1-1.png"/>
-<meta property="twitter:image:width" content="1248"/>
-<meta property="twitter:image:height" content="768"/>
+<meta property="twitter:image" content="https://abhikumar86.github.io/posts/2021-08-27-mwls/data/map.png"/>
+<meta property="twitter:image:width" content="2400"/>
+<meta property="twitter:image:height" content="1800"/>
 <meta property="twitter:site" content="@abkumar_"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
@@ -137,7 +137,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/elv_band.gpkg","data/mwls_elev.dbf","data/mwls_elev.prj","data/mwls_elev.shp","data/mwls_elev.shx","data/pas.gpkg","data/sw_lake.gpkg","data/sw_roads.gpkg","data/sw_streams.gpkg","map.pdf","mwls_files/anchor-4.2.2/anchor.min.js","mwls_files/bowser-1.9.3/bowser.min.js","mwls_files/distill-2.2.21/template.v2.js","mwls_files/figure-html5/unnamed-chunk-1-1.png","mwls_files/header-attrs-2.10/header-attrs.js","mwls_files/jquery-1.11.3/jquery.min.js","mwls_files/popper-2.6.0/popper.min.js","mwls_files/tippy-6.2.7/tippy-bundle.umd.min.js","mwls_files/tippy-6.2.7/tippy-light-border.css","mwls_files/tippy-6.2.7/tippy.css","mwls_files/tippy-6.2.7/tippy.umd.min.js","mwls_files/webcomponents-2.0.0/webcomponents.js","refs.bib"]}
+  {"type":"character","attributes":{},"value":["data/elv_band.gpkg","data/map.png","data/morni-sanctuary.jpg","data/mwls-esz.pdf","data/mwls-notification.pdf","data/pas.gpkg","data/sw_lake.gpkg","data/sw_roads.gpkg","data/sw_streams.gpkg","map.pdf","mwls_files/anchor-4.2.2/anchor.min.js","mwls_files/bowser-1.9.3/bowser.min.js","mwls_files/distill-2.2.21/template.v2.js","mwls_files/figure-html5/unnamed-chunk-1-1.png","mwls_files/header-attrs-2.10/header-attrs.js","mwls_files/jquery-1.11.3/jquery.min.js","mwls_files/popper-2.6.0/popper.min.js","mwls_files/tippy-6.2.7/tippy-bundle.umd.min.js","mwls_files/tippy-6.2.7/tippy-light-border.css","mwls_files/tippy-6.2.7/tippy.css","mwls_files/tippy-6.2.7/tippy.umd.min.js","mwls_files/webcomponents-2.0.0/webcomponents.js","refs.bib"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -1892,70 +1892,23 @@ Show code
 
 <span class='co'>## load the data</span>
 <span class='co'># boundary for area of interest</span>
-<span class='va'>mwls</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/pas.gpkg"</span><span class='op'>)</span> |&gt; <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>short_name</span> <span class='op'>==</span> <span class='st'>"MH"</span><span class='op'>)</span>
-</code></pre>
-</div>
-</details>
-<pre><code>Reading layer `pas&#39; from data source 
-  `D:\R\abhikumar86.github.io\_posts\2021-08-27-mwls\data\pas.gpkg&#39; 
-  using driver `GPKG&#39;
-Simple feature collection with 3 features and 6 fields
-Geometry type: POLYGON
-Dimension:     XY
-Bounding box:  xmin: 76.81343 ymin: 30.67084 xmax: 76.99991 ymax: 30.80577
-Geodetic CRS:  WGS 84</code></pre>
-<details>
-<summary>
-Show code
-</summary>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># elevation data </span>
+<span class='va'>mwls</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/pas.gpkg"</span><span class='op'>)</span> |&gt; <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>short_name</span> <span class='op'>==</span> <span class='st'>"MH"</span><span class='op'>)</span>
+
+<span class='co'># elevation data </span>
 <span class='va'>elev</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span><span class='st'>"D:/spatial-data/dem/n30_e076_1arc_v3.tif"</span><span class='op'>)</span> |&gt;
   <span class='fu'><a href='https://rdrr.io/pkg/raster/man/merge.html'>merge</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span><span class='st'>"D:/spatial-data/dem/n30_e077_1arc_v3.tif"</span><span class='op'>)</span><span class='op'>)</span> |&gt; 
   <span class='fu'><a href='https://rdrr.io/pkg/raster/man/crop.html'>crop</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/extent.html'>extent</a></span><span class='op'>(</span><span class='fl'>76.85</span>, <span class='fl'>77.01</span>, <span class='fl'>30.66</span>, <span class='fl'>30.75</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># morni hills wls</span>
 
 <span class='co'># major roads</span>
-<span class='va'>sw_roads</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/sw_roads.gpkg"</span><span class='op'>)</span>
-</code></pre>
-</div>
-</details>
-<pre><code>Reading layer `sw_roads&#39; from data source 
-  `D:\R\abhikumar86.github.io\_posts\2021-08-27-mwls\data\sw_roads.gpkg&#39; 
-  using driver `GPKG&#39;
-Simple feature collection with 4082 features and 28 fields
-Geometry type: LINESTRING
-Dimension:     XY
-Bounding box:  xmin: 76.78795 ymin: 30.61273 xmax: 77.01875 ymax: 30.83662
-Geodetic CRS:  WGS 84</code></pre>
-<details>
-<summary>
-Show code
-</summary>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>trunk_roads</span> <span class='op'>&lt;-</span> <span class='va'>sw_roads</span> |&gt; <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>highway</span> <span class='op'>==</span> <span class='st'>"trunk"</span><span class='op'>)</span>
-<span class='va'>secondary_roads</span> <span class='op'>&lt;-</span> <span class='va'>sw_roads</span> |&gt; <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>highway</span> <span class='op'>==</span> <span class='st'>"secondary"</span><span class='op'>)</span>
-<span class='va'>tertiary_roads</span> <span class='op'>&lt;-</span> <span class='va'>sw_roads</span> |&gt; <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>highway</span> <span class='op'>==</span> <span class='st'>"tertiary"</span><span class='op'>)</span>
+<span class='va'>sw_roads</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/sw_roads.gpkg"</span><span class='op'>)</span>
+<span class='va'>trunk_roads</span> <span class='op'>&lt;-</span> <span class='va'>sw_roads</span> |&gt; <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>highway</span> <span class='op'>==</span> <span class='st'>"trunk"</span><span class='op'>)</span>
+<span class='va'>secondary_roads</span> <span class='op'>&lt;-</span> <span class='va'>sw_roads</span> |&gt; <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>highway</span> <span class='op'>==</span> <span class='st'>"secondary"</span><span class='op'>)</span>
+<span class='va'>tertiary_roads</span> <span class='op'>&lt;-</span> <span class='va'>sw_roads</span> |&gt; <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>highway</span> <span class='op'>==</span> <span class='st'>"tertiary"</span><span class='op'>)</span>
 
 <span class='co'># major rivers</span>
-<span class='va'>sw_streams</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/sw_streams.gpkg"</span><span class='op'>)</span>
-</code></pre>
-</div>
-</details>
-<pre><code>Reading layer `sw_streams&#39; from data source 
-  `D:\R\abhikumar86.github.io\_posts\2021-08-27-mwls\data\sw_streams.gpkg&#39; 
-  using driver `GPKG&#39;
-Simple feature collection with 52 features and 16 fields
-Geometry type: LINESTRING
-Dimension:     XY
-Bounding box:  xmin: 73.5626 ymin: 29.22947 xmax: 77.11868 ymax: 30.87021
-Geodetic CRS:  WGS 84</code></pre>
-<details>
-<summary>
-Show code
-</summary>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>dem_river</span> <span class='op'>&lt;-</span> <span class='va'>sw_streams</span> |&gt; <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>waterway</span> <span class='op'>==</span> <span class='st'>"river"</span><span class='op'>)</span>
-<span class='va'>dem_stream</span> <span class='op'>&lt;-</span> <span class='va'>sw_streams</span> |&gt; <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>waterway</span> <span class='op'>==</span> <span class='st'>"stream"</span><span class='op'>)</span>
+<span class='va'>sw_streams</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/sw_streams.gpkg"</span><span class='op'>)</span>
+<span class='va'>dem_river</span> <span class='op'>&lt;-</span> <span class='va'>sw_streams</span> |&gt; <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>waterway</span> <span class='op'>==</span> <span class='st'>"river"</span><span class='op'>)</span>
+<span class='va'>dem_stream</span> <span class='op'>&lt;-</span> <span class='va'>sw_streams</span> |&gt; <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>waterway</span> <span class='op'>==</span> <span class='st'>"stream"</span><span class='op'>)</span>
 
 
 <span class='co'># prepare elevation bands</span>
@@ -1967,24 +1920,9 @@ Show code
 <span class='co'>#elv_band &lt;- reclass_pol |&gt; </span>
     <span class='co'>#mutate(elev_zone = c("301-400", "401-500", "501-600", "601-700", "701-800"))</span>
 <span class='co'>#st_write(elv_band, "data/elv_band.gpkg")</span>
-<span class='va'>elv_band</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/elv_band.gpkg"</span><span class='op'>)</span>
-</code></pre>
-</div>
-</details>
-<pre><code>Reading layer `elv_band&#39; from data source 
-  `D:\R\abhikumar86.github.io\_posts\2021-08-27-mwls\data\elv_band.gpkg&#39; 
-  using driver `GPKG&#39;
-Simple feature collection with 5 features and 2 fields
-Geometry type: MULTIPOLYGON
-Dimension:     XY
-Bounding box:  xmin: 76.88181 ymin: 30.67097 xmax: 76.99986 ymax: 30.73847
-Geodetic CRS:  WGS 84</code></pre>
-<details>
-<summary>
-Show code
-</summary>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># prepare hillshade with</span>
+<span class='va'>elv_band</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>st_read</a></span><span class='op'>(</span><span class='st'>"data/elv_band.gpkg"</span><span class='op'>)</span>
+
+<span class='co'># prepare hillshade with</span>
 <span class='va'>hs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/hillShade.html'>hillShade</a></span><span class='op'>(</span>
   <span class='co'># extract slope from elevation</span>
   slope <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/terrain.html'>terrain</a></span><span class='op'>(</span><span class='va'>elev</span>, opt<span class='op'>=</span> <span class='st'>"slope"</span><span class='op'>)</span>,
@@ -1996,7 +1934,7 @@ Show code
   angle <span class='op'>=</span> <span class='fl'>45</span>, direction <span class='op'>=</span> <span class='fl'>315</span><span class='op'>)</span>
 
 <span class='co'># make the map</span>
-<span class='fu'><a href='https://rdrr.io/pkg/tmap/man/tm_shape.html'>tm_shape</a></span><span class='op'>(</span><span class='va'>hs</span><span class='op'>)</span> <span class='op'>+</span> 
+<span class='va'>mymap</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tmap/man/tm_shape.html'>tm_shape</a></span><span class='op'>(</span><span class='va'>hs</span><span class='op'>)</span> <span class='op'>+</span> 
   <span class='fu'><a href='https://rdrr.io/pkg/tmap/man/tm_raster.html'>tm_raster</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"-Greys"</span>, n <span class='op'>=</span> <span class='fl'>100</span>, style <span class='op'>=</span> <span class='st'>"cont"</span>, <span class='co'>#alpha = 0.7, </span>
             legend.show <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
   
@@ -2031,25 +1969,84 @@ Show code
             main.title <span class='op'>=</span> <span class='st'>"Morni Hills (Khol-Hi-Raitan) Wildlife Sanctuary"</span>,
             main.title.position <span class='op'>=</span> <span class='st'>"center"</span>,
             legend.text.size <span class='op'>=</span> <span class='fl'>0.85</span><span class='op'>)</span>
+
+<span class='co'>#tmap_save(mymap, filename = "map.pdf", height = 6, width = 8, units = "in")</span>
+<span class='co'>#tmap_save(mymap, filename = "data/map.png", height = 6, width = 8, units = "in", dpi = 300)</span>
 </code></pre>
 </div>
 </details>
-<img src="mwls_files/figure-html5/unnamed-chunk-1-1.png" width="624" />
+</div>
+<div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
 Show code
 </summary>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#tmap_save(filename = "map.pdf", height = 6, width = 8, units = "in")</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"data/map.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </details>
+<p><img src="data/map.png" width="1200" /></p>
 </div>
 <h1 id="introduction">Introduction</h1>
-<p>Morni Hills Introduction Various developmental activities and requirements of local people have brought significant ecological changes and degradation in the Siwalik Hills of the Inter State Chandigarh Region.</p>
+<p>Various developmental activities and requirements of local people have brought significant ecological changes and degradation in the Siwalik Hills of the Inter State Chandigarh Region.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"data/morni-sanctuary.jpg"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="data/morni-sanctuary.jpg" alt="Figure from http://haryanaforest.gov.in/Portals/0/morni-sanctuary.jpg" width="100%" class=external />
+<p class="caption">
+Figure 1: Figure from <a href="http://haryanaforest.gov.in/Portals/0/morni-sanctuary.jpg" class="uri">http://haryanaforest.gov.in/Portals/0/morni-sanctuary.jpg</a>
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"data/mwls-notification.pdf"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="data/mwls-notification.pdf" alt="Figure from https://parivesh.nic.in/writereaddata/ENV/Eco-sensitiveZone/16.pdf" width="100%" class=external />
+<p class="caption">
+Figure 2: Figure from <a href="https://parivesh.nic.in/writereaddata/ENV/Eco-sensitiveZone/16.pdf" class="uri">https://parivesh.nic.in/writereaddata/ENV/Eco-sensitiveZone/16.pdf</a>
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"data/mwls-esz.pdf"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="data/mwls-esz.pdf" alt="Figure from http://moef.gov.in/wp-content/uploads/2019/10/Map-of-ESZ-of-Khol-Hi-Ratan-WLS-Haryana.pdf" width="100%" class=external />
+<p class="caption">
+Figure 3: Figure from <a href="http://moef.gov.in/wp-content/uploads/2019/10/Map-of-ESZ-of-Khol-Hi-Ratan-WLS-Haryana.pdf" class="uri">http://moef.gov.in/wp-content/uploads/2019/10/Map-of-ESZ-of-Khol-Hi-Ratan-WLS-Haryana.pdf</a>
+</p>
+</div>
+</div>
+<ul>
+<li><a href="http://haryanaforest.gov.in/en-us/Wild-Life/Protected-Area" class="uri">http://haryanaforest.gov.in/en-us/Wild-Life/Protected-Area</a></li>
+</ul>
 <p>Review of literature Ecology The forest floor litter mass, litterfall, herbaceous biomass and the nutrient content of litter showed significant seasonal variations due to site and tissues in subtropical forest ecosystems of Siwalik hills (Rout and Gupta 1990b, a). Litter chemical quality controls the rate of leaf-litter decomposition measured as carbon dioxide evolution rates from the soil (Rout and Gupta 1987). Attempts have been made to estimate above ground biomass using Spectral modelling (Kumar et al. 2011). Biodiversity The Morni hills are rich in diversity of flora as well as fauna. The site is inhabited by diverse group of non-primates (Chopra et al. 2013). As many as 156 birds can be observed at lower Siwalik foothills (Chopra and Sharma 2014). Vegetation Palynostratigraphical studies of Subathu formation revealed the presence of dinoflagellates cysts, acritarch, fungal spores and ascostroma, pteridophytic spores, and pollen grains of gymnosperms and angiosperms (Sarkar and Prasad 2000). The Siwalik hills probably hosted a luxuriant vegetation in the pre-glacial times in view of rich and varied flora and fauna discovered from wide and distant localities in them. The account of the present-day flora and fauna shows that much has been lost in the last 150 years or more. Vegetation is analysed in three forest types of the site up to a limited extent previously (Rout and Gupta 1989). Several attempts have been made to document the plant diversity of the region (SP Jain, S Kumar, 2001). Orchids are poorly represented and only three orchids (Habenaria plantaginea Lindl., Rhynchostylis retusa Bl. and Zeuxine strateumatica (L.) Schltr.) have been reported from Haryana state (Jain et al, 2000; Kumar, 2001). Another orchid (Eulophia dabia (D.Don) Hochr.) was later added to the state’s flora (Vij and Verma 2005). Studies have clearly shown that the vegetation of Morni hills is under threat and as many as 61 species have been disappeared since 2000 (Singh and Vashistha 2014). Ecosystem services Land-use changes (in terms of controlled grazing and increased agriculture), physical structures for water harvesting and vegetation (especially grasses) have significantly reduced erosion and sedimentation. Erosion control combined with land-use changes has resulted in increased the biomass productivities of agriculture, timber and fodder (Scott and Walter 1993). Further, watershed development activities have also contributed the increase in vegetation cover and reduction in soil loss due to high water runoff (Singh et al. 2016). The local inhabitants already know that some plants are more effective in controlling soil erosion. For example, perennial Jhoond grass (Saccharum bengalense) and Bhabbar grass (Eulaliopsis binata) that is thought to be symbiotic with Khair (Acacia catechu), is used to prevent soil erosion (Scott and Walter 1993). Similarly, another plant called Jhingan (Lannea coromandelica) and vegetative barriers of Agave is used as fence for the fields and to stabilize eroding slopes, respectively (Scott and Walter 1993). The utilization various plants as a source of medicine, food, fodder, fibre, gum and dye indicate their socio-economic importance to the local people (Singh et al. 2017). More than 300 species from the Morni hills only are reported to be of medicinal importance (Balkrishna et al. 2018). Some of Lamiaceous plants possess anti-oxidant properties (Singh et al. 2014). Barberry (Berberis aristata DC.) from the hills have been implicated for dyeing the silk (Pruthi et al. 2008). Man-made disturbances especially Tourism can potentially threaten the biodiversity and ecological balance. Though tourism may offer economic development, there are also increased chances of habitat degradation and biodiversity loss (Chand 2015). Several trees of the area serve as sleeping site for near threatened Hanuman Langurs (Chopra et al. 2012). Materials and Methods Study Site Siwalik landscape has been identified as one of the most degraded ecosystems of India primarily due to its fragile soil resulting in heavy soil erosion. Weathering and erosion in this area has produced a variety of erosional land-form features. The seasonal streams commonly called choes run from NE to SW descend into the valleys. On an average more than 50% of the total rain in the Siwalik ends in run-off. At foothills, artificial Sukhna lake was constructed in 1958 for water storage, however, it is facing siltation problem due to erosion and sedimentation from Siwalik hills (Singh 2002). The Chandigarh Siwalik hills and Morni hills are separated by the Ghaggar river (Singh 2001). Tikkar taal is a natural lake at the site and known to support several diatoms (Saini et al. 2017). Water from natural resources have been reported to contain varying amount of Uranium and Radon indicating their presence in the rocks in the area (Singh et al. 2008, 2009a). The soils also have varying degree of Uranium, Radium and Radon (Singh et al. 2009b; Pundir et al. 2014). Soils The Lower Shivaliks are dominated by alluvial sediments chiefly consisting of loose sand and gravel inserted with clay horizons. Soil is clay loam or silt loam and underlying rocks are soft sandstones that are prone to erosion and result in high water runoff (Rout and Gupta 1990b). The alkali soils of the region are low in organic matter and deficient in nutrients, probably due to minimal leaf litter (Kumar et al. 1995).<br />
 Climate The Siwalik Hills experience Koeppen’s Cwg category climate based on annual and monthly means of temperature and rainfall (Koeppen, 1936). The climatic data of Chandigarh suggests that the Chandigarh Siwalik Hills have BSh category climate. For general vegetation there are two major growth periods February to March (Spring) and rainy months of July and August. Leaf fall for non-evergreen vegetation is experienced during October to November (Autumn). Climate is monsoonal, average rainfall of the area is 1069 mm and major portion of the rainfall occurs during June to September. The year is divisible into three seasons, warm wet rainy season (June to September), cool dry winter season (October to March) and hot dry summer season (April to May). Results Discussions Conclusion References Balkrishna A, Srivastava A, Shukla B, et al (2018) Medicinal Plants of Morni Hills, Shivalik Range, Panchkula, Haryana. J Non-Timber For Prod 25:1–14 Chand P (2015) Local people’s perceptions toward tourism: a case study of Morni hills (Haryana). Asia Pacific J Res 1:70–77 Chopra G, Bhoombak MB, Kumar P (2013) Prevalence of non-human primates in Morni Hills of Haryana, India: A survey. Tigerpaper 40:1–9 Chopra G, Bhoombak MB, Kumar P (2012) Selection and Shifting of Sleeping Sites by Hanuman Langurs in Morni Hills of Haryana , India. Zoo’s Print XXVII:19–24 Chopra G, Sharma SK (2014) Avian Diversity of Lower Shivalik Foothills, India. Int J Res Stud Biosci 2:1–12 Kumar R, Ahuja RL, Singh NT, Ghabru SK (1995) Characteristics and Classification of Alkali Soils on Siwalik Hills of Satluj-Yamuna Divide, North-West India. Agropedology 5:29–35 Kumar R, Gupta SR, Singh S, et al (2011) Spatial Distribution of Forest Biomass Using Remote Sensing and Regression Models in Northern Haryana , India. Int J Ecol Environ Sci 37:37–47 Pruthi N, Chawla GD, Yadav S (2008) Dyeing of silk with barberry bark dye using mordant combination. Nat Prod Radiance 7:40–44 Pundir A, Rajinder S, Sunil K (2014) Measurement of Radon Concentration and Exhalation Rates in Soil Samples of some districts of Haryana and Himachal in India. Researcher 6:71–76 Rout SK, Gupta SR (1990a) Forest floor, litterfall and nutrient return in subtropical forest ecosystems of Siwaliks in northern India. I. Forest floor litter and herbaceous biomass. Flora (Jena) 184:325–339. doi: 10.1016/S0367-2530(17)31631-6 Rout SK, Gupta SR (1990b) Forest floor, litterfall and nutrient return in subtropical forest ecosystems of Siwaliks in northern India. II. Litterfall pattern and nutrient turnover rates. Flora (Jena) 184:405–421. doi: 10.1016/S0367-2530(17)31643-2 Rout SK, Gupta SR (1987) Effect of chemical composition on leaf-litter decomposition in forest soil. Proc Plant Sci 97:399–404. doi: 10.1007/BF03053566 Rout SK, Gupta SR (1989) Analysis of forest vegetation of Morni hills in northeast Haryana. Proc Plant Sci 99:117–126. doi: 10.1007/BF03053523 Saini E, Khanagwal VP, Singh R (2017) A systematic databasing of diatoms from different geographical localities and sites of Haryana for advancing validation of forensic diatomology. Data Br 10:63–68. doi: 10.1016/j.dib.2016.11.072 Sarkar S, Prasad V (2000) Palynostratigraphy and depositional environment of the Subathu formation (late Ypresian-middle Lutetian), Morni Hills, Haryana, India. J. Paleontol. Soc. India 45:137–149 Scott CA, Walter MF (1993) Local Knowledge and Conventional Soil Science Approaches To Erosional Processes in the Shivalik Himalaya. Mt Res Dev 13:61–72. doi: 10.2307/3673644 Singh J, Singh A, Laxmi V (2017) Appraisal of non-timber forest products in Morni and Raipur Rani ranges of Shivalik hills, India. Int J For Usufructs Manag 18:2–13 Singh J, Singh H, Singh S, Bajwa BS (2008) Estimation of uranium and radon concentration in some drinking water samples. Radiat Meas 43:S523–S526. doi: 10.1016/j.radmeas.2008.04.004 Singh J, Singh H, Singh S, Bajwa BS (2009a) Estimation of uranium and radon concentration in some drinking water samples of Upper Siwaliks, India. Environ Monit Assess 154:15–22. doi: 10.1007/s10661-008-0373-8 Singh J, Singh H, Singh S, Bajwa BS (2009b) Uranium, radium and radon exhalationstudies in some soil samples using plastic track detectors. Indian J Phys 83:1147–1153 Singh N, Vashistha BD (2014) Flowering plant diversity and ethnobotany of Morni hills, Siwalik range, Haryana, India. Int J Pharm Bio Sci 5:214–222 Singh O, Sharma T, Singh J (2016) Farmers’ perceptions and satisfaction levels on the performance of watershed development activities in the Morni Hill area of the Siwalik Himalayas in India. Hum Ecol 44:91–104. doi: 10.1007/s10745-015-9801-x Singh S, Batish DR, Kohli RK, Singh HP (2014) An evaluation of the antioxidant properties of some oil yielding lamiaceous plants from Morni hills (Haryana, India). Int J Pharmacogn (Panchkula, India) 1:640–645. doi: 10.13040/IJPSR.0975-8232.IJP.1(10).640-45 Singh Y (2002) Siltation problems in Sukhna Lake in Chandigarh, NW India and comments on geohydrological changes in the Yamuna-Satluj region. ENVIS Bull Himal Ecol Dev 10:18–31 Singh Y (2001) Geo-ecology of the trans Satluj Punjab - Haryana Siwalik hills, NW India. ENVIS Bull Himal Ecol Dev 9:19–38 Vij SP, Verma J (2005) Eulophia dabia (D.Don) Hochr.: A new Orchid record for Haryana state, India. J Orchid Soc India 19:47–49</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
   <p class="social_footer">
