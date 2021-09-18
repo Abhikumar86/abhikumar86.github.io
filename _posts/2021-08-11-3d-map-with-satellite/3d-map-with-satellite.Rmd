@@ -24,7 +24,8 @@ library(scales)
 
 ```{r}
 morni_elev <- raster("D:/spatial-data/dem/n30_e076_1arc_v3.tif") |> 
-  merge(raster("D:/spatial-data/dem/n30_e077_1arc_v3.tif"))
+  merge(raster("D:/spatial-data/dem/n30_e077_1arc_v3.tif")) |>
+  crop(extent(76.8764, 77.0085, 30.6239, 30.7560))
 
 raster_to_matrix(morni_elev) |> height_shade() |> 
   plot_map()

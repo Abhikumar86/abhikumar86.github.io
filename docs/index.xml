@@ -7,16 +7,18 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 27 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Aug 2021 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Morni Hills (Khol-Hi-Raitan) Wildlife Sanctuary</title>
+      <title>Khol Hi-Raitan (Morni Hills) Wildlife Sanctuary</title>
       <dc:creator>Abhishek Kumar</dc:creator>
       <link>https://abhikumar86.github.io/posts/2021-08-27-mwls</link>
-      <description>A short description and introduction.</description>
+      <description>A short description and introduction to Khol Hi-Raitan Wildlife Sanctuary.</description>
       <category>protected areas</category>
       <category>siwaliks</category>
+      <category>morni hills</category>
+      <category>khol hi-raitan wildlife sanctuary</category>
       <guid>https://abhikumar86.github.io/posts/2021-08-27-mwls</guid>
-      <pubDate>Fri, 27 Aug 2021 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 26 Aug 2021 00:00:00 +0000</pubDate>
       <media:content url="https://abhikumar86.github.io/posts/2021-08-27-mwls/data/map.png" medium="image" type="image/png" width="2400" height="1800"/>
     </item>
     <item>
