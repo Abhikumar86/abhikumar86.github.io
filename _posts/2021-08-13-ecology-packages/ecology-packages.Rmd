@@ -44,6 +44,8 @@ rbind(
   
   c("`ecospat`", "spatial analyses and modeling of species niches and distributions", "@cola2017", "https://www.unil.ch/ecospat/home/menuguid/ecospat-resources/tools.html"),
   
+  c("`Distance`", "Distance Sampling Detection Function and Abundance Estimation", "@miller2019", "https://distancesampling.org/"),
+  
   c("`ENMTools`", "toolbox for ecological niche modelling in comparative ecological biogeography", "@warren2021", "https://github.com/danlwarren/ENMTools"),
   
   c("`ForestFit`", "bayesian modeling for plant height diameter data", "@teimouri2020", ""),

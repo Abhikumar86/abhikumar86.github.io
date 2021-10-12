@@ -37,23 +37,23 @@ knitr::include_graphics("data/pkl-ndvi.gif")
 
 ```{r rgee-setup, eval=FALSE}
 ## load the package
-library(rgee)
+#library(rgee)
 
 ## initially run once to set up rgee
-ee_install(py_env = "rgee")
+#ee_install(py_env = "rgee")
 
 #reticulate::py_install(packages = 'earthengine-api', 
 #envname = 'C:/Users/ARVIND/AppData/Local/r-miniconda/envs/rgee')
 
 ## check for proper set up for rgee installation and dependencies
-ee_check() # Check non-R dependencies
+#ee_check() # Check non-R dependencies
 #ee_clean_credentials() # Remove credentials of a specific user
-ee_clean_pyenv() # Remove reticulate system variables
+#ee_clean_pyenv() # Remove reticulate system variables
 
 ## Initialize Earth Engine!
-ee_Initialize()
+#ee_Initialize()
 
-srtm <- ee$Image("USGS/SRTMGL1_003") 
+#srtm <- ee$Image("USGS/SRTMGL1_003") 
 ```
 
 # Precipitation from TerraClimate

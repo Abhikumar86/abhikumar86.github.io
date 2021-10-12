@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Abhishek Kumar</title>
+    <link>https://abhikumar86.github.io/</link>
+    <atom:link href="https://abhikumar86.github.io/publications.xml" rel="self" type="application/rss+xml"/>
+    <description>I blog about Plant Ecology and R
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Tue, 11 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Ecological performances of exotic and native woody species on coal mine spoil in Indian dry tropical region</title>
+      <dc:creator>Anand Narain Singh</dc:creator>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/publications/2022-ansingh-ee</link>
+      <description>In this article we analysed the growth and biomass production of exotic and native woody species on Indian coal mine spoils. We observed higher survival of native species on coal mine spoil, though exotic species exhibited faster growth rates than the native species on coal mine spoil. However, biomass production was higher for native species on coal mine overburden. Overall, we showed that native species performed better than exotic species in rehabilitation of coal mine.</description>
+      <category>Coal mine</category>
+      <category>Restoration</category>
+      <category>Journal Article</category>
+      <category>Ecological Engineering</category>
+      <guid>https://abhikumar86.github.io/publications/2022-ansingh-ee</guid>
+      <pubDate>Tue, 11 Jan 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/publications/2022-ansingh-ee/2022-ansingh-ee_files/figure-html5/ee-fig1-1.svg" medium="image" type="image/svg+xml"/>
+    </item>
+    <item>
+      <title>Shivalik, Siwalik, Shiwalik or Sivalik: Which one is an appropriate term for the foothills of Himalayas?</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <dc:creator>Meenu Patil</dc:creator>
+      <dc:creator>Anand Narain Singh</dc:creator>
+      <link>https://abhikumar86.github.io/publications/2020-abhishek-jsr</link>
+      <description>The present study has applied bibliometric analysis to resolve the inconsistency about the usage of these terms. Here, we have shown that the term 'Siwalik' was most dominant in the available literature.</description>
+      <category>Siwalik</category>
+      <category>Journal Article</category>
+      <category>Journal of Scientific Research</category>
+      <guid>https://abhikumar86.github.io/publications/2020-abhishek-jsr</guid>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/publications/2020-abhishek-jsr/img/Fig1_map.png" medium="image" type="image/png" width="3300" height="2550"/>
+    </item>
+  </channel>
+</rss>
