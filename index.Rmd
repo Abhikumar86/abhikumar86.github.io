@@ -1,5 +1,5 @@
 ---
-title: "Abhishek Kumar"
+title: "Blog"
 site: distill::distill_website
 listing: posts
 ---
