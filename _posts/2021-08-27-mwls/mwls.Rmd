@@ -3,10 +3,10 @@ name: "mwls"
 title: "Khol Hi Raitan (Morni Hills) Wildlife Sanctuary"
 
 categories:
-  - protected areas
-  - siwaliks
-  - morni hills
-  - khol hi raitan wildlife sanctuary
+- protected areas
+- siwaliks
+- morni hills
+- khol hi raitan wildlife sanctuary
 
 description: |
   A short description and introduction to Khol Hi Raitan Wildlife Sanctuary.
