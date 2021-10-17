@@ -7,11 +7,7 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-<<<<<<< HEAD
     <lastBuildDate>Sat, 16 Oct 2021 00:00:00 +0000</lastBuildDate>
-=======
-    <lastBuildDate>Fri, 15 Oct 2021 00:00:00 +0000</lastBuildDate>
->>>>>>> a5264fa4538026839f1a5702facb2b8bbf8e4f74
     <item>
       <title>Deriving Spectral Indices with Google Earth Engine in R</title>
       <dc:creator>Abhishek Kumar</dc:creator>
@@ -22,11 +18,7 @@
       <category>Remote Sensing</category>
       <category>Google Earth Engine</category>
       <guid>https://abhikumar86.github.io/posts/2021-10-16-rgee-composites</guid>
-<<<<<<< HEAD
       <pubDate>Sat, 16 Oct 2021 00:00:00 +0000</pubDate>
-=======
-      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
->>>>>>> a5264fa4538026839f1a5702facb2b8bbf8e4f74
     </item>
     <item>
       <title>mwls-climate</title>
@@ -62,7 +54,7 @@
       <title>R packages for Ecology</title>
       <dc:creator>Abhishek Kumar</dc:creator>
       <link>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</link>
-      <description>A list of useful `R` packages for ecology, biodiversity and conservation.</description>
+      <description>A list of useful R packages for ecology, biodiversity and conservation.</description>
       <guid>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</guid>
       <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
     </item>

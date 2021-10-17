@@ -5,7 +5,7 @@ name: "rgee-spectral-indices"
 >>>>>>> a5264fa4538026839f1a5702facb2b8bbf8e4f74
 title: "Deriving Spectral Indices with Google Earth Engine in R"
 description: |
-  In this post, I have derived several spectral indices from Sentinel-2 data using Google Earth Engine in `R` with package `rgee`.
+  In this post, I have derived several spectral indices from Sentinel-2 data using Google Earth Engine in R with package rgee.
 
 categories:
 - R
