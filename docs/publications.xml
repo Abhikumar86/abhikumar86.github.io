@@ -7,7 +7,21 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 09 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Comparative soil restoration potential of exotic and native woody plantations on coal mine spoil in a dry tropical environment of India: A case study</title>
+      <dc:creator>Anand Narain Singh</dc:creator>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/publications/2022-ansingh-ldd</link>
+      <description>A short description of the post.</description>
+      <category>Coal mine</category>
+      <category>Restoration</category>
+      <category>Journal Article</category>
+      <category>Land Degradation &amp; Development</category>
+      <guid>https://abhikumar86.github.io/publications/2022-ansingh-ldd</guid>
+      <pubDate>Fri, 11 Feb 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/publications/2022-ansingh-ldd/2022-ansingh-ldd_files/figure-html5/fig1-1.svg" medium="image" type="image/svg+xml"/>
+    </item>
     <item>
       <title>Shivalik, Siwalik, Shiwalik or Sivalik: Which one is an appropriate term for the foothills of Himalayas?</title>
       <dc:creator>Abhishek Kumar</dc:creator>

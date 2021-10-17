@@ -1,0 +1,81 @@
+---
+title: "mwls-climate"
+description: |
+  A short description of the post.
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app/
+date: 10-15-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Abstract
+
+
+## Introduction
+
+
+## Methods
+
+### Study site
+
+### Data
+
+```{r}
+rbind(
+  temperature = c("MODIS", "Landsat"),
+  precipitation = c("CHIRPS", NA)
+) |> as.data.frame() 
+  
+```
+
+```{r}
+library(gt)
+rbind(
+  c("Landsat 4", "TM", "07/1982 - 12/1993"),
+  c("Landsat 5", "TM", "03/1984 - 01/2013"),
+  c("Landsat 7", "ETM+", "04/1999 - Present"),
+  c("Landsat 8", "OLI / TIRS", "02/2013 - Present"),
+  c("Terra", "ASTER & MODIS", "12/1999 - Present"),
+  c("Aqua", "MODIS", "04/2002 - Present"),
+  c("ECOSTRESS", "PHyTIR", "06/2018 - Present"),
+  c("NSPP", "VIIRS", "10/2011 - Present"),
+  c("NOAA 20", "VIIRS", "11/2018 - Present"),
+  c("NOAA 15, 18, 19", "AVHRR", "1979 - Present"),
+  c("ESA - Metop-A & B", "AVHRR", "1979 - Present"),
+  c("NOAA GOES-16 & GOES-17", "ABI", "1975 - Present"),
+  c("ESA - Sentinel 3A", "SLSTR", "02/2016 - Present"),
+  c("ESA - Sentinel 3B", "SLSTR", "04/2019 - Present"),
+  c("ESA - Sentinel 2A", "MSI", "07/2015 - Present"),
+  c("ESA - Sentinel 2B", "MSI", "03/2017 - Present")
+  ) |> as.data.frame() |> 
+  gt::gt(caption = "Satellites and Sensors for Estimating LST") |>
+  gt::cols_label(V1 = "Satellite", V2 = "Sensor", V3 = "Temporal Coverage") |>
+  tab_source_note(source_note = "TM = Thematic Mapper; ETM+ = Enhanced Thematic Mapper; OLI = Operational Land Imager (OLI); TIR = Thermal Infrared Sensor; ASTER = Advanced Spaceborne Thermal Emission and Reflection Radiometer; MODIS = MODerate-resolution Imaging Spectroradiometer; ECOSTRESS = ECOsystem Spaceborne Thermal Radiometer Experiment on Space Station; PHyTIR = Prototype HyspIRI Thermal Infrared Radiometer; NSPP = Suomi National Polar Partnership; NOAA 20 = Joint Polar Satellite System-1; VIIRS = Visible Infrared Imaging Radiometer Suite; AVHRR = Advance Very High-Resolution Radiometer; GOES = Geostationary Operational Environmental Satellites; ABI = Advance Baseline Imager; SLSTR = Sea and Land Surface Temperature Radiometer; MSI = MultiSpectral Instrument")
+  
+  
+```
+
+
+
+### Statistical analysis
+
+
+## Results
+
+### WorldClim
+
+
+
+
+## Discussion
+
+## Conclusion

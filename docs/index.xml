@@ -7,7 +7,27 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 27 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Deriving Spectral Indices with Google Earth Engine in R</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-10-16-rgee-composites</link>
+      <description>In this post, I have derived several spectral indices from Sentinel-2 data using Google Earth Engine in `R` with package `rgee`.</description>
+      <category>R</category>
+      <category>rgee</category>
+      <category>Remote Sensing</category>
+      <category>Google Earth Engine</category>
+      <guid>https://abhikumar86.github.io/posts/2021-10-16-rgee-composites</guid>
+      <pubDate>Sat, 16 Oct 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>mwls-climate</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-10-15-mwls-climate</link>
+      <description>A short description of the post.</description>
+      <guid>https://abhikumar86.github.io/posts/2021-10-15-mwls-climate</guid>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Khol Hi Raitan (Morni Hills) Wildlife Sanctuary</title>
       <dc:creator>Abhishek Kumar</dc:creator>
@@ -20,15 +40,6 @@
       <guid>https://abhikumar86.github.io/posts/2021-08-27-mwls</guid>
       <pubDate>Fri, 27 Aug 2021 00:00:00 +0000</pubDate>
       <media:content url="https://abhikumar86.github.io/posts/2021-08-27-mwls/data/map.png" medium="image" type="image/png" width="2400" height="1800"/>
-    </item>
-    <item>
-      <title>Google Earth Engine in R</title>
-      <dc:creator>Abhishek Kumar</dc:creator>
-      <link>https://abhikumar86.github.io/posts/2021-08-22-rgee-veg-indices</link>
-      <description>Google Earth Engine in `R` with package `rgee`</description>
-      <guid>https://abhikumar86.github.io/posts/2021-08-22-rgee-veg-indices</guid>
-      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://abhikumar86.github.io/posts/2021-08-22-rgee-veg-indices/rgee-veg-indices_files/figure-html5/unnamed-chunk-2-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>3d-map</title>

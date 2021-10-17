@@ -1,0 +1,74 @@
+---
+name: "rgee-tsa"
+title: "Time series analysis with Google Earth Engine in R"
+
+categories:
+  - rgee
+  - time series
+
+description: |
+  A short description of the post.
+  
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app/
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in/
+    orcid_id: 0000-0003-2252-7623
+
+bibliography: refs.bib
+
+date: 10-13-2021
+
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+    code_folding: false
+---
+
+
+```{r setup, include=FALSE}
+## set global options for markdown
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE, 
+                      fig.align = 'center', fig.width = 7, fig.height = 5, 
+                      out.width = '90%', dev = "svglite",
+                      echo=FALSE, message=FALSE, warning=FALSE)
+```
+
+## Abstract
+
+
+
+## Introduction
+
+* Mapping the environment at various time-scales can provide information about 
+land monitoring parameters like land cover change trends and patterns in 
+vegetation growth.
+* Mapping deforestation
+
+(1) Where and when has change taken place? 
+(2) How much and what kind of change has occurred?
+(3) What are the cycles and trends in the change?
+(4) What are the possible drivers?
+
+## Methods
+
+### Change detection
+
+* Visual
+* Image differencing
+
+
+## Results
+
+
+## Discussions
+
+
+## Conclusion
+
+
