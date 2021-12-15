@@ -26,113 +26,36 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     toc_float: true
     theme: pygments
-    code_folding: false
+    code_folding: true
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+## set global options for markdown
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE, 
+                      fig.align = 'center', fig.width = 7, fig.height = 5, 
+                      out.width = '90%', dev = "svglite",
+                      echo=TRUE, message=FALSE, warning=FALSE)
 ```
 
+```{r packages}
+#library(bfast)       # change detection algorithms
+#library(lubridate)   # handling date object
+#library(osmdata)     # spatial data extraction
+library(raster)      # raster data
+#library(rgee)        # Google Earth Engine in R
+library(sf)          # spatial data handling
+library(tidyverse)   # general data wrangling and visualisation
+library(tmap)        # thematic mapping 
 
-
-```{r include=FALSE}
-library(dplyr)
-library(raster)
-library(sf)
-library(tmap)
-
-## load the data
-# boundary for area of interest
-mwls <- st_read("data/pas.gpkg") |> filter(short_name == "MH")
-
-# elevation data 
-elev <- raster("D:/spatial-data/dem/n30_e076_1arc_v3.tif") |>
-	merge(raster("D:/spatial-data/dem/n30_e077_1arc_v3.tif")) |> 
-	crop(extent(76.85, 77.01, 30.66, 30.75)) # morni hills wls
-
-# major roads
-sw_roads <- st_read("data/sw_roads.gpkg")
-trunk_roads <- sw_roads |> filter(highway == "trunk")
-secondary_roads <- sw_roads |> filter(highway == "secondary")
-tertiary_roads <- sw_roads |> filter(highway == "tertiary")
-
-# major rivers
-sw_streams <- st_read("data/sw_streams.gpkg")
-dem_river <- sw_streams |> filter(waterway == "river")
-dem_stream <- sw_streams |> filter(waterway == "stream")
-
-
-# prepare elevation bands
-melev <- elev |> mask(mwls)
-#m <- c(300, 400, 1, 400, 500, 2, 500, 600, 3, 600, 700, 4, 700, 800, 5)
-#rclmat <- matrix(m, ncol=3, byrow=TRUE)
-#reclass_dem <- reclassify(melev, rclmat)
-#reclass_pol <- rasterToPolygons(reclass_dem, dissolve = TRUE) |> st_as_sf()
-#elv_band <- reclass_pol |> 
-    #mutate(elev_zone = c("301-400", "401-500", "501-600", "601-700", "701-800"))
-#st_write(elv_band, "data/elv_band.gpkg")
-elv_band <- st_read("data/elv_band.gpkg")
-
-# prepare hillshade with
-hs <- hillShade(
-	# extract slope from elevation
-	slope = terrain(elev, opt= "slope"),
-	
-	# extract aspect from elevation
-	aspect = terrain(elev, opt= "aspect"), 
-	
-	# 45 altitude angle and 315 azimuth angle
-	angle = 45, direction = 315)
-
-# make the map
-mymap <- tm_shape(hs) + 
-	tm_raster(palette = "-Greys", n = 100, style = "cont", #alpha = 0.7, 
-            legend.show = FALSE) +
-	
-    tm_shape(elv_band) + tm_fill(col = "elev_zone", alpha = 0.7, palette = "Greens",
-                                 title = "Elevation (m)") + 
-    
-	tm_shape(mwls) + tm_borders(col = "seagreen", lwd = 2.5) +
-    
-	tm_shape(dem_river) + tm_lines(col = "#9bbff4", lwd = 6) +
-	#tm_shape(dem_river) + tm_lines(col = "#4a80f5", lwd = 1) +
-	tm_shape(dem_stream) + tm_lines(col = "#9bbff4", lwd = 3) +
-	#tm_shape(dem_stream) + tm_lines(col = "#4a80f5", lwd = 0.5) +
-	
-	
-	tm_shape(tertiary_roads) + tm_lines(col = "white", lwd = 1.5) +
-	#tm_shape(secondary_roads) + tm_lines(col = "grey50", lwd = 4) +
-	tm_shape(secondary_roads) + tm_lines(col = "white", lwd = 3) +
-	#tm_shape(trunk_roads) + tm_lines(col = "grey50", lwd = 6) +
-	tm_shape(trunk_roads) + tm_lines(col = "white", lwd = 4) +
-	
-	tm_add_legend(type = "line", labels = "Roads", col = "white", 
-                lwd = 4) +
-    tm_add_legend(type = "line", labels = "Rivers", col = "skyblue", lwd = 4) +
-  
-	tm_compass(position = c(0.89, 0.84), size = 2.5, bg.color = "grey90", 
-	           bg.alpha = 0.7) +
-	tm_scale_bar(position = c(0.26, 0.001), breaks = c(0, 5, 10), text.size = 0.75) +
-  
-	tm_layout(frame.double.line = T, compass.type = "arrow", 
-            legend.position = c(0.015, 0.015), legend.bg.color = "grey90", 
-            legend.bg.alpha = 0.7, 
-            main.title = "Morni Hills (Khol-Hi-Raitan) Wildlife Sanctuary",
-            main.title.position = "center",
-            legend.text.size = 0.85)
-
-#tmap_save(mymap, filename = "map.pdf", height = 6, width = 8, units = "in")
-#tmap_save(mymap, filename = "data/map.png", height = 6, width = 8, units = "in", dpi = 300)
+#knitr::write_bib(x = c(.packages(), "distill"), "packages.bib")
 ```
 
+## Abstract
 
-```{r}
-knitr::include_graphics("data/map.png")
-```
 
 ## Introduction
 
@@ -151,17 +74,151 @@ An area of 2,226.58 ha was initially notified as R-70 Khol Hi-Raitan (KHR) Wildl
 
 The eco-sensitive zone (ESZ) around KHR was proposed as area within five kilometres of the boundary on 03 June 2009 with notification No. [S.O. 1394 (E)](https://parivesh.nic.in/writereaddata/ENV/Eco-sensitiveZone/16.pdf). 
 
-```{r fig.cap="Ecosensitive Zone (ESZ) of Khol Hi-Raital wildlife sanctuary as drafted in September 2009. Figure from https://cdnbbsr.s3waas.gov.in/s3c5866e93cab1776890fe343c9e7063fb/uploads/2021/05/2021052022-1.jpg", layout = "l-body", out.extra="class=external", out.width="100%"}
+```{r fig.cap="Ecosensitive Zone (ESZ) of Khol Hi-Raital wildlife sanctuary as drafted in September 2009. Figure from [Haryana Forest Department](https://cdnbbsr.s3waas.gov.in/s3c5866e93cab1776890fe343c9e7063fb/uploads/2021/05/2021052022-1.jpg)", layout = "l-body", out.extra="class=external", out.width="100%"}
 knitr::include_graphics("data/mwls-map-2009.jpg")
 ```
 
 However, the proposal has been revised in another draft No. [S.O. 1395 (E)](https://moef.gov.in/wp-content/uploads/2019/10/S.O.-1395-25.05.2015-Draft-ESZ-Notification-on-Khol-Hi-Raitan-Wildlife-Sanctuary-Haryana-1.pdf) dated 21 May 2015 and the ESZ has been revised to vary from zero to 925 meters only.
 
-```{r fig.cap="Ecosensitive Zone (ESZ) of Khol Hi-Raital wildlife sanctuary as drafted in May 2015. Figure from https://moef.gov.in/wp-content/uploads/2019/10/Map-of-ESZ-of-Khol-Hi-Ratan-WLS-Haryana.pdf", layout = "l-body", out.extra="class=external", out.width="100%"}
+```{r fig.cap="Ecosensitive Zone (ESZ) of Khol Hi-Raital wildlife sanctuary as drafted in May 2015. Figure from [MoEFCC, Govt. of India](https://moef.gov.in/wp-content/uploads/2019/10/Map-of-ESZ-of-Khol-Hi-Ratan-WLS-Haryana.pdf)", layout = "l-body", out.extra="class=external", out.width="100%"}
 
 knitr::include_graphics("data/mwls-map-2016.jpg")
 ```
 
+## Location and Physiography
+
+```{r data-prep1, eval=FALSE}
+## extract boundaries and data from OpenStreetMap
+library(osmdata)
+
+## define a bounding box for area of interest
+osm_bbox <- c(76.8, 30.6, 77.1, 30.9) # xmin, ymin, xmax, ymax
+
+## extract boundary of the protected area as sf from OpenStreetMap (osm)
+protected_areas <- opq(osm_bbox) |>
+  add_osm_feature(key = "boundary", value = "protected_area", value_exact = F) |>
+  osmdata_sf()
+
+## rename protected areas to short names and save to local file as gpkg
+protected_areas$osm_polygons |> select(name, geometry) |>
+  mutate(short_name = c("MH", "BS", "SL")) |>
+  st_write("data/protected_areas.gpkg")
+
+## extract rivers / streams (waterways) from osm as sf
+waterways <- opq(osm_bbox) |> add_osm_feature(key = "waterway") |> 
+  osmdata_sf()
+
+## save waterways to local file as gpkg
+waterways$osm_lines |> select(name, waterway, geometry) |> 
+  st_write("data/waterways.gpkg")
+
+## extract roadways (highway) major roads from osm as sf
+highways <- opq(osm_bbox) |> add_osm_feature(key = "highway") |> 
+  osmdata_sf()
+
+## save roadways to local file as gpkg
+highways$osm_lines |> select(name, highway, geometry) |> 
+  st_write("data/highways.gpkg")
+
+## load, merge, and crop pre-downloaded SRTM 30 m elevation data 
+elev <- raster("D:/spatial-data/dem/n30_e076_1arc_v3.tif") |>
+	merge(raster("D:/spatial-data/dem/n30_e077_1arc_v3.tif")) |> 
+	crop(extent(76.85, 77.01, 30.66, 30.75)) # morni hills wls
+
+## prepare and save boundaries for elevation bands
+masked_elev <- elev |> mask(mwls)
+reclass_matrix <- matrix(data = c(300, 400, 1, 
+                                  400, 500, 2, 
+                                  500, 600, 3, 
+                                  600, 700, 4, 
+                                  700, 800, 5), 
+                         ncol = 3, byrow = T)
+masked_elev |> reclassify(rcl = reclass_matrix) |>
+  rasterToPolygons(dissolve = T) |> st_as_sf() |> 
+  mutate(elev_zone = c("301-400", "401-500", "501-600", "601-700", "701-800")) |>
+  st_write("data/elev_band.gpkg")
+
+## prepare and save hillshade
+hillShade(
+	# extract slope from elevation
+	slope = terrain(elev, opt= "slope"),
+	
+	# extract aspect from elevation
+	aspect = terrain(elev, opt= "aspect"), 
+	
+	# 45 altitude angle and 315 azimuth angle
+	angle = 45, direction = 315) |> 
+    writeRaster("data/hill_shade.tif")
+```
+
+```{r include=FALSE}
+## boundary for area of interest (protected area)
+mwls <- st_read("data/protected_areas.gpkg") |> filter(short_name == "MH")
+
+## boundaries for elevation bands
+elev_band <- st_read(("data/elev_band.gpkg"))
+
+## filter waterways into major river and streams
+waterways <- st_read("data/waterways.gpkg")
+rivers <- waterways |> filter(waterway == "river")
+streams <- waterways |> filter(waterway == "stream")
+
+## filter major roads
+highways <- st_read("data/highways.gpkg")
+trunk_roads <- highways |> filter(highway == "trunk")
+secondary_roads <- highways |> filter(highway == "secondary")
+tertiary_roads <- highways |> filter(highway == "tertiary")
+
+## read the hillshade raster
+hill_shade <- raster("data/hill_shade.tif")
+```
+
+```{r fig1, fig.cap="Location and topography of Khol Hi Raitan Wildlife Sanctuary. The map is prepared in `R` programming environment using the package `tmap` [@tmap2018]"}
+## add hillshade
+tm_shape(hill_shade) + 
+    tm_raster(palette = "-Greys", n = 100, style = "cont", legend.show = FALSE) +
+    
+    tm_graticules(lwd = 1.5, col = "grey75", labels.size = 0.85) +  
+    
+	## add elevation bands
+    tm_shape(elev_band) + tm_fill(col = "elev_zone", alpha = 0.7, palette = "Greens",
+                                 title = "Elevation (m)") + 
+    
+    ## add boundary of protected area
+	tm_shape(mwls) + tm_borders(col = "seagreen", lwd = 2.5) +
+    
+    ## add rivers and streams
+	tm_shape(rivers) + tm_lines(col = "#9bbff4", lwd = 6) +
+	tm_shape(streams) + tm_lines(col = "#9bbff4", lwd = 3) +
+	
+	## add major roads
+	tm_shape(tertiary_roads) + tm_lines(col = "white", lwd = 1.5) +
+	tm_shape(secondary_roads) + tm_lines(col = "white", lwd = 3) +
+	tm_shape(trunk_roads) + tm_lines(col = "white", lwd = 4) +
+	
+    ## add legend
+	tm_add_legend(type = "line", labels = "Roads", col = "white", 
+                lwd = 4) +
+    tm_add_legend(type = "line", labels = "Rivers", col = "skyblue", lwd = 4) +
+    
+    
+    ## add compass and scale bar
+	tm_compass(position = c(0.89, 0.84), size = 2.5, bg.color = "grey90", 
+	           bg.alpha = 0.7) +
+	tm_scale_bar(position = c(0.26, 0.001), breaks = c(0, 5, 10), text.size = 0.75) +
+    
+    
+    ## adjust layout
+	tm_layout(frame.double.line = T, compass.type = "arrow", 
+            legend.position = c(0.015, 0.015), legend.bg.color = "grey90", 
+            legend.bg.alpha = 0.7, 
+            main.title = "Khol Hi Raitan (Morni Hills) Wildlife Sanctuary",
+            main.title.position = "center",
+            legend.text.size = 0.85) 
+
+## remove all variables from the environment
+rm(list = ls())
+```
 
 ## Biodiversity
 
@@ -183,14 +240,98 @@ Man-made disturbances especially Tourism can potentially threaten the biodiversi
 Several trees of the area serve as sleeping site for near threatened Hanuman Langurs [@Chopra2012].
 
 
-### Soils
+## Soils
 
 The Lower Shivaliks are dominated by alluvial sediments chiefly consisting of loose sand and gravel inserted with clay horizons. Soil is clay loam or silt loam and underlying rocks are soft sandstones that are prone to erosion and result in high water runoff [@Rout1990b]. The alkali soils of the region are low in organic matter and deficient in nutrients, probably due to minimal leaf litter [@Kumar1995].  
 
-### Climate
+## Climate
 
 The Siwalik Hills experience Koeppen's Cwg category climate based on annual and monthly means of temperature and rainfall (Koeppen, 1936). The climatic data of Chandigarh suggests that the Chandigarh Siwalik Hills have BSh category climate. For general vegetation there are two major growth periods February to March (Spring) and rainy months of July and August. Leaf fall for non-evergreen vegetation is experienced during October to November (Autumn). 
 Climate is monsoonal, average rainfall of the area is 1069 mm and major portion of the rainfall occurs during June to September. The year is divisible into three seasons, warm wet rainy season (June to September), cool dry winter season (October to March) and hot dry summer season (April to May).
+
+
+## Land Cover
+
+```{r lc, fig.width=10, fig.height=8, fig.cap="Land cover at Khol Hi Raitan wildlife sanctuary. Data source: ESA WorldCover 2020"}
+
+## data from ESA WorldCover 2020 
+mwls_lc <- raster("D:/spatial-data/gee/mwls-ESA_WorldCover_2020.tif")
+
+## a function to convert raster to dataframe
+rasterdf <- function(x, aggregate = 1){
+    resampleFactor <- aggregate
+    inputRaster <- x    
+    inCols <- ncol(inputRaster)
+    inRows <- nrow(inputRaster)
+    
+    # Compute numbers of columns and rows in the new raster for mapping
+    resampledRaster <- raster(ncol = (inCols / resampleFactor),
+                              nrow = (inRows / resampleFactor))
+    
+    # Match to the extent of the original raster
+    extent(resampledRaster) <- extent(inputRaster)
+   
+    # Resample data on the new raster
+    y <- resample(inputRaster, resampledRaster, method='ngb')
+   
+    # Extract cell coordinates  
+    coords <- xyFromCell(y, seq_len(ncell(y)))
+    dat <- stack(as.data.frame(getValues(y)))
+    
+    # Add names - 'value' for data, 'variable' to indicate different raster layers
+    # in a stack
+    names(dat) <- c('value', 'variable')
+    dat <- cbind(coords, dat)
+    dat
+}
+
+## convert raster to data frame
+mwls_df <- rasterdf(mwls_lc)
+
+## prepare legend
+LCcodes <- c(seq(10, 90, 10), 95, 100)
+LCnames <- c("Trees", "Shrubland", "Grassland", "Cropland", "Built-up", 
+             "Barren/Sparse Vegetation", "Snow and Ice", "Open water",
+             "Herbaceous wetland", "Mangroves", "Moss and lichen")
+LCcolors <- attr(mwls_lc, "legend")@colortable[LCcodes + 1]
+names(LCcolors) <- as.character(LCcodes)
+
+## plot the map
+ggplot(data = mwls_df) +
+  geom_raster(aes(x = x, y = y, fill = as.character(value))) + 
+  scale_fill_manual(name = "Land cover",
+                    values = LCcolors[-c(7, 9:11)],
+                    labels = LCnames[-c(7, 9:11)],
+                    na.translate = FALSE) +
+  coord_sf(expand = F) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        panel.background = element_rect(fill = "white", color = "black"))
+
+## remove all variables from the environment
+#rm(list = ls())
+```
+
+
+```{r fig.height=8, fig.width=10}
+library(raster)
+library(rasterVis)
+
+## data from ESA WorldCover 2020 
+mwls_lc <- raster("D:/spatial-data/gee/mwls-ESA_WorldCover_2020.tif")
+
+levels(mwls_lc) <- data.frame(
+    ID = c(seq(10, 60, 10), 80),
+    landcover = c("Trees", "Shrubland", "Grassland", "Cropland", "Built-up", 
+             "Barren/Sparse \n Vegetation", "Open water")
+    )
+
+levelplot(mwls_lc, att='landcover',
+          col.regions = c("#006400", "#FFBB22", "#FFFF4C", "#F096FF", "#FA0000", 
+                          "#B4B4B4", "#0064C8"),
+          colorkey = list(height = 1, labels = list(cex = 1.2)))
+```
+
 
 ## Ecology
 

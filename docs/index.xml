@@ -7,7 +7,34 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 15 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Churdhar Wildlife Sanctuary</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-10-27-churdhar-wls</link>
+      <description>A short description of the post.</description>
+      <category>protected areas</category>
+      <category>Himalayas</category>
+      <category>Himachal Pradesh</category>
+      <category>Churdhar Wildlife Sanctuary</category>
+      <guid>https://abhikumar86.github.io/posts/2021-10-27-churdhar-wls</guid>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/posts/2021-10-27-churdhar-wls/churdhar-wls_files/figure-html5/unnamed-chunk-3-1.svg" medium="image" type="image/svg+xml"/>
+    </item>
+    <item>
+      <title>Land Surface Temperature</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-10-18-lst</link>
+      <description>A short description of the post.</description>
+      <category>R</category>
+      <category>LST</category>
+      <category>MODIS</category>
+      <category>rgee</category>
+      <category>time series</category>
+      <guid>https://abhikumar86.github.io/posts/2021-10-18-lst</guid>
+      <pubDate>Sun, 17 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/posts/2021-10-18-lst/lst_files/figure-html5/fig1-1.svg" medium="image" type="image/svg+xml"/>
+    </item>
     <item>
       <title>Deriving Spectral Indices with Google Earth Engine in R</title>
       <dc:creator>Abhishek Kumar</dc:creator>
@@ -18,7 +45,7 @@
       <category>Remote Sensing</category>
       <category>Google Earth Engine</category>
       <guid>https://abhikumar86.github.io/posts/2021-10-16-rgee-composites</guid>
-      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 16 Oct 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>mwls-climate</title>
@@ -39,7 +66,7 @@
       <category>khol hi raitan wildlife sanctuary</category>
       <guid>https://abhikumar86.github.io/posts/2021-08-27-mwls</guid>
       <pubDate>Fri, 27 Aug 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://abhikumar86.github.io/posts/2021-08-27-mwls/data/map.png" medium="image" type="image/png" width="2400" height="1800"/>
+      <media:content url="https://abhikumar86.github.io/posts/2021-08-27-mwls/data/mwls-map-2009.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
       <title>3d-map</title>

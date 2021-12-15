@@ -22,13 +22,13 @@ author:
     affiliation_url: https://puchd.ac.in
     orcid_id: 0000-0003-2252-7623
 
-journal: "Ecological Engineering"    
+journal: "Ecological Engineering"
+
+doi: 10.1016/j.ecoleng.2021.106470
             
-date: 01-11-2022
+date: 04-11-2021
 
 bibliography: refs.bib
-
-draft: true
 
 output:
   distill::distill_article:
@@ -56,53 +56,66 @@ library(rstatix)
 library(tidyverse)
 ```
 
+> This article is originally written by authors and may differ from published version.
 
 ## Abstract
 
-Coal extraction by opencast mining involves in dumping of overburden or mine spoil as large heaps. These mountains of mine spoil can act as serious threat to ecological integrity and therefore, overall societal well-being. Plantations are often employed as a measure of revegetation and management of mine spoil; thus, mitigating the mining effects on the environment. However, the performance of plant species can be highly variable due to environmental and species-specific effects. Therefore, the present paper's primary objective is to compare exotic (*Acacia auriculiformis*, *Cassia siamea*, *Casuarina equisetifolia* and *Grevillea pteridifolia*) and native (*Albizia lebbeck*, *Albizia procera*, *Dendrocalamus strictus* and *Tectona grandis*) species' performance on the coal mine spoils. Previous studies on the Singrauli coalfields allowed us to compare the growth performance, standing biomass, and net primary production (NPP) of four exotic and four native species plantations. Our results showed that native species have significantly higher survival, stem-diameter, biomass, and NPP than the exotic species plantations. Further, litterfall and decomposition rates were also not differed either between exotic vs. native. Thus, exotic species might not be useful in mine spoil rehabilitation than the native species. Overall, this study suggests that native species are useful for mine spoil rehabilitation despite faster growth of exotic species. 
+Coal extraction by opencast mining involves the dumping of overburden or mine spoil as large heaps. These large heaps of overburdened materials can act as a serious threat to ecological integrity and, therefore, overall societal well-being. Plantations are often employed to establish revegetation and management of mine spoil, thus mitigating the effects of mining on the environment. However, the performance of plant species can be highly variable due to environmental and species-specific effects. Therefore, the present paper's primary objective is to compare exotic (*Acacia auriculiformis*, *Cassia siamea*, *Casuarina equisetifolia* and *Grevillea pteridifolia*) and native (*Albizia lebbeck*, *Albizia procera*, *Dendrocalamus strictus* and *Tectona grandis*) species' performance on the coal mine spoils. Previous studies on the Singrauli coalfields allowed us to compare the growth performance, standing biomass, and net primary production (NPP) of four exotic and four native species plantations. Our results showed that native species have significantly higher survival, stem diameter, biomass, and NPP than exotic woody plantations. Thus, exotic species might not be useful in mine spoil rehabilitation than the native species. Overall, this study suggests that native species are useful for mine spoil rehabilitation despite the faster growth of exotic species.
 
-Keywords: ecological restoration; soil redevelopment; exotic species; native species; coal mine spoil 
-
+Keywords: Ecological restoration; Soil redevelopment; Exotic species; Native species; Coal mine spoil
 
 ## Introduction
 
-India is one of the major producers of coal worldwide; however, the demand of coal for electricity generation and industrial production is so high that it needs to import substantial coal quantities [@IEA2019]. Most of the coal in India is extracted by surface mining, which involves removing the earth's surface in the form of sheets resulting in a large amount of waste material, usually referred to as overburden or mine spoil [@Singh2006a]. This overburden is piled up to form new landforms looking as large stacks of mine spoil until refilling. These piles of mine spoils are characterised by high concentration of metals and toxic chemical compounds [@Novianti2018], which cascades into ecosystem and reach to humans through various sources like contaminated food and water. Further, removal of topsoil and alteration in soil profile causes unavoidable loss to biodiversity disrupts the ecosystem structure and functions [@Adibee2013; @Feng2019]. 
+India is one of the significant coal producers worldwide; however, the demand for coal for electricity generation and industrial production is so high that it needs to import substantial coal quantities [@IEA2019]. Most of the coal in India is extracted by surface mining, which involves removing the earth's surface in the form of sheets resulting in a large amount of waste material, usually referred to as overburden or mine spoil [@Singh2006a]. This overburden is piled up to form new landforms looking like large stacks of mine spoil until refilling. These piles of mine spoils are characterised by a high concentration of metals and toxic chemical compounds [@Novianti2018], which cascades into the ecosystem and reaches humans through various sources like contaminated food and water. Further, removal of topsoil and alteration in soil profile causes unavoidable loss to biodiversity, which disrupts the ecosystem structure and functions [@Adibee2013; @Feng2019].
 
-Growing concerns about the environmental impacts of coal mining together with slow natural recovery of mine spoils urge technical solutions to restore these degraded ecosystems into their original states [@Macdonald2015]. A successful restoration programme attempts to accelerate the natural recovery processes to check soil erosion, restore soil fertility, and enhance biological diversity [@Singh2002]. Therefore, the first step in any restoration programme, of course, is to protect the disturbed habitat and communities from being further wasted. Then follow attempts to accelerate the revegetation process for increasing biodiversity and stabilising nutrient cycling [@Singh2006a; @Singh2006b]. 
+Growing concerns about the environmental impacts of coal mining, together with the slow natural recovery of mine spoils, urge technical solutions to restore these degraded ecosystems into their original states [@Macdonald2015]. A successful restoration programme accelerates the natural recovery processes to check soil erosion, restore soil fertility, and enhance biological diversity [@Singh2002]. Therefore, the first step in any restoration programme, of course, is to protect the disturbed habitat and communities from being further wasted. Then follow attempts to accelerate the revegetation process for increasing biodiversity and stabilising nutrient cycling [@Singh2006a; @Singh2006b].
 
-Plantations have been contemporarily used to restore degraded lands worldwide effectively [@Badia2007; @Bohre2016; @Erskine2005; @Jezowski2017; @Singh2001; @Singh1999; @Singh2004a]. However, the suitability of species and their performance on coal mine spoil have remained a challenging task as the characteristics of coal mine spoils are highly heterogeneous and lacked soil organic matter (SOM), so that it is regarded as a recalcitrant medium for plant growth [@Adibee2013; @Feng2019; @Singh2021].
+Plantations have been contemporarily used to restore degraded lands worldwide effectively [@Badia2007; @Bohre2016; @Erskine2005; @Jezowski2017; @Singh2001; @Singh1999; @Singh2004a]. However, the suitability of species and their performance on coal mine spoil have remained a challenging task as the characteristics of coal mine spoils are highly heterogeneous and lack soil organic matter (SOM), so that it is regarded as a recalcitrant medium for plant growth [@Adibee2013; @Feng2019; @Singh2021].
 
 Some of the earlier studies have evaluated several plant species' growth and biomass production on coal mine spoil [@Badia2007; @Bohre2016; @Erskine2005; @Jezowski2017; @Singh2001; @Singh1999; @Singh2004a]. Although exotic woody species are often suggested to restore coal mine spoil due to their fast growth and high economic or livelihood benefits, it often results in low biodiversity development [@DAntonio2002; @Dutta2003; @Lamb2005]. Many previous studies have shown that exotic species can positively or negatively impact soil fertility and native flora while restoring degraded lands [@Berger1993; @DAntonio2002; @Yan2020]. Although exotic species may have higher survival [@Citadini-Zanette2017] and improve soil properties [@Yan2020], they often result in low carbon development compared to native species [@Citadini-Zanette2017].
 
-Biomass is a crucial parameter of structural attributes. Net primary production is considered a critical functional parameter that helps evaluate species' quality because they directly contribute to organic matter, energy transformation, and maintain nutrient cycling between vegetation and soil. Exotic species show successful establishment, and their fast-growth often outcompete the native species during the restoration [@Huxtable2005]. Another study showed little differences in biomass production among the exotic and native plants established on degraded lands [@Islam1999]. The biomass allocation to different plant parts can be controlled by environmental and biological (species-specific) factors [@Boonman2020; @Freschet2015; @Poorter2012]. However, the biomass allocation to different plant parts can vary between exotic and native species because species may have adapted to their native habitats and may exhibit differential allocation strategies. Thus, there is a need for an increased understanding of the biology and impacts of exotic and native species on degraded lands. Therefore, a comparison of survival, growth and biomass production among exotic and native species becomes important to assess the suitability of plant species for the reclamation process. 
+Net primary production is considered a critical functional parameter that helps evaluate species' quality. Biomass is a crucial parameter of structural attributes. They directly contribute to organic matter, energy transformation, and nutrient cycling between vegetation and soil. Exotic species show successful establishment, and their fast growth often outcompetes the native species during the restoration [@Huxtable2005]. Another study showed slight differences in biomass production among the exotic and native plants established on degraded lands [@Islam1999]. The biomass allocation to different plant parts can be controlled by environmental and biological (species-specific) factors [@Boonman2020; @Freschet2015; @Poorter2012]. However, the biomass allocation to different plant parts can vary between exotic and native species because species may have adapted to their native habitats and exhibit differential allocation strategies. Thus, there is a need for an increased understanding of the biology and impacts of exotic and native species on degraded lands. Therefore, comparing survival, growth and biomass production among exotic and native species becomes essential to assess the suitability of plant species for the reclamation process.
 
-The present study aims to compare the survival, growth performance, biomass accumulation, net primary productivity of 5-year-old native and exotic woody plantations established on coal mine spoils. We expect exotic species to have higher survival, growth, and biomass production on coal mine spoils because they usually exhibit higher competitive abilities. Therefore, they can sustain themselves on nutrient-poor and degraded lands. Specifically, we address the following four questions from our study: (1) Can native species have higher survival and growth performance on coal mine spoils? (2) What is the level of biomass and net primary production among native and exotic plantations at earlier stages? (3) What is the pattern of litterfall and litter decomposition among different types of species? (4) Whether biomass production and net primary production (NPP) are the species-specific?
+The present study compares the survival, growth performance, biomass accumulation, net primary productivity of 5-year-old native and exotic woody plantations established on coal mine spoils. We expect exotic species to have higher survival, growth, and biomass production on coal mine spoils because they usually exhibit higher competitive abilities. Therefore, they can sustain themselves on nutrient-poor and degraded lands. Specifically, we address the following four questions from our study: 
+
+(1) Can native species have higher survival and growth performance on coal mine spoils? 
+(2) What are the biomass and net primary production level among native and exotic plantations at earlier stages? (3) Whether biomass production and net primary production (NPP) are species-specific?
 
 
 ##	Material and methods
 
 ###	Study site and climate
-The plantations under present study were located in the west section of Jayant block of Singrauli Coalfields in Singrauli district of Madhya Pradesh, India, which lies between latitudes 24$^\circ$ 6\' 45\" – 24$^\circ$ 11\' 15\" N and longitude 82$^\circ$ 36\' 40\" – 82$^\circ$ 41\' 15\" E. The study area is situated on a plateau above the plain (around 500 m above mean sea level) on its southwest side. In contrast, the average elevation at the plateau’s foot is around 300 m above mean sea level. The climate of the area is tropical monsoon, and the year is divisible into a mild winter (November-February), a hot summer (March-June), and a warm rainy season (July-October). The mean monthly minimum temperature within the annual cycle ranges from 6 – 28 $^\circ \text{C}$  and the mean monthly maximum from 20 – 40 $^\circ \text{C}$. The rainfall annually averages 1069 mm, of which about 90\% occurs from late June to early September. The rainfall is characterised by a high degree of inter-annual variation, as during the study period 1990–1996, it ranges from 700 to 1450 mm yr^-1^ [@Singh2004a; @Singh2004b].
+
+The plantations under present study were located in the west section of Jayant block of Singrauli Coalfields in Singrauli district of Madhya Pradesh, India, which lies between latitudes 24° 6′ 45″ – 24° 11′ 15″ N and longitude 82° 36′ 40″ – 82° 41′ 15″ E. The study area is situated on a plateau above the plain (around 500 m above mean sea level) on its southwest side. In contrast, the plateau's foot's average elevation is approximately 300 m above mean sea level. The climate of the area is tropical monsoon, and the year is divisible into a mild winter (November–February), a hot summer (March–June), and a warm rainy season (July–October). The mean monthly minimum temperature within the annual cycle ranges from 6 to 28 °C and the mean monthly maximum from 20 to 40 °C. The rainfall annually averages 1069 mm, of which about 90% occurs from late June to early September. The rainfall is characterised by a high degree of inter-annual variation, as during the study period 1990–1996, it ranges from 700 to 1450 mm yr^−1^ [@Singh2004a; @Singh2004b].
 
 ###	Plantations and experimental design
-Plantations of native species were raised in July-August of 1990-91 by planting nursery-raised seedlings in previously dug pits of 40 cm $\times$ 40 cm $\times$ 40 cm size at a spacing of 2 $\times$ 2 m. The plantations of *Albizia lebbeck* (L.) Benth., *Albizia procera* (Roxb.) Benth. and *Tectona grandis* L.f. were raised in 1990, whereas *Dendrocalamus strictus* Nees plantation was raised in 1991 by planting 7 to 8 months old nursery raised seedlings. The total planted area for *A. lebbeck* and *A. procera* was 1.5 ha, whereas the same for *T. grandis* and *D. strictus* was about 0.5 ha each. For sampling, three permanent plots were established for each species. The sample plots’ size was 25 $\times$ 25 m for *A. lebbeck* and *A. procera* whereas 15 $\times$ 15 m plot size for *T. grandis* and *D. strictus*. 
-Initially a total of 2500 seedlings per hectare were planted for each species. After five years, survival is estimated as the number of individuals (clumps in *D. strictus*) in each plot was inventoried in February-March 1995-1996. 
+
+Plantations of native species were raised in July–August of 1990–91 by planting nursery-raised seedlings in previously dug pits of 40 cm × 40 cm × 40 cm size at a spacing of 2 m × 2 m. The plantations of *Albizia lebbeck* (L.) Benth., *Albizia procera* (Roxb.) Benth. and *Tectona grandis* L.f. were raised in 1990, whereas *Dendrocalamus strictus* Nees plantation was raised in 1991 by planting 7 to 8 months old nursery raised seedlings. The total planted area for *A. lebbeck* and *A. procera* was 1.5 ha, whereas the same for *T. grandis* and *D. strictus* was about 0.5 ha each. For sampling, three permanent plots were established for each species. The sample plots' size was 25 m × 25 m for *A. lebbeck* and *A. procera* whereas 15 m × 15 m plot size for *T. grandis* and *D. strictus*.
+
+Initially a total of 2500 seedlings per hectare were planted for each species. After five years, survival is estimated as the number of individuals (clumps in *D. strictus*) in each plot, which was inventoried in February–March during 1995–1996.
 
 ###	Biomass and net primary production
-For the measurement of tree biomass, allometric equations relating tree dimensions to the parts’ biomass were developed. Twelve individuals of each species, representing a gradient of diameter, were felled from an area adjoining the permanent plots, and their diameter (D) and height (H) were measured. The felled individuals were separated into stem and foliage. The root systems of the felled plants were excavated to a depth of 1 m. Each component’s fresh weight (stem, foliage, and coarse roots with a diameter greater than 5 mm) was recorded in the field. Sub-samples were brought to the laboratory to determine dry weights. The data were subjected to regression analysis to relate the dry weight of stem, foliage, rhizome, and root with D or D2H or their natural log values. The highest R^2^ (correlation coefficient) equations were selected, which were also used in earlier studies [@Dutta2003; @Singh2004a; @Singh1999]. The standing biomass of different components (stem, foliage, and root) was calculated using the biomass estimation equations. These values were then multiplied by the density of tree species. Per hectare, biomass estimations were obtained separately for each plot and averaged across the plots to obtain the mean estimates at different ages.
-Fine root (less than 5 mm in diameter) biomass was quantified by digging out 20 cm $\times$  20 cm $\times$ 20 cm monoliths at 20 cm intervals from the plant base to 1-meter distance. Monoliths were washed with a fine jet of water, and fine roots were collected, dried, and weighed. Tree roots were separated from roots of herbaceous plants based on colour and appearance.
-The net primary production was estimated using diameter increments and biomass data as described by earlier studies on the study site [@Dutta2003; @Singh2004b; @Singh1991]. 
+
+Allometric equations relating tree dimensions to the plant parts' biomass were developed to measure tree biomass. Twelve individuals of each species, representing a gradient of diameter, were felled from an area adjoining the permanent plots, and their diameter (D) and height (H) were measured. The felled individuals were separated into stem and foliage. The root systems of the felled plants were excavated to a depth of 1 m. Each component's fresh weight (stem, foliage, and coarse roots with a diameter greater than 5 mm) was recorded in the field. Sub-samples were brought to the laboratory to determine dry weights. The data were subjected to regression analysis to relate the dry weight of stem, foliage, rhizome, and root with D or D2H or their natural log values. The highest R^2^ (correlation coefficient) equations were selected, which were also used in earlier studies [@Dutta2003; @Singh2004a; @Singh1999]. The standing biomass of different components (stem, foliage, and root) was calculated using the biomass estimation equations. These values were then multiplied by the density of tree species. Per hectare biomass estimations were obtained separately for each plot and averaged across the plots to get the mean estimates at different ages.
+
+Fine root (less than 5 mm in diameter) biomass was quantified by digging out 20 cm × 20 cm × 20 cm monoliths at 20 cm intervals from the plant base to 1-m distance. Monoliths were washed with a fine jet of water, and fine roots were collected, dried, and weighed. Tree roots were separated from roots of herbaceous plants based on colour and appearance.
+
+The net primary production was estimated using diameter increments and biomass data described by earlier studies on the study site [@Dutta2003; @Singh2004b; @Singh1991].
 
 ###	Data for exotic species
-Previous studies have investigated the restoration potential of some exotic species on the same study site [@Dutta2003; @Dutta2001; @Singh1995a]. These studies provided an opportunity to compare exotic and native species' restoration potential because they followed a similar experimental design. These studies considered four exotic species (*Casuarina equisetifolia* L., *Cassia siamea* Lam., *Grevillea pteridifolia* Knight, and *Acacia auriculiformis* A. Cunn. ex Benth.). The total planted area for *C. equisetifolia* and *G. pteridifolia* was 1.5 ha each, whereas the same for *A. auriculiformis* and *C. siamea* was about 0.5 ha each. For sampling, three permanent plots were established for each species. The sample plots' size was 25 $\times$ 25 m for *C. equisetifolia* and *G. pteridifolia* and; 10 $\times$ 10 m for *A. auriculiformis* and *C. siamea* [@Dutta2003; @Dutta2001; @Singh1995a].
+
+Previous studies have investigated the restoration potential of some exotic species on the same study site [@Dutta2003; @Dutta2001; @Singh1995a]. These studies provided an opportunity to compare exotic and native species' restoration potential because they followed a similar experimental design. These studies considered four exotic species (*Casuarina equisetifolia* L., *Cassia siamea* Lam., *Grevillea pteridifolia* Knight, and *Acacia auriculiformis* A. Cunn. ex Benth.). The total planted area for *C. equisetifolia* and *G. pteridifolia* was 1.5 ha each, whereas the same for *A. auriculiformis* and *C. siamea* was about 0.5 ha each. For sampling, three permanent plots were established for each species. The sample plots' size was 25 m × 25 m for *C. equisetifolia* and *G. pteridifolia* and; 10 m × 10 m for *A. auriculiformis* and *C. siamea* [@Dutta2003; @Dutta2001; @Singh1995a].
+
 
 ###	Statistical analyses
+
 SPSS-PC statistical software was used for all statistical analyses, except wherever specifically mentioned. The data were subjected to the General Linear Model (GLM) for analysis of variance (ANOVA) to observe the species’ effect. Mean values were tested for difference among plantation species with Tukey’s honestly significant difference (HSD) mean separation test (SPSS, 2003, version 10.0). Regression equations were developed through the same statistical package. To observe the effect of origin (exotic vs. native), student’s t-test was conducted using the package `rstatix` [@rstatix2020] in the `R` language and environment for statistical computation [@R2020].
 
 
 ## Results
 
 ### Survival
+
 Plantations' survival has been estimated as the stocking density (Individual stems ha^-1^) for each species (three plots) under exotic and native plantations, and the results are tabulated in Table \@ref(tab:tab1)). 
 
 ```{r tab1}
@@ -721,6 +734,244 @@ rbind(
 
 ```
 
+```{r ee-fig-npp, fig.height=11.7, fig.width=8, fig.cap="Net primary productivity (NPP) partitioning among different plant parts (a, b), aboveground and below ground (c, d), and short-lived and long-lived components (e, f) for exotic vs. native and legume vs. non-legume species plantation, respectively."}
+# Data Preparation
+mydata <- read.csv("data/data.csv")
+mydata1 <- mydata[,c(1,2,3, 14:18)]
+
+# Biomass partitioning origin-wise
+## data processing
+mydata2 <- ddply(mydata1, .(Origin), summarise, # origin wise
+                 Bm_Foliage.Mean = mean(Np_Foliage),
+                 Bm_Stem.Mean = mean(Np_Stem),
+                 Bm_CorRoot.Mean = mean(Np_CorRoot),
+                 Bm_FinRoot.Mean = mean(Np_FinRoot))
+C <- mydata2
+## Label preparation
+C$Foliage <- C$Bm_Foliage.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                      C$Bm_FinRoot.Mean)*100 # calculate percentage
+C$Stem <- C$Bm_Stem.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                C$Bm_FinRoot.Mean)*100
+C$CoarseRoot <- C$Bm_CorRoot.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                         C$Bm_FinRoot.Mean)*100
+C$FineRoot <- C$Bm_FinRoot.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                       C$Bm_FinRoot.Mean)*100
+mydata.long <- C %>% 
+      pivot_longer(-c(Origin, Bm_Foliage.Mean, Bm_Stem.Mean, Bm_CorRoot.Mean, 
+                      Bm_FinRoot.Mean), 
+                   names_to = "variables", values_to = "value")
+## plotting
+p1 <- ggplot(data = mydata.long, aes(x = Origin, y = value, fill = variables)) + 
+      theme_bw() + 
+      geom_bar(stat = "identity", position = "fill", width = 0.6, color = "black") + 
+      scale_y_continuous(labels = scales::percent_format()) + 
+      scale_fill_brewer(palette = "Set3") + 
+      guides(fill = guide_legend(reverse = TRUE)) + 
+      labs(x = "", y= "") + 
+      geom_label(data = mydata.long, aes(label = paste0(round(value, 2), "%")), 
+                 position = position_fill(vjust=0.5), size = 3.5, show.legend = FALSE) + 
+      theme(legend.position = "top", legend.title = element_blank(), 
+            legend.text = element_text(size = 14, colour = "black"),
+             axis.text = element_text(size= 14, color= "black"),
+             axis.ticks.length = unit(1.5, "mm"), axis.line = element_line(size = 0.5), 
+            axis.ticks = element_line(size = 0.5))
+
+
+# Biomass partitioning legume-wise
+## data processing
+mydata2 <- ddply(mydata1, .(Legume), summarise, # Legume-wise
+                 Bm_Foliage.Mean = mean(Np_Foliage),
+                 Bm_Stem.Mean = mean(Np_Stem),
+                 Bm_CorRoot.Mean = mean(Np_CorRoot),
+                 Bm_FinRoot.Mean = mean(Np_FinRoot))
+
+C <- mydata2
+## label preparation
+C$Foliage <- C$Bm_Foliage.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                      C$Bm_FinRoot.Mean)*100 # calculate percentage
+C$Stem <- C$Bm_Stem.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                C$Bm_FinRoot.Mean)*100
+C$CoarseRoot <- C$Bm_CorRoot.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                         C$Bm_FinRoot.Mean)*100
+C$FineRoot <- C$Bm_FinRoot.Mean/(C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + 
+                                       C$Bm_FinRoot.Mean)*100
+mydata.long <- C %>% 
+      pivot_longer(-c(Legume, Bm_Foliage.Mean, Bm_Stem.Mean, Bm_CorRoot.Mean, 
+                      Bm_FinRoot.Mean), 
+                   names_to = "variables", values_to = "value")
+## plotting
+p2 <- ggplot(data = mydata.long, aes(x = Legume, y = value, fill = variables)) + 
+      theme_bw() + 
+      geom_bar(stat = "identity", position = "fill", width = 0.6, color = "black") + 
+      scale_y_continuous(labels = scales::percent_format()) + 
+      scale_fill_brewer(palette = "Set3") + 
+      guides(fill = guide_legend(reverse = TRUE))+ labs(x = "", y = "") + 
+      geom_label(data = mydata.long, aes(label = paste0(round(value, 2), "%")), 
+                 position = position_fill(vjust=0.5), size = 3.5, show.legend = FALSE) + 
+      theme(legend.position = "top", legend.title = element_blank(), 
+            legend.text = element_text(size = 14, colour = "black"),
+            axis.text = element_text(size= 14, color= "black"),
+            axis.ticks.length = unit(1.5, "mm"), axis.line = element_line(size = 0.5), 
+            axis.ticks = element_line(size = 0.5))
+
+
+# Data Preparation
+mydata <- read.csv("data/data.csv")
+mydata1 <- mydata[,c(1,2,3,9,10,11,12)]
+
+# Origin-wise
+## Data processing
+mydata2 <- ddply(mydata1, .(Origin), summarise, #Origin-wise
+                 Bm_Foliage.Mean = mean(Bm_Foliage),
+                 Bm_Stem.Mean = mean(Bm_Stem),
+                 Bm_CorRoot.Mean = mean(Bm_CorRoot),
+                 Bm_FinRoot.Mean = mean(Bm_FinRoot))
+C <- mydata2
+## Label preparation
+C$AboveGround <- (C$Bm_Foliage.Mean + C$Bm_Stem.Mean)/
+      (C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100 #calculate percentage
+C$BelowGround <- (C$Bm_CorRoot.Mean+ C$Bm_FinRoot)/
+      (C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100
+mydata.long <- C %>% 
+      pivot_longer(-c(Origin, Bm_Foliage.Mean, Bm_Stem.Mean, Bm_CorRoot.Mean, 
+                      Bm_FinRoot.Mean), 
+                   names_to = "variables", values_to = "value")
+## plotting
+p3 <- ggplot(data = mydata.long, aes(x = Origin, y = value, fill = variables)) + 
+      theme_bw() + 
+      geom_bar(stat = "identity", position = "fill", width = 0.6, color = "black") + 
+      scale_y_continuous(labels = scales::percent_format()) + 
+      guides(fill = guide_legend(reverse = TRUE)) + 
+      scale_fill_brewer(palette = "Accent") +
+      labs(x = "", y= "") + 
+      geom_label(data = mydata.long, aes(label = paste0(round(value, 2), "%")), 
+                 position = position_fill(vjust=0.5), size = 3.5, show.legend = FALSE) + 
+      theme(legend.position = "top", legend.title = element_blank(), 
+            legend.text = element_text(size = 14, colour = "black"), 
+            axis.text = element_text(size= 14, color= "black"), 
+            axis.ticks.length = unit(1.5, "mm"), axis.line = element_line(size = 0.5), 
+            axis.ticks = element_line(size = 0.5))
+
+
+# Legume-wise
+## Data processing
+mydata2 <- ddply(mydata1, .(Legume), summarise, # Legume-wise
+                 Bm_Foliage.Mean = mean(Bm_Foliage),
+                 Bm_Stem.Mean = mean(Bm_Stem),
+                 Bm_CorRoot.Mean = mean(Bm_CorRoot),
+                 Bm_FinRoot.Mean = mean(Bm_FinRoot))
+C <- mydata2
+## Label preparation
+C$AboveGround <- (C$Bm_Foliage.Mean + C$Bm_Stem.Mean)/
+      (C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100 #calculate percentage
+C$BelowGround <- (C$Bm_CorRoot.Mean+ C$Bm_FinRoot)/
+      (C$Bm_Foliage + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100
+mydata.long <- C %>% 
+      pivot_longer(-c(Legume, Bm_Foliage.Mean, Bm_Stem.Mean, Bm_CorRoot.Mean, 
+                      Bm_FinRoot.Mean), 
+                   names_to = "variables", values_to = "value")
+## plotting
+p4 <- ggplot(data = mydata.long, aes(x = Legume, y = value, fill = variables)) + 
+      theme_bw() + 
+      geom_bar(stat = "identity", position = "fill", width = 0.6, color = "black") + 
+      scale_y_continuous(labels = scales::percent_format()) + 
+      guides(fill = guide_legend(reverse = TRUE))+
+      scale_fill_brewer(palette = "Accent") +
+      labs(x = "", y= "") +
+      geom_label(data = mydata.long, aes(label = paste0(round(value, 2), "%")), 
+                 position = position_fill(vjust=0.5), size = 3.5, show.legend = FALSE) +
+      theme(legend.position = "top", legend.title = element_blank(), 
+            legend.text = element_text(size = 14, colour = "black"),
+            axis.text = element_text(size= 14, color= "black"),
+            axis.ticks.length = unit(1.5, "mm"), axis.line = element_line(size = 0.5), 
+            axis.ticks = element_line(size = 0.5))
+
+# Origin-wise
+## Data processing
+mydata2 <- ddply(mydata1, .(Origin), summarise, 
+                 Bm_Foliage.Mean = mean(Bm_Foliage),
+                 Bm_Stem.Mean = mean(Bm_Stem),
+                 Bm_CorRoot.Mean = mean(Bm_CorRoot),
+                 Bm_FinRoot.Mean = mean(Bm_FinRoot))
+C <- mydata2
+## Label preparation
+C$LongLived <- (C$Bm_Stem.Mean + C$Bm_CorRoot.Mean)/
+      (C$Bm_Foliage.Mean + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100
+C$ShortLived <- (C$Bm_Foliage.Mean + C$Bm_FinRoot.Mean)/
+      (C$Bm_Foliage.Mean + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100
+mydata.long <- C %>% 
+      pivot_longer(-c(Origin, Bm_Foliage.Mean, Bm_Stem.Mean, Bm_CorRoot.Mean, 
+                      Bm_FinRoot.Mean), 
+                   names_to = "variables", values_to = "value")
+## plotting
+p5 <- ggplot(data = mydata.long, aes(x = Origin, y = value, fill = variables)) + 
+      theme_bw() + 
+      geom_bar(stat = "identity", position = "fill", width = 0.6, color = "black") +
+      scale_y_continuous(labels = scales::percent_format()) + 
+      scale_fill_brewer(palette = "Set3") + 
+      guides(fill = guide_legend(reverse = TRUE))+
+      labs(y = "", x = "") +
+      geom_label(data = mydata.long, aes(label = paste0(round(value, 2), "%")), 
+                 position = position_fill(vjust=0.5), size = 3.5, show.legend = FALSE) + 
+      theme(legend.position = "top", legend.title = element_blank(), 
+            legend.text = element_text(size = 14, colour = "black"),
+            axis.text = element_text(size= 14, color= "black"),
+            axis.title.x = element_text(size = 16, color = "black"),
+            axis.ticks.length = unit(1.5, "mm"), axis.line = element_line(size = 0.5), 
+            axis.ticks = element_line(size = 0.5))
+
+# Legume-wise
+## Data processing
+mydata2 <- ddply(mydata1, .(Legume), summarise, 
+                 Bm_Foliage.Mean = mean(Bm_Foliage),
+                 Bm_Stem.Mean = mean(Bm_Stem),
+                 Bm_CorRoot.Mean = mean(Bm_CorRoot),
+                 Bm_FinRoot.Mean = mean(Bm_FinRoot))
+C <- mydata2
+## Label preparation
+C$LongLived <- (C$Bm_Stem.Mean + C$Bm_CorRoot.Mean)/
+      (C$Bm_Foliage.Mean + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100
+C$ShortLived <- (C$Bm_Foliage.Mean + C$Bm_FinRoot.Mean)/
+      (C$Bm_Foliage.Mean + C$Bm_Stem.Mean + C$Bm_CorRoot.Mean + C$Bm_FinRoot.Mean)*100
+mydata.long <- C %>% 
+      pivot_longer(-c(Legume, Bm_Foliage.Mean, Bm_Stem.Mean, Bm_CorRoot.Mean, 
+                      Bm_FinRoot.Mean), 
+                   names_to = "variables", values_to = "value")
+## plotting
+p6 <- ggplot(data = mydata.long, aes(x = Legume, y = value, fill = variables)) + 
+      theme_bw() + 
+      geom_bar(stat = "identity", position = "fill", width = 0.6, color = "black") + #Biomass among species  
+      scale_y_continuous(labels = scales::percent_format()) + 
+      scale_fill_brewer(palette = "Set3") +
+      guides(fill = guide_legend(reverse = TRUE))+
+      labs(y = "", x = "") +
+      geom_label(data = mydata.long, aes(label = paste0(round(value, 2), "%")), 
+                 position = position_fill(vjust=0.5), size = 3.5, show.legend = FALSE) + 
+      theme(legend.position = "top", legend.title = element_blank(), 
+            legend.text = element_text(size = 14, colour = "black"),
+            axis.text = element_text(size= 14, color= "black"),
+            axis.title.x = element_text(size = 16, color = "black"),
+            axis.ticks.length = unit(1.5, "mm"), axis.line = element_line(size = 0.5), 
+            axis.ticks = element_line(size = 0.5))
+
+g1 <- ggarrange(p1 + rremove("x.text"), 
+                p2 + rremove("xy.text"),
+                common.legend = TRUE,
+                legend = "top",
+                labels = c("a)", "b)"))
+g2 <- ggarrange(p3 + rremove("x.text"), 
+                p4 + rremove("xy.text"),
+                common.legend = TRUE,
+                legend = "top",
+                labels = c("c)", "d)"))
+g3 <- ggarrange(p5, 
+                p6 + rremove("y.text"),
+                common.legend = TRUE,
+                legend = "top",
+                labels = c("e)", "f)"))
+ggarrange(g1, g2, g3, nrow = 3)
+```
+
 Similarly, in native species, foliage contributed 12.7-32.1% being maximum by *T. grandis* and minimum by *A. lebbeck*, whereas fine root was in the range of 1.6-5.1%, respectively. Interestingly, the foliage and total net primary production of exotic species were significantly higher in native species than the exotic species (Figure \@ref(fig:ee-fig1)). However, stem and roots’ net primary production did not significantly differ among the exotic and native species (Figure \@ref(fig:ee-fig1)). A significant positive correlation was observed for total and stem net primary production with the foliage biomass (Figure \@ref(fig:fig4)). 
 
 ```{r fig4, fig.height=6, fig.width=8, fig.cap="Relationships between net primary production and foliage biomass for 5-yr-old plantations of all exotic and all native woody species on coal mine spoil. The linear regression equation (*y* = *a* + *bx*), Pearson's correlation coefficient (*r*), and corresponding probability values (*p*) are shown in the top-left corner of each subplot."}
@@ -830,4 +1081,4 @@ Authors are grateful to the Chairperson, Department of Botany, Panjab University
 This work was supported by the University Grants Commission, Government of India as GATE fellowship and MRP to ANS, and Junior Research Fellowship to AK [507/(OBC) (CSIR-UGC NET DEC. 2016)]. 
 
 ## Author's contributions {.appendix}
-ANS conceptualised, designed and collected data; AK and ANS analysed the data, wrote the first draft and revised the manuscript for final submission.
+**Anand Narain Singh:** Conceptualisation, Methodology, Validation, Formal analyses, Investigation, Data curation, Writing - original draft, Writing - review & editing, Supervision. **Abhishek Kumar:** Formal analyses, Writing - review & editing, Visualization, Funding acquisition.

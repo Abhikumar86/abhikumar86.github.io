@@ -1,0 +1,477 @@
+---
+title: "Land Surface Temperature"
+
+description: |
+  A short description of the post.
+  
+categories:
+- R
+- LST
+- MODIS
+- rgee
+- time series  
+  
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app/
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in/
+    orcid_id: 0000-0003-2252-7623
+
+bibliography: refs.bib    
+            
+date: 2021-10-18
+
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+    code_folding: true
+---
+
+```{r setup, include=FALSE}
+## set global options for markdown
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE, 
+                      fig.align = 'center', fig.width = 7, fig.height = 5, 
+                      out.width = '90%', dev = "svglite",
+                      echo=TRUE, message=FALSE, warning=FALSE)
+```
+
+```{r packages}
+library(bfast)       # change detection algorithms
+library(lubridate)   # handlingdate object   
+library(raster)      # raster data
+library(rgee)
+library(sf)
+library(tidyverse)
+library(tmap)
+
+#knitr::write_bib(x = c(.packages(), "distill"), "packages.bib")
+```
+
+* Theoretical and Applied Climatology (3.179)
+
+## Abstract
+
+
+## Introduction
+
+The factors affecting LST are complex. latitude, altitude, the NDVI (normalized differential vegetation index), SM (soil moisture), AOD (aerosol optical depth), cloud fraction and atmospheric WV (water vapor), to analyze the driving factors of spatial differences in LST.
+
+climate change India <https://doi.org/10.1007/978-981-15-4327-2>
+
+* <https://public.wmo.int/en/our-mandate/climate/wmo-statement-state-of-global-climate>
+* <https://doi.org/10.1016/j.rse.2012.12.008>
+
+## Methods
+
+
+### Study Site
+
+
+```{r eval=FALSE}
+## extract boundaries and data from OpenStreetMap
+library(osmdata)
+
+## define a bounding box for area of interest
+osm_bbox <- c(76.8079, 30.6636, 77.5173, 31.0125) # xmin, ymin, xmax, ymax
+
+## extract boundary of the protected area as sf from OpenStreetMap (osm)
+protected_areas <- opq(osm_bbox) |>
+  add_osm_feature(key = "boundary", value = "protected_area", value_exact = F) |>
+  osmdata_sf()
+
+## rename protected areas to short names and save to local file as gpkg
+protected_areas$osm_polygons |> dplyr::select(name, geometry) |>
+  mutate(short_name = c("CL", "CD", "MH", "BS", "SL")) |>
+  st_write("data/protected_areas.gpkg")
+
+## extract rivers / streams (waterways) from osm as sf
+waterways <- opq(osm_bbox) |> add_osm_feature(key = "waterway") |> 
+  osmdata_sf()
+
+## save waterways to local file as gpkg
+waterways$osm_lines |> dplyr::select(name, waterway, geometry) |> 
+  st_write("data/waterways.gpkg")
+
+## extract roadways (highway) major roads from osm as sf
+highways <- opq(osm_bbox) |> add_osm_feature(key = "highway") |> 
+  osmdata_sf()
+
+## save roadways to local file as gpkg
+highways$osm_lines |> dplyr::select(name, highway, geometry) |> 
+  st_write("data/highways.gpkg")
+
+## load, merge, and crop pre-downloaded SRTM 30 m elevation data 
+elev <- raster("D:/spatial-data/elevation/n30_e076_1arc_v3.tif") |>
+	merge(raster("D:/spatial-data/elevation/n30_e077_1arc_v3.tif")) |> 
+	merge(raster("D:/spatial-data/elevation/n31_e076_1arc_v3.tif")) |> 
+	merge(raster("D:/spatial-data/elevation/n31_e077_1arc_v3.tif")) |> 
+	crop(extent(76.8079, 77.5173, 30.6636, 31.0125))
+
+## prepare and save hillshade
+hillShade(
+	# extract slope from elevation
+	slope = terrain(elev, opt= "slope"),
+	
+	# extract aspect from elevation
+	aspect = terrain(elev, opt= "aspect"), 
+	
+	# 45 altitude angle and 315 azimuth angle
+	angle = 45, direction = 315) |> 
+    writeRaster("data/hill_shade.tif")
+
+## remove all files from environment
+rm(list = ls())
+```
+
+
+```{r include=FALSE}
+## boundary for area of interest (protected area)
+protected_areas <- st_read("data/protected_areas.gpkg")
+
+## filter waterways into major river and streams
+waterways <- st_read("data/waterways.gpkg")
+rivers <- waterways |> filter(waterway == "river")
+streams <- waterways |> filter(waterway == "stream")
+
+## filter major roads
+highways <- st_read("data/highways.gpkg")
+trunk_roads <- highways |> filter(highway == "trunk")
+secondary_roads <- highways |> filter(highway == "secondary")
+tertiary_roads <- highways |> filter(highway == "tertiary")
+
+## read the hillshade raster
+hill_shade <- raster("data/hill_shade.tif")
+
+## India admin level 0
+ind0 <- st_read("D:/spatial-data/admin/ind_adm0.gpkg") |> 
+    mutate(name = "India")
+
+## area bound of main map
+site_box <- st_bbox(obj = c(xmin = 76.8079, xmax = 77.5173, ymin = 30.6636, 
+                            ymax = 31.0125), crs = st_crs(4326)) |> 
+      st_as_sfc()
+
+## inset map
+inset_map <- tm_shape(ind0) + tm_polygons() + tm_text("name") +
+      tm_shape(site_box) + tm_borders(col = "red", lwd = 0.75)
+
+## add hillshade
+main_map <- tm_shape(hill_shade) + 
+  tm_raster(palette = "-Greys", n = 100, style = "cont", legend.show = FALSE) +
+  
+  # add graticule
+  tm_graticules(lwd = 1.5, col = "grey75", labels.size = 0.85) + 
+  
+  # add protected areas
+  tm_shape(protected_areas) + tm_fill(col = "green2", alpha = 0.4) +  
+  tm_borders(col = "seagreen") +
+    
+    ## add rivers and streams
+	tm_shape(rivers) + tm_lines(col = "dodgerblue", lwd = 2) +
+	tm_shape(streams) + tm_lines(col = "deepskyblue", lwd = 1) +
+  
+	## add major roads
+	tm_shape(tertiary_roads) + tm_lines(col = "grey60", lwd = 0.5) +
+	tm_shape(secondary_roads) + tm_lines(col = "grey50", lwd = 1) +
+	tm_shape(trunk_roads) + tm_lines(col = "grey40", lwd = 2) +
+  	
+    ## add legend
+    tm_add_legend(type = "fill", labels = "Protected area", col = "green2",
+                alpha = 0.4, border.col = "seagreen") +
+	tm_add_legend(type = "line", labels = "Roads", col = "grey40", 
+                lwd = 3) +
+    tm_add_legend(type = "line", labels = "Rivers", col = "dodgerblue", lwd = 3) +
+    
+    
+    ## add compass and scale bar
+	tm_compass(position = c(0.89, 0.8), size = 2.5, bg.color = "grey90", 
+	           bg.alpha = 0.7) +
+	tm_scale_bar(position = c(0.4, 0.02), breaks = c(0, 10, 20), text.size = 0.75,
+	             bg.color = "grey90", bg.alpha = 0.7) +
+    
+    ## adjust layout
+	tm_layout(frame.double.line = T, compass.type = "arrow", 
+            legend.position = c(0.78, 0.02), legend.bg.color = "white", 
+            legend.bg.alpha = 0.9, 
+            main.title.position = "center",
+            legend.text.size = 0.85)
+
+```
+
+```{r fig1, fig.cap="Location and topography of selected protected areas. The map is prepared in `R` programming environment using the package `tmap`"}
+# aspect ratio inset map
+xy <- st_bbox(ind0)
+asp <- (xy$ymax - xy$ymin)/(xy$xmax - xy$xmin)
+
+library(grid)
+main_map
+print(inset_map, vp = viewport(0.195, 0.718, width = 0.3, height = 0.3*asp))
+## remove all variables from the environment
+rm(list = ls())
+```
+
+
+* location
+* elevation
+* climate
+* biodiversity
+
+Khol Hi Raitan Wildlife Sanctuary
+
+
+
+
+### Satellite data
+
+Land surface temperature (LST) data derived from the Moderate Resolution Imaging Spectro-radiometer (MODIS) instrument mounted on Terra satellite. MODIS has 36 spectral bands. The terra satellite was launched in 1999 and it has transit time 10:30 am. MODIS inversely generates LST by using information from middle infrared and thermal infrared bands.
+
+The generalized split window method and day/night method are the official inversion algorithms of MODIS LST data at present. Through many verification analyses and improvements, the average precision of LST inversion for these two algorithms is approximately 1 K. MODIS LST data have been widely used in many fields, such as climate change, water cycles, environmental assessment and agricultural production, due to the good temporal and spatial resolution and wide coverage. The MOD11C3 LST products are inverted by the day/night method and obtained by projection, splicing, re-sampling and average synthesis. <https://doi.org/10.1038/s41598-020-63701-5>.
+
+
+
+The MOD11A1 Version 6 product provides daily per-pixel Land Surface Temperature and Emissivity (LST&E) with 1 kilometer (km) spatial resolution in a 1,200 by 1,200 km grid. The pixel temperature value is derived from the MOD11_L2 swath product. Above 30 degrees latitude, some pixels may have multiple observations where the criteria for clear-sky are met. When this occurs, the pixel value is a result of the average of all qualifying observations. Provided along with the daytime and nighttime surface temperature bands are associated quality control assessments, observation times, view zenith angles, and clear-sky coverages along with bands 31 and 32 emissivities from land cover types.
+
+Data product: MOD11A1.006 Terra Land Surface Temperature and Emissivity Daily Global 1km [@mod11a1]
+
+
+This dataset represents an 8-day composite of 1-2 day observation intervals, with spatial resolution of 1000 m. Data are available from March 5, 2000 to present.
+
+* summary of images used
+
+
+```{r eval=FALSE}
+## initialise the earth engine 
+ee_Initialize()
+
+## read the are of interest and convert to ee object
+study_sites <- st_read("data/protected_areas.gpkg") |> 
+    filter(short_name %in% c("CL", "CD", "MH")) |>
+    sf_as_ee()
+
+## load the modis lst data
+modis_lst <- ee$ImageCollection("MODIS/006/MOD11A2")$
+    
+    ## filter dates
+    filterDate(ee$DateRange("2001-01-01", "2021-01-01"))$
+    
+    ## select the LST band
+    select("LST_Day_1km")
+
+## define a function to convert Kelvin to Celcius and get dates for each image
+modC <- modis_lst$map(
+  function(image){
+    return(
+        image$multiply(0.02)$
+        subtract(273.15)$
+        select("LST_Day_1km")$
+        copyProperties(image, image$propertyNames())
+        )
+  }
+)
+
+## Extract pixel values for each elevation band from each image
+roi_lst <- ee_extract(x = modC, y = study_sites, scale = 250, sf = TRUE)
+
+## Reshape the data to longer format and convert dates strings to date format
+roi_long <- roi_lst |> 
+    st_drop_geometry() |>
+    pivot_longer(cols = -c(name, short_name), names_to = "date", 
+                 values_to = "lst") |>
+    ## select characters 2 to 11 from the date
+    mutate(date = str_sub(date, 2, 11))
+
+
+## save to local file for further analysis    
+write.csv(roi_long, "data/modis_lst.csv")
+```
+
+* terrain extraction: We extracted the terrain factors, including the elevation, slope, and aspect and a shaded relief map, from the DEM data.We extracted the terrain factors, including the elevation, slope, and aspect and a shaded relief map, from the DEM data.
+* LST inversion. Te radiative transfer model.
+* surface emissivity
+* Interference removal.
+* Accuracy verification of the LST inversion results
+
+### Processing
+
+
+
+### Statistical analysis
+
+* correlation
+* multiple regression
+* Sen's slope
+* Theil-Sen Approach (TSA)
+* Mann–Kendall
+* Time series forecasting
+* ARIMA, Support vector machines (SVMs)
+
+
+## Results
+
+```{r}
+## read the previously extracted LST data
+lst <- read.csv("data/modis_lst.csv") |>
+    
+    ## convert to date column to Date object
+    mutate(date = lubridate::as_date(date, format = "%Y_%m_%d")) |>
+    
+    ## separate year and months from the date
+    mutate(year = lubridate::year(date), 
+           month = lubridate::month(date, label = T)) |>
+    
+    ## select all columsn except layer
+    select(-X)
+
+lst |> head() |> gt::gt()
+```
+
+```{r}
+lst |> ggplot(aes(x = short_name, y = lst)) +
+    geom_boxplot()
+```
+
+
+```{r fig2, fig.cap="Overall simple linear regression for LST"}
+## Overall simple regression
+ggplot(data = lst, aes(x = date, y = lst)) +
+    geom_point(size = 3.5, alpha = 0.5, color = "grey90") +
+    geom_line(color = "grey85") +
+    geom_smooth(alpha = 0.2) +
+    ggpubr::stat_cor(show.legend = F, label.y = 52, p.accuracy = 0.001, 
+                     r.accuracy = 0.01, color = "black") +
+    ggpubr::stat_regline_equation(label.y = 48) +
+    facet_wrap(.~short_name) +
+    ylim(0, 55) +
+    theme_light()    
+    
+```
+
+
+```{r fig3, fig.cap="Monthly trend for LST"}
+## simple linear regression
+lst |> filter(short_name == "CD") |>
+ggplot(aes(x = date, y = lst)) +
+    geom_point(size = 3.5, alpha = 0.5, color = "grey90") +
+    geom_line(color = "grey85") +
+    geom_smooth(alpha = 0.2) +
+    facet_wrap(.~month) +
+    ggpubr::stat_cor(show.legend = F, label.y = 32, p.accuracy = 0.001, 
+                     r.accuracy = 0.01, color = "black") +
+    ggpubr::stat_regline_equation(label.y = 0) +
+    ylim(-5, 35) +
+    theme_light() +
+    labs(title = "Churdhar WLS")
+
+lst |> filter(short_name == "CL") |>
+ggplot(aes(x = date, y = lst)) +
+    geom_point(size = 3.5, alpha = 0.5, color = "grey90") +
+    geom_line(color = "grey85") +
+    geom_smooth(alpha = 0.2) +
+    facet_wrap(.~month) +
+    ggpubr::stat_cor(show.legend = F, label.y = 40, p.accuracy = 0.001, 
+                     r.accuracy = 0.01, color = "black") +
+    ggpubr::stat_regline_equation(label.y = 0) +
+    ylim(-5, 45) +
+    theme_light() +
+    labs(title = "Chail WLS")
+
+lst |> filter(short_name == "MH") |>
+ggplot(aes(x = date, y = lst)) +
+    geom_point(size = 3.5, alpha = 0.5, color = "grey90") +
+    geom_line(color = "grey85") +
+    geom_smooth(alpha = 0.2) +
+    facet_wrap(.~month) +
+    ggpubr::stat_cor(show.legend = F, label.y = 52, p.accuracy = 0.001, 
+                     r.accuracy = 0.01, color = "black") +
+    ggpubr::stat_regline_equation(label.y = 5) +
+    ylim(0, 55) +
+    theme_light() +
+    labs(title = "Morni WLS")
+```
+
+```{r fig4, fig.cap="Annual trends of LST"}
+lst |> drop_na() |> group_by(year) |> 
+  summarise(avg_lst = mean(lst), max_lst = max(lst), min_lst = min(lst)) |>
+  pivot_longer(cols = -year, names_to = "vars", values_to = "lst") |>
+  ggplot(aes(x = year, y = lst, color = vars)) +
+  geom_point(size = 3.5) +
+  geom_smooth(aes(fill = vars), method = "lm", alpha = 0.1) +
+  ggpubr::stat_cor(show.legend = F, p.accuracy = 0.001, label.y = c(35, 55, 8),
+                     r.accuracy = 0.01) +
+  ggpubr::stat_regline_equation(show.legend = F, label.y = c(32, 52, 5)) +
+  ylim(5, 55) +
+  theme_bw()
+```
+
+```{r fig5, fig.height=10, fig.width=8, fig.cap="Variation in LST for year, month and elevation zones"}
+par(mfrow=c(3,1))
+boxplot(lst ~ year, data = lst, cex = 1.2)
+boxplot(lst ~ month, data = lst)
+boxplot(lst ~ short_name, data = lst)
+```
+
+
+## Time series analysis
+
+```{r fig6, fig.cap="Time series decomposition for LST"}
+
+## calculate monthly average LST for each year
+monthly_avg_lst <- lst |> drop_na() |> 
+    group_by(year, month) |> 
+    summarise(avg_lst = mean(lst))
+
+## create a monthly ndvi time series object, frequency = 12 for 12 months
+lst_ts <- ts(monthly_avg_lst$avg_lst, start = c(2001, 1), end = c(2020, 12), 
+             frequency = 12)
+
+par(mfrow = c(2, 1))
+# classical seasonal decomposition by moving averages
+lst_ts |> decompose() |> plot()
+
+# seasonal decomposition of time series by loess
+lst_ts |> stl(s.window = "periodic") |> plot()
+```
+
+```{r fig7, fig.cap="Change point detection using bfast"}
+library(bfast)
+
+## BFAST algorithm for break
+lst_ts |> bfast01() |> plot()
+```
+
+```{r}
+## classify the break
+lst_ts |> bfast01() |> bfast01classify() |> gt::gt(caption = "Classification of breakpoint")
+```
+
+
+```{r, fig.cap="Iterative breakpoint detection"}
+## detecting all breaks
+lst_ts |> bfast(formula = response ~ trend + harmon, order = 3, breaks = "BIC") |> 
+    plot()
+```
+
+
+```{r, fig.cap="Monitoring changepoint and LST time series"}
+lst_ts |> bfastmonitor(start = 2015, formula = response ~ trend + harmon) |> 
+  plot(ylim = c(-7, 45))
+```
+
+```{r}
+lst_ts |> bfastlite() |> plot()
+```
+
+
+## Discussions
+
+## Conclusion
+
+## Authors' contribution {.appendix}
+
+**Abhishek Kumar** Conceptualisation, Methodology, Software, Validation, Formal Analysis, Investigation, Resources, Data Curation, Writing - Original Draft, Writing - Review & Editing, Visualization, Funding acquisition. **Meenu Patil** Formal Analysis, Writing - Review & Editing, Funding acquisition. **Anand Narain Singh** Supervision, Project administration.
+

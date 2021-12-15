@@ -1,0 +1,200 @@
+---
+name: "churdhar-wls"
+title: "Churdhar Wildlife Sanctuary"
+
+categories:
+- protected areas
+- Himalayas
+- Himachal Pradesh
+- Churdhar Wildlife Sanctuary
+
+description: |
+  A short description of the post.
+  
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app/
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in/
+    orcid_id: 0000-0003-2252-7623
+    
+date: 2021-10-27
+
+bibliography: refs.bib
+
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    theme: pygments
+    code_folding: true
+---
+
+```{r setup, include=FALSE}
+## set global options for markdown
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE, 
+                      fig.align = 'center', fig.width = 7, fig.height = 5, 
+                      out.width = '90%', dev = "svglite",
+                      echo=TRUE, message=FALSE, warning=FALSE)
+```
+
+
+
+```{r}
+library(dplyr)       # general data wrangling
+library(raster)      # raster data
+library(sf)          # spatial data handling
+library(tmap)        # thematic mapping
+```
+
+
+
+```{r, eval=FALSE}
+## extract boundaries and data from OpenStreetMap
+library(osmdata)
+
+## define a bounding box for area of interest
+osm_bbox <- c(77.3578, 30.8035, 77.5207, 30.9214) # xmin, ymin, xmax, ymax
+
+## extract boundary of the protected area as sf from OpenStreetMap (osm)
+protected_areas <- opq(osm_bbox) |>
+  add_osm_feature(key = "boundary", value = "protected_area", value_exact = F) |>
+  osmdata_sf()
+
+## rename protected areas to short names and save to local file as gpkg
+protected_areas$osm_polygons |> dplyr::select(name, geometry) |>
+  st_write("data/churdhar_wls.gpkg")
+
+## extract rivers / streams (waterways) from osm as sf
+waterways <- opq(osm_bbox) |> add_osm_feature(key = "waterway") |> 
+  osmdata_sf()
+
+## save waterways to local file as gpkg
+waterways$osm_lines |> dplyr::select(name, waterway, geometry) |> 
+  st_write("data/waterways.gpkg")
+
+## extract roadways (highway) major roads from osm as sf
+highways <- opq(osm_bbox) |> add_osm_feature(key = "highway") |> 
+  osmdata_sf()
+
+## save roadways to local file as gpkg
+highways$osm_lines |> dplyr::select(highway, geometry) |> 
+  st_write("data/highways.gpkg")
+
+## load, merge, and crop pre-downloaded SRTM 30 m elevation data 
+elev <- raster("D:/spatial-data/dem/n30_e077_1arc_v3.tif") |>
+    crop(extent(77.3578, 77.5207, 30.8035, 30.9214)) # xmin, xmax, ymin, ymax
+
+## prepare and save hillshade
+hillShade(
+    # extract slope from elevation
+    slope = terrain(elev, opt= "slope"),
+    
+    # extract aspect from elevation
+    aspect = terrain(elev, opt= "aspect"), 
+    
+    # 45 altitude angle and 315 azimuth angle
+    angle = 45, direction = 315) |> 
+    writeRaster("data/hill_shade.tif")
+
+## mask elevation for study site
+cwls_elevation <- elev |> mask(protected_areas$osm_polygons)
+
+## remove all files from environment
+rm(list = ls())
+```
+
+
+```{r}
+hill_shade <- raster("data/hill_shade.tif")
+churdhar_wls <- st_read("data/churdhar_wls.gpkg")
+waterways <- st_read("data/waterways.gpkg")
+highways <- st_read("data/highways.gpkg")
+
+## add hillshade
+tm_shape(hill_shade) + 
+  tm_raster(palette = "-Greys", n = 100, style = "cont", legend.show = FALSE) +
+  
+  # add graticule
+  tm_graticules(lwd = 1.5, col = "grey75", labels.size = 0.85, alpha = 0.5) + 
+  
+  
+  # add protected areas
+  tm_shape(churdhar_wls) + tm_fill(col = "green", alpha = 0.3) + 
+  tm_borders(col = "seagreen", lwd = 2) +
+    
+  ## add rivers and streams
+  tm_shape(waterways) + tm_lines(col = "dodgerblue", lwd = 4) +
+  
+  ## add major roads
+  tm_shape(highways) + tm_lines(col = "lightyellow", lwd = 2.5) +
+    
+  ## add legend
+  tm_add_legend(type = "fill", labels = "Protected area", col = "green2",
+                alpha = 0.4, border.col = "seagreen") +
+  tm_add_legend(type = "line", labels = "Roads", col = "lightyellow", 
+                lwd = 2.5) +
+  tm_add_legend(type = "line", labels = "Rivers", col = "dodgerblue", lwd = 4) +
+    
+    
+  ## add compass and scale bar
+  tm_compass(position = c(0.88, 0.86), size = 2.5, bg.color = "grey90", 
+               bg.alpha = 0.7) +
+  tm_scale_bar(position = c(0.04, 0.01), breaks = c(0, 2.5, 5), text.size = 0.75,
+                 bg.color = "grey90", bg.alpha = 0.7) +
+    
+  ## adjust layout
+  tm_layout(frame.double.line = T, compass.type = "arrow", 
+            legend.position = c(0.015, 0.78), legend.bg.color = "grey90", 
+            legend.bg.alpha = 0.7, 
+            main.title.position = "center",
+            legend.text.size = 0.85) 
+```
+
+
+
+
+## Climate
+
+
+
+## Vegetation
+
+```{r}
+rbind(
+  c("Abies pindrow", "Pinaceae", "Gymnosperm", "Tree", "@Thakur2021"),
+  c("Abies spectabilis", "Pinaceae", "Gymnosperm", "Tree", "@Thakur2021"),  
+  c("Acer caesium", "Sapindaceae", "Angiosperm", "Tree", "@Thakur2021"), 
+  c("Acer pentapomicum", "Sapindaceae", "Angiosperm", "Tree", "@Thakur2021"),  
+  c("Ailanthus altissima", "Simaroubaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Alnus nepalensis", "Betulaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Betula utilis", "Betulaceae", "Angiosperm", "Tree", "@Thakur2021"),  
+  c("Buxus wallichiana", "Buxaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Euonymus lucidus", "Celastraceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Ficus palmata", "Moraceae", "Angiosperm", "Tree", "@Thakur2021"),  
+  c("Juglans regia", "Juglandaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Lyonia ovalifolia", "Ericaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Neolitsea pallens", "Lauraceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Picea smithiana", "Pinaceae", "Gymnosperm", "Tree", "@Thakur2021"),
+  c("Prunus cerasoides", "Rosaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Prunus cornuta", "Rosaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Pyrus pashia", "Rosaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Rhododendron arboreum", "Ericaceae", "Angiosperm", "Tree", "@Thakur2021"),  
+  c("Quercus floribunda", "Fagaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Quercus leucotrichophora", "Fagaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Quercus semecarpifolia", "Fagaceae", "Angiosperm", "Tree", "@Thakur2021"), 
+  c("Syringa emodi", "Oleaceae", "Angiosperm", "Tree", "@Thakur2021"),
+  c("Taxus wallichiana", "Taxaceae", "Gymnosperm", "Tree", "@Thakur2021")
+  ) |>
+  as.data.frame() |> 
+  knitr::kable(caption = "Flora of Churdhar Wildlife Sanctuary",
+               col.names = c("Botanical Name", "Family", "Clade", "Habit", 
+                             "Reference"))
+```
+
+* http://www.bbmanthan.in/wp-content/uploads/2021/02/Manthan13_1ritesh.et_.al_.pdf
+* https://link.springer.com/content/pdf/10.1007/s11629-020-6401-z.pdf
+* https://threatenedtaxa.org/index.php/JoTT/article/view/1619
+* 

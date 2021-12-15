@@ -1,0 +1,168 @@
+---
+name: "siwalik-pas"
+title: "Protected areas in Indian Siwalik"
+
+description: |
+  A short description of the post.
+  
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app/
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in/
+    orcid_id: 0000-0003-2252-7623
+
+date: 2021-10-22
+
+categories:
+- protected areas
+- siwaliks
+
+bibliography: refs.bib
+
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+    code_folding: true    
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+* <https://doi.org/10.1659/MRD-JOURNAL-D-10-00019.1>
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(raster)
+library(sf)
+library(tmap)
+```
+
+
+```{r eval=FALSE}
+## outline of Siwalik group from Geological Survey of India (GSI)
+sw_gsi <- st_read("D:/spatial-data/geology/Siwalik_Geology_2M.gpkg")
+
+## buffered (8.5 km) outline siwaliks
+sw_buffer <- sw_gsi |>
+  
+  # create a buffer of 8.5 km around the area
+  st_buffer(8500) |>
+  
+  # summarise to dissolve internal boundaries
+  summarise() |>
+  
+  # add a column name
+  mutate(name = "Siwalik") |>
+  
+  # make valid
+  st_make_valid()
+
+## Siwalik states and districts
+jk <- st_read("D:/spatial-data/admin/ind_adm2/stname_JAMMU & KASHMIR.gpkg")
+hp <- st_read("D:/spatial-data/admin/ind_adm2/stname_HIMACHAL PRADESH.gpkg")
+pb <- st_read("D:/spatial-data/admin/ind_adm2/stname_PUNJAB.gpkg")
+ch <- st_read("D:/spatial-data/admin/ind_adm2/stname_CHANDIGARH.gpkg")
+hr <- st_read("D:/spatial-data/admin/ind_adm2/stname_HARYANA.gpkg")
+uk <- st_read("D:/spatial-data/admin/ind_adm2/stname_UTTARAKHAND.gpkg")
+up <- st_read("D:/spatial-data/admin/ind_adm2/stname_UTTAR PRADESH.gpkg")
+
+bind_rows(jk, hp, pb, ch, hr, uk, up) |>
+  st_filter(sw_buffer, .predicate = st_overlaps) |>
+  bind_rows(filter(hp, dtname %in% c("Hamirpur", "Una"))) |>
+  saveRDS("data/siwalik_districts.rds")
+
+```
+
+## Preparing outline for Siwalik
+
+For preparing a region of interest (Outline for Siwaliks), We used the Geology of the region as provided by the Geological Survey of India. Then, We filter the Siwalik group and create a buffer around the region. I have already downloaded the geological maps for each of the state in the north-west India.
+
+
+```{r eval=FALSE}
+## extract boundaries and data from OpenStreetMap
+library(osmdata)
+
+jkpas <- (opq(c(74.8290, 32.4516, 75.4430, 33.0902)) |>
+  add_osm_feature(key = c("boundary", "leisure"), 
+                  value = c("protected_area", "national_park", "nature_reserve"), 
+                  value_exact = F) |>
+  osmdata_sf())$osm_polygons
+
+chpas <- 
+
+jkpas |> tm_shape() + tm_fill(col = "green2", alpha = 0.2) + 
+  tm_borders(col = "seagreen", lwd = 2)
+
+## extract boundary of the protected area as sf from OpenStreetMap (osm)
+protected_areas <- opq(jkbb) |>
+  add_osm_feature(key = c("boundary", "leisure"), 
+                  value = c("protected_area", "national_park", "nature_reserve"), 
+                  value_exact = F) |>
+  #add_osm_feature(key = "leisure", value = "nature_reserve", value_exact = F) |>
+  osmdata_sf()
+
+## rename protected areas to short names and save to local file as gpkg
+tmap_mode("view")
+protected_areas$osm_polygons |> 
+  #dplyr::select(name, geometry) |>
+  #st_filter(sbox, .predicate = st_within) |> 
+  #st_write("data/protected_areas.shp")
+  tm_shape() + tm_fill(col = "green2", alpha = 0.2) + 
+  tm_borders(col = "seagreen", lwd = 2) +
+  tm_shape(sw) + tm_borders(col = "blue")
+
+```
+
+
+```{r} 
+sw <- st_read("data/siwalik_0.shp") |> st_make_valid()
+pas <- st_read("data/protected_areas.shp")
+
+
+
+#s2::s2_rebuild()
+#sf::sf_use_s2(FALSE)
+pas |> st_filter(sw, .predicate = st_within) |>
+  tm_shape() + tm_fill(col = "green2", alpha = 0.2) + tm_borders(col = "seagreen", lwd = 2) +
+  tm_shape(sw) + tm_borders(col = "red")
+  
+  mutate(short_name = c("CL", "CD", "MH", "BS", "SL")) |>
+  st_write("data/protected_areas.gpkg")
+```
+
+```{r}
+tmap_mode("view")
+swdist <- readRDS("data/siwalik_districts.rds")
+
+tm_shape(sw_buffer) + 
+  tm_fill(col = "lightpink", alpha = 0.2) + 
+  tm_borders(col = "red") +
+  tm_shape(swdist) + tm_borders(col = "blue")
+```
+
+## Elevation
+
+```{r}
+library(raster)
+library(tmap)
+
+elev <- raster("D:/spatial-data/elevation/Siwalik_Elevation90.tif")
+elev[elev > 2000 | elev == 0] <- NA
+
+tm_shape(elev) + tm_raster()
+```
+
+
+## Further resources
+
+* https://www.jstor.org/stable/24098002

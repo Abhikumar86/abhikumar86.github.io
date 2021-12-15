@@ -1,0 +1,50 @@
+---
+name: "meta-analysis"
+title: 
+description: |
+  A short description of the post.
+  
+author:
+  - name: Meenu Patil
+    url: https://www.researchgate.net/profile/Meenu-Patil
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0002-7664-7877
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0003-2252-7623
+  - name: Pardeep Kumar
+    url: https://www.researchgate.net/profile/Pardeep-Kumar-22
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+  - name: Anand Narain Singh
+    url: https://www.researchgate.net/profile/Anand-Singh-15
+    affiliation: Panjab University, Chandigarh
+    affiliation_url: https://puchd.ac.in
+    orcid_id: 0000-0002-0148-8680
+
+date: 2021-10-22
+
+bibliography: refs.bib
+
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: pygments
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Abstract
+
+The presence of mycorrhiza can either increase or decrease the litter decomposition rates either by facilitation or competition. However, empirical evidence about the magnitude and direction of such effects is lacking. To address this knowledge gap, we conducted a meta-analysis of published peer-reviewed literature. Surprisingly, only four studies were found relevant. Therefore, based on these four studies, we evaluated the effects of mycorrhiza on litter decomposition rates for eight species. Our meta-analysis exhibited an overall significant decrease (*SMD* = – 0.73, *Z* = −2.031, *p* = 0.042) in litter decomposition rate due to the presence of mycorrhiza. However, included studies indicated substantial between-study heterogeneity and slight publication bias. Our results support the 'Gadgil effect', which suggests mycorrhizal mediated litter decomposition suppression due to resource competition. However, we need more studies conducted for a longer duration and representative of diverse forest and litter types to arrive at a more robust conclusion.
+
+
