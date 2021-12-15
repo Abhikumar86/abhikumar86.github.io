@@ -98,24 +98,24 @@
 <polyline points='321.56,103.18 326.58,100.54 321.79,97.52 ' style='stroke-width: 1.07; stroke: #B3B3B3; stroke-linecap: butt;' />
 <line x1='207.57' y1='95.83' x2='323.19' y2='97.68' style='stroke-width: 1.07; stroke: #B3B3B3; stroke-linecap: butt;' />
 <polyline points='318.24,100.43 323.19,97.68 318.33,94.76 ' style='stroke-width: 1.07; stroke: #B3B3B3; stroke-linecap: butt;' />
-<text x='248.30' y='106.19' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='12.27px' lengthAdjust='spacingAndGlyphs'>bd</text>
-<text x='156.07' y='87.00' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>whc</text>
-<text x='86.90' y='126.99' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='23.92px' lengthAdjust='spacingAndGlyphs'>sand</text>
-<text x='140.15' y='39.54' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='13.48px' lengthAdjust='spacingAndGlyphs'>silt</text>
-<text x='305.36' y='132.87' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>clay</text>
-<text x='219.03' y='88.69' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='12.27px' lengthAdjust='spacingAndGlyphs'>ph</text>
-<text x='312.51' y='75.66' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='30.64px' lengthAdjust='spacingAndGlyphs'>ammn</text>
-<text x='170.42' y='63.54' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='36.79px' lengthAdjust='spacingAndGlyphs'>nitraten</text>
-<text x='296.59' y='68.19' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='23.90px' lengthAdjust='spacingAndGlyphs'>minn</text>
-<text x='315.18' y='115.82' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='8.58px' lengthAdjust='spacingAndGlyphs'>pi</text>
-<text x='104.93' y='71.14' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='20.84px' lengthAdjust='spacingAndGlyphs'>nitrif</text>
-<text x='295.06' y='47.86' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='33.71px' lengthAdjust='spacingAndGlyphs'>nminer</text>
-<text x='222.98' y='36.06' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='17.16px' lengthAdjust='spacingAndGlyphs'>soc</text>
+<text x='248.29' y='106.20' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='12.27px' lengthAdjust='spacingAndGlyphs'>bd</text>
+<text x='156.13' y='86.99' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>whc</text>
+<text x='110.93' y='109.94' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='23.92px' lengthAdjust='spacingAndGlyphs'>sand</text>
+<text x='140.11' y='39.49' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='13.48px' lengthAdjust='spacingAndGlyphs'>silt</text>
+<text x='305.42' y='132.87' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='19.61px' lengthAdjust='spacingAndGlyphs'>clay</text>
+<text x='219.06' y='88.69' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='12.27px' lengthAdjust='spacingAndGlyphs'>ph</text>
+<text x='312.54' y='75.69' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='30.64px' lengthAdjust='spacingAndGlyphs'>ammn</text>
+<text x='170.41' y='63.53' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='36.79px' lengthAdjust='spacingAndGlyphs'>nitraten</text>
+<text x='296.63' y='68.19' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='23.90px' lengthAdjust='spacingAndGlyphs'>minn</text>
+<text x='315.28' y='115.76' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='8.58px' lengthAdjust='spacingAndGlyphs'>pi</text>
+<text x='104.94' y='71.13' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='20.84px' lengthAdjust='spacingAndGlyphs'>nitrif</text>
+<text x='295.01' y='47.90' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='33.71px' lengthAdjust='spacingAndGlyphs'>nminer</text>
+<text x='222.91' y='36.04' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='17.16px' lengthAdjust='spacingAndGlyphs'>soc</text>
 <text x='256.80' y='54.14' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='14.72px' lengthAdjust='spacingAndGlyphs'>tkn</text>
-<text x='266.28' y='117.76' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='9.20px' lengthAdjust='spacingAndGlyphs'>tp</text>
-<text x='343.51' y='90.77' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='20.84px' lengthAdjust='spacingAndGlyphs'>mbc</text>
-<text x='340.18' y='113.00' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='21.46px' lengthAdjust='spacingAndGlyphs'>mbn</text>
-<text x='311.15' y='93.09' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='21.46px' lengthAdjust='spacingAndGlyphs'>mbp</text>
+<text x='284.76' y='102.46' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='9.20px' lengthAdjust='spacingAndGlyphs'>tp</text>
+<text x='343.47' y='90.82' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='20.84px' lengthAdjust='spacingAndGlyphs'>mbc</text>
+<text x='340.26' y='113.05' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='21.46px' lengthAdjust='spacingAndGlyphs'>mbn</text>
+<text x='311.18' y='93.09' text-anchor='middle' style='font-size: 11.04px; fill: #333333; font-family: Arial;' textLength='21.46px' lengthAdjust='spacingAndGlyphs'>mbp</text>
 <rect x='35.99' y='5.48' width='347.15' height='245.96' style='stroke-width: 1.07; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw0NjguMDB8MC4wMHwyODguMDA=)'>
