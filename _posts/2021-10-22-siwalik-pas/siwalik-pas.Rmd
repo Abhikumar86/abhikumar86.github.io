@@ -18,6 +18,8 @@ categories:
 - protected areas
 - siwaliks
 
+csl: apa.csl
+
 bibliography: refs.bib
 
 output:
@@ -32,28 +34,26 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+knitr::opts_chunk$set(echo = FALSE, comment = "#>",
+                      warning = F, message = F)
 
-
-* <https://doi.org/10.1659/MRD-JOURNAL-D-10-00019.1>
-
-
-```{r}
 library(dplyr)
 library(ggplot2)
-library(raster)
+library(gt)
+library(rgee)
 library(sf)
+library(terra)
 library(tmap)
 ```
 
 
-```{r eval=FALSE}
-## outline of Siwalik group from Geological Survey of India (GSI)
-sw_gsi <- st_read("D:/spatial-data/geology/Siwalik_Geology_2M.gpkg")
 
-## buffered (8.5 km) outline siwaliks
-sw_buffer <- sw_gsi |>
+```{r data-prep, eval=FALSE}
+## data preparation
+###################
+
+## outline of Siwalik group from Geological Survey of India (GSI)
+sw_buffer <- st_read("D:/spatial-data/geology/Siwalik_Geology_2M.gpkg") |>
   
   # create a buffer of 8.5 km around the area
   st_buffer(8500) |>
@@ -65,9 +65,14 @@ sw_buffer <- sw_gsi |>
   mutate(name = "Siwalik") |>
   
   # make valid
-  st_make_valid()
+  st_make_valid() |> 
+  
+  # save locally to rds
+  saveRDS("data/siwalik_buffer.rds")
 
-## Siwalik states and districts
+################################################################################
+
+## Indian states covering Siwalik
 jk <- st_read("D:/spatial-data/admin/ind_adm2/stname_JAMMU & KASHMIR.gpkg")
 hp <- st_read("D:/spatial-data/admin/ind_adm2/stname_HIMACHAL PRADESH.gpkg")
 pb <- st_read("D:/spatial-data/admin/ind_adm2/stname_PUNJAB.gpkg")
@@ -76,90 +81,266 @@ hr <- st_read("D:/spatial-data/admin/ind_adm2/stname_HARYANA.gpkg")
 uk <- st_read("D:/spatial-data/admin/ind_adm2/stname_UTTARAKHAND.gpkg")
 up <- st_read("D:/spatial-data/admin/ind_adm2/stname_UTTAR PRADESH.gpkg")
 
+## filter and save districts covering Siwaliks
 bind_rows(jk, hp, pb, ch, hr, uk, up) |>
   st_filter(sw_buffer, .predicate = st_overlaps) |>
   bind_rows(filter(hp, dtname %in% c("Hamirpur", "Una"))) |>
   saveRDS("data/siwalik_districts.rds")
 
+################################################################################
+
+## Protected areas in Siwalik (as of Dec 2020 from WII)
+rbind(
+    c("Chandigarh", "Sukhna Lake", "WLS", "1986", "25.98"),
+    
+    c("Haryana", "Kalesar", "National Park", "2003", "46.82"),
+    c("Haryana", "Bir Shikargarh", "WLS", "1987", "7.67"),  
+    c("Haryana", "Kalesar", "WLS", "1996", "54.36"),
+    c("Haryana", "Morni Hills (Khol-Hi-Raitan)", "WLS", "2004", "48.83"),
+    
+    
+    c("Himachal Pradesh", "Simbalbara", "National Park", "2010", "27.88"),
+    c("Himachal Pradesh", "Gobind Sagar", "WLS", "1962", "100.34"),
+    c("Himachal Pradesh", "Pong Dam Lake", "WLS", "1982", "207.59"),
+    c("Himachal Pradesh", "Shilli", "Conservation Reserve", "2013", "1.49"),
+    c("Himachal Pradesh", "Shri Naina Devi", "Conservation Reserve", "2013", 
+      "17.01"),
+    
+    c("Jammu and Kashmir", "Jasrota", "WLS", "1987", "10.04"),
+    c("Jammu and Kashmir", "Nandni", "WLS", "1981", "33.34"),
+    c("Jammu and Kashmir", "Ramnagar Rakha", "WLS", "1981", "31.5"),
+    c("Jammu and Kashmir", "Surinsar Mansar", "WLS", "1981", "97.82"),
+    c("Jammu and Kashmir", "Trikuta", "WLS", "1981", "31.77"),
+    c("Jammu and Kashmir", "Bahu", "Conservation Reserve", "2008", "19.75"),
+    c("Jammu and Kashmir", "Gharana Wetland", "Conservation Reserve", "2008", 
+      "0.75"),
+    c("Jammu and Kashmir", "Kukarian Wetland", "Conservation Reserve", "2008", 
+      "24.25"),
+    c("Jammu and Kashmir", "Nanga Wetland", "Conservation Reserve", "2008", 
+      "15.25"),
+    c("Jammu and Kashmir", "Pargwal Wetland", "Conservation Reserve", "2008", 
+      "49.25"),
+    c("Jammu and Kashmir", "Sangral-Asachak Wetland", "Conservation Reserve", 
+      "2008", "7.00"),
+    c("Jammu and Kashmir", "Thein Wetland", "Conservation Reserve", "2008", 
+      "18.90"),
+    
+    
+    c("Punjab", "Jhajjar Bacholi", "WLS", "1998", "1.16"),
+    c("Punjab", "Takhni-Rehmapur", "WLS", "1992", "3.82"),
+    c("Punjab", "Nangal", "WLS", "2009", "2.9"),
+    c("Punjab", "Ranjit Sagar", "Conservation Reserve", "2017", "18.65"),
+    c("Punjab", "Ropar Wetland", "Conservation Reserve", "2017", "2.11"),
+    c("Punjab", "Lalwan", "Community Reserve", "2007", "12.67"),
+    c("Punjab", "Siswan", "Community Reserve", "2017", "12.95"),
+    
+    c("Uttarakhand", "Corbett", "National Park", "1936", "520.82"),
+    c("Uttarakhand", "Rajaji", "National Park", "1983", "820"),
+    c("Uttarakhand", "Nandhaur", "WLS", "2012", "269.96"),
+    c("Uttarakhand", "Sonanadi", "WLS", "1987", "301.18"),
+    c("Uttarakhand", "Jhilmil Jheel", "Conservation Reserve", "2005", "37.84"),
+    c("Uttarakhand", "Pawalgarh", "Conservation Reserve", "2012", "58.25")
+    
+) |>
+    
+    as.data.frame() |> 
+    
+    dplyr::mutate(V1 = as.factor(V1), V3 = as.factor(V3), V4 = as.integer(V4), 
+           V5 = as.numeric(V5)) |>
+      
+    dplyr::rename("State/UT" = V1, "Name" = V2 , "Type" = V3, "Year" = V4, 
+               "WII_Area" = V5) |>
+  write.csv("data/wii_siwalik_pas.csv", row.names = F)
+
+################################################################################
+
+## Boundaries of protected areas from OpenStreetMap
+library(osmdata)
+
+## way type 
+pas1 <- (opq_osm_id(id = c(677724717, 668486755, 676577119, 669088005, 669101943, 
+                           126759807,  668309964, 678758041, 666664869, 668504384,
+                           668498256, 666725799, 668495014, 668472257, 668415720), 
+                    type = "way") |> 
+           opq_string() |> 
+           osmdata_sf())$osm_polygon
+
+## relation type
+pas2 <- (opq_osm_id(id = c(9300145, 8815465), type = "relation") |> 
+           opq_string() |> 
+           osmdata_sf())$osm_multipolygon
+
+## combine protected areas
+bind_rows(pas1, pas2) |> dplyr::select(name, geometry) |>
+  mutate(name = recode(
+    name, "Rajaji National Park/Tiger Reserve" = "Rajaji National Park"
+    )) |>
+  
+  inner_join(
+    mutate(read.csv("data/wii_siwalik_pas.csv"), 
+           name = paste(Name, Type)) 
+  ) |>
+  
+  ## save as shapefile
+  #st_write(dsn = "data/siwalik_pas.shp")
+
+  ## or as RDS
+  saveRDS("data/siwalik_pas.rds")
+  
+################################################################################
+
 ```
 
-## Preparing outline for Siwalik
+* <https://doi.org/10.1659/MRD-JOURNAL-D-10-00019.1>
 
-For preparing a region of interest (Outline for Siwaliks), We used the Geology of the region as provided by the Geological Survey of India. Then, We filter the Siwalik group and create a buffer around the region. I have already downloaded the geological maps for each of the state in the north-west India.
+
+## Introduction
+
+
+
+## Methodology
+
+We defined the Siwalik region based on the Geological Map of India [@GSI2021] accessed from the [bhukosh portal](https://bhukosh.gsi.gov.in/Bhukosh/MapViewer.aspx) on 13 August 2019. Then, we filtered the Siwalik groups from the `INDEX_` variable and dissolved with 8.5 km buffer to get an outline of the region (referred to Siwalik region hereafter). Based on this outline, we filtered the Indian states and districts that completely or partly overlapped.
+
+### Protected areas in Siwaliks
+
+We identified the protected areas falling in the Siwalik region from the National Wildlife Database prepared by Wildlife Institute of India (WII), Dehradun [@Sivakumar2010; @WII2020]. Further, we also considered the maps developed by WII (accessed from: <http://www.wiienvis.nic.in/Database/Maps_PAs_1267.aspx>) to identify the protected areas distribution in this region. The Specifically, we retrieved the state/UT, name, type, year of establishment and area for each protected area identified to overlap with Siwalik region.
+
+
+
+Next, we searched for boundaries of identified protected areas in Siwalik region. Unfortunately, we were unable to find any reliable and accurate database for spatial polygons of the protected areas. We decided to use the polygons provided the [OpenStreetMap](https://www.openstreetmap.org/), which are the nearest available boundaries for protected areas of India. Since the present study aim to assess vegetation change, we filtered all the terrestrial protected areas.The polygons for these selected protected areas were accessed using the `R` package `osmdata` [@Padgham2017].
+
+
+### Topography
+
+The elevation data obtained from SRTM 30 m 
+
+### Statistical analysis
+
+
+## Results
+
+Our analysis identified a total of 35 protected areas in the Siwaliks. These protected areas include four national parks, 16 wildlife sanctuaries, 13 conservation reserves and two community reserves. The Siwaliks has long history of protection as the India's first national park was established in this region. Before 1970s
+
+2010s 8
+2000s 12
+1990s 3
+1980s 10
+Before 2
+
+
+```{r}
+read.csv("data/wii_siwalik_pas.csv") |>
+  
+  mutate(Type = recode(Type, "WLS" = "Wildlife Sanctuary")) |>
+  
+    gt(caption = md("Protected areas in Siwaliks of north-west India (Source: Wildlife Institute of India, [2020](http://www.wiienvis.nic.in/Database/Protected_Area_854.aspx))")) |>
+    
+    cols_label(State.UT = "State/UT", WII_Area = md("Area (km<sup>2</sup>)")) |>
+    
+    fmt_number(columns = 5) |>
+    
+    cols_align(align = "left", columns = 1:3) |>
+    
+    tab_source_note(
+        md("**References:** <br>
+       Gosh-Harihar et al ([2019](https://doi.org/10.1016/j.biocon.2019.06.024));
+       Sivakumar et al ([2010](http://environmentportal.in/files/Shivalik.pdf))")
+    ) |>
+    
+    tab_source_note(
+        md("**Websites:** <br>
+      <http://wiienvis.nic.in/Database/Protected_Area_854.aspx> <br>
+      <http://wiienvis.nic.in/Database/npa_8231.aspx> <br>
+      <http://wiienvis.nic.in/Database/wls_8230.aspx> <br>
+      <http://wiienvis.nic.in/Database/cri_8229.aspx> <br>
+      <http://wiienvis.nic.in/Database/cri_8228.aspx>"
+        )
+    ) |>
+    
+    tab_options(
+        column_labels.border.top.width = 2,
+        column_labels.border.top.color = "black",
+        
+        table_body.border.top.color = "black",
+        table_body.border.top.width = 3,
+        
+        table_body.border.bottom.color = "black",
+        table_body.border.bottom.width = 2,
+        
+        table.border.bottom.width = 0,
+        table.border.bottom.color = NULL,
+        
+        # make the width 100%
+        table.width = pct(100),
+        table.background.color = "white"
+    )
+```
+
+### Topography
 
 
 ```{r eval=FALSE}
-## extract boundaries and data from OpenStreetMap
-library(osmdata)
+library(terra)
 
-jkpas <- (opq(c(74.8290, 32.4516, 75.4430, 33.0902)) |>
-  add_osm_feature(key = c("boundary", "leisure"), 
-                  value = c("protected_area", "national_park", "nature_reserve"), 
-                  value_exact = F) |>
-  osmdata_sf())$osm_polygons
+elev <- rast("D:/spatial-data/elevation/siwalik/Siwalik_Elevation30.tif")
 
-chpas <- 
+pas <- readRDS("data/siwalik_pas.rds") |> dplyr::filter(Name != "Trikuta") |>
+  st_transform(crs = crs(elev))
 
-jkpas |> tm_shape() + tm_fill(col = "green2", alpha = 0.2) + 
-  tm_borders(col = "seagreen", lwd = 2)
-
-## extract boundary of the protected area as sf from OpenStreetMap (osm)
-protected_areas <- opq(jkbb) |>
-  add_osm_feature(key = c("boundary", "leisure"), 
-                  value = c("protected_area", "national_park", "nature_reserve"), 
-                  value_exact = F) |>
-  #add_osm_feature(key = "leisure", value = "nature_reserve", value_exact = F) |>
-  osmdata_sf()
-
-## rename protected areas to short names and save to local file as gpkg
-tmap_mode("view")
-protected_areas$osm_polygons |> 
-  #dplyr::select(name, geometry) |>
-  #st_filter(sbox, .predicate = st_within) |> 
-  #st_write("data/protected_areas.shp")
-  tm_shape() + tm_fill(col = "green2", alpha = 0.2) + 
-  tm_borders(col = "seagreen", lwd = 2) +
-  tm_shape(sw) + tm_borders(col = "blue")
-
+ 
 ```
 
-
-```{r} 
-sw <- st_read("data/siwalik_0.shp") |> st_make_valid()
-pas <- st_read("data/protected_areas.shp")
+### Land use land cover
 
 
-
-#s2::s2_rebuild()
-#sf::sf_use_s2(FALSE)
-pas |> st_filter(sw, .predicate = st_within) |>
-  tm_shape() + tm_fill(col = "green2", alpha = 0.2) + tm_borders(col = "seagreen", lwd = 2) +
-  tm_shape(sw) + tm_borders(col = "red")
+```{r}
+crop_save <- function(origin_folder, pattern, destination_folder, name_sub_folder, crop_areas, name_crop_areas){
+  file_list <- list.files(path = origin_folder, pattern)
   
-  mutate(short_name = c("CL", "CD", "MH", "BS", "SL")) |>
-  st_write("data/protected_areas.gpkg")
+  #Create folder
+  dir.create(paste0(destination_folder,"/",name_sub_folder))
+  how_many_areas <- nrow(crop_areas)
+  
+  #Create raster stack
+  raster_stack <- stack() 
+  
+  #File paths
+  paths1 <- paste0(origin_folder,file_list)
+  
+  #Load rasters to stack
+  for(i in 1:length(file_list)){
+    raster_stack <- stack(raster_stack, raster(paths1[i]))  
+  }  
+  names_list <-  eval(parse(text=name_crop_areas))
+  numbers <- 1:length(names_list)
+  names_list <- paste0(as.character(numbers),"_polygon_", names_list)
+  polyRR_list <- list()
+  for(x in 1: nrow(crop_areas)){
+    pol1 <- assign(names_list[x],crop_areas[x,])
+    polyRR_list[[x]] <- pol1
+  }
+  for(j in 1:nlayers(raster_stack)){
+    dir.create(paste0(destination_folder,"/",name_sub_folder, "/", names(raster_stack)[j]))
+    for(k in 1:length(polyRR_list)){
+      a<-crop(raster_stack[[j]], polyRR_list[[k]])
+      a<-mask(a,polyRR_list[[k]], filename = paste0(destination_folder,"/",name_sub_folder, "/", names(raster_stack)[j], "/", "RR",polyRR_list[[k]]$Id, ".tif"))
+    }
+  }
+}
 ```
 
-```{r}
-tmap_mode("view")
-swdist <- readRDS("data/siwalik_districts.rds")
 
-tm_shape(sw_buffer) + 
-  tm_fill(col = "lightpink", alpha = 0.2) + 
-  tm_borders(col = "red") +
-  tm_shape(swdist) + tm_borders(col = "blue")
-```
-
-## Elevation
 
 ```{r}
-library(raster)
-library(tmap)
+pas <- readRDS("data/siwalik_pas.rds") |> dplyr::filter(Name != "Trikuta")
 
-elev <- raster("D:/spatial-data/elevation/Siwalik_Elevation90.tif")
-elev[elev > 2000 | elev == 0] <- NA
+nsamp <- pas |> mutate(n = round(as.numeric(st_area(pas)/1e6), 0)) |>
+  st_drop_geometry() |>
+  dplyr::select(n)
 
-tm_shape(elev) + tm_raster()
+
+st_sample(pas, nsamp[,1])
 ```
 
 

@@ -111,8 +111,7 @@ rbind(
 ) |> 
   as.data.frame() |>
   knitr::kable(col.names = c("Package", "Description", "Reference", "Links"), valign = "t") |>
-  row_spec(0, background = "#666", color = "#fff")
+  row_spec(0, background = "#666", color = "#fff") 
 ```
-
 
 

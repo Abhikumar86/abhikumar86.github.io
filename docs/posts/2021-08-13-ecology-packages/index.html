@@ -56,7 +56,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
 code span.cf { color: #007ba5; } /* ControlFlow */
@@ -77,12 +77,34 @@ code span.kw { color: #007ba5; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
 code span.ot { color: #007ba5; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
 code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
 </style>
 
   <!--radix_placeholder_meta_tags-->
@@ -170,7 +192,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["ecology-packages_files/anchor-4.2.2/anchor.min.js","ecology-packages_files/bowser-1.9.3/bowser.min.js","ecology-packages_files/crosstalk-1.1.1/css/crosstalk.css","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.js","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.js.map","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.min.js","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.min.js.map","ecology-packages_files/datatables-binding-0.18/datatables.js","ecology-packages_files/datatables-css-0.0.0/datatables-crosstalk.css","ecology-packages_files/distill-2.2.21/template.v2.js","ecology-packages_files/dt-core-1.10.20/css/jquery.dataTables.extra.css","ecology-packages_files/dt-core-1.10.20/css/jquery.dataTables.min.css","ecology-packages_files/dt-core-1.10.20/js/jquery.dataTables.min.js","ecology-packages_files/header-attrs-2.10/header-attrs.js","ecology-packages_files/header-attrs-2.8/header-attrs.js","ecology-packages_files/htmlwidgets-1.5.3/htmlwidgets.js","ecology-packages_files/jquery-1.11.3/jquery.min.js","ecology-packages_files/jquery-3.5.1/jquery-AUTHORS.txt","ecology-packages_files/jquery-3.5.1/jquery.js","ecology-packages_files/jquery-3.5.1/jquery.min.js","ecology-packages_files/jquery-3.5.1/jquery.min.map","ecology-packages_files/kePrint-0.0.1/kePrint.js","ecology-packages_files/lightable-0.0.1/lightable.css","ecology-packages_files/popper-2.6.0/popper.min.js","ecology-packages_files/tippy-6.2.7/tippy-bundle.umd.min.js","ecology-packages_files/tippy-6.2.7/tippy-light-border.css","ecology-packages_files/tippy-6.2.7/tippy.css","ecology-packages_files/tippy-6.2.7/tippy.umd.min.js","ecology-packages_files/webcomponents-2.0.0/webcomponents.js","refs.bib"]}
+  {"type":"character","attributes":{},"value":["ecology-packages_files/anchor-4.2.2/anchor.min.js","ecology-packages_files/bowser-1.9.3/bowser.min.js","ecology-packages_files/crosstalk-1.1.1/css/crosstalk.css","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.js","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.js.map","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.min.js","ecology-packages_files/crosstalk-1.1.1/js/crosstalk.min.js.map","ecology-packages_files/datatables-binding-0.18/datatables.js","ecology-packages_files/datatables-css-0.0.0/datatables-crosstalk.css","ecology-packages_files/distill-2.2.21/template.v2.js","ecology-packages_files/dt-core-1.10.20/css/jquery.dataTables.extra.css","ecology-packages_files/dt-core-1.10.20/css/jquery.dataTables.min.css","ecology-packages_files/dt-core-1.10.20/js/jquery.dataTables.min.js","ecology-packages_files/header-attrs-2.10/header-attrs.js","ecology-packages_files/header-attrs-2.11/header-attrs.js","ecology-packages_files/header-attrs-2.8/header-attrs.js","ecology-packages_files/htmlwidgets-1.5.3/htmlwidgets.js","ecology-packages_files/jquery-1.11.3/jquery.min.js","ecology-packages_files/jquery-3.5.1/jquery-AUTHORS.txt","ecology-packages_files/jquery-3.5.1/jquery.js","ecology-packages_files/jquery-3.5.1/jquery.min.js","ecology-packages_files/jquery-3.5.1/jquery.min.map","ecology-packages_files/jquery-3.6.0/jquery-3.6.0.js","ecology-packages_files/jquery-3.6.0/jquery-3.6.0.min.js","ecology-packages_files/jquery-3.6.0/jquery-3.6.0.min.map","ecology-packages_files/kePrint-0.0.1/kePrint.js","ecology-packages_files/lightable-0.0.1/lightable.css","ecology-packages_files/popper-2.6.0/popper.min.js","ecology-packages_files/tippy-6.2.7/tippy-bundle.umd.min.js","ecology-packages_files/tippy-6.2.7/tippy-light-border.css","ecology-packages_files/tippy-6.2.7/tippy.css","ecology-packages_files/tippy-6.2.7/tippy.umd.min.js","ecology-packages_files/webcomponents-2.0.0/webcomponents.js","refs.bib"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2243,7 +2265,7 @@ d-appendix d-footnote-list a.footnote-backlink {
 <a href="https://twitter.com/abkumar_">
 <i class="fa fa-twitter" aria-hidden="true"></i>
 </a>
-<a href="https://github.com/rstudio/distill" aria-label="Link to source">
+<a href="https://github.com/abhikumar86/abhikumar86.github.io" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2824,6 +2846,382 @@ reproducible and shareable species distribution modelling
 </tr>
 </tbody>
 </table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span>
+  
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"`adiv`"</span>, <span class='st'>"analyse biodiversity in ecology"</span>, <span class='fu'><a href='https://gt.rstudio.com/reference/md.html'>md</a></span><span class='op'>(</span><span class='st'>"Pavoine et al. [2020](https://doi.org/10.1111/2041-210x.13430)"</span><span class='op'>)</span>, <span class='st'>""</span><span class='op'>)</span>,
+  
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"`BAT`"</span>, <span class='st'>"measurement and estimation of alpha and beta taxon, phylogenetic and functional diversity"</span>, <span class='st'>"@cardoso2014"</span>, <span class='st'>""</span><span class='op'>)</span><span class='op'>)</span> |&gt;
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span> |&gt;
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div id="bguwlmxuwi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#bguwlmxuwi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bguwlmxuwi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bguwlmxuwi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bguwlmxuwi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bguwlmxuwi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bguwlmxuwi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bguwlmxuwi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bguwlmxuwi .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bguwlmxuwi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bguwlmxuwi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bguwlmxuwi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bguwlmxuwi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bguwlmxuwi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#bguwlmxuwi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bguwlmxuwi .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bguwlmxuwi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bguwlmxuwi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bguwlmxuwi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bguwlmxuwi .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bguwlmxuwi .gt_left {
+  text-align: left;
+}
+
+#bguwlmxuwi .gt_center {
+  text-align: center;
+}
+
+#bguwlmxuwi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bguwlmxuwi .gt_font_normal {
+  font-weight: normal;
+}
+
+#bguwlmxuwi .gt_font_bold {
+  font-weight: bold;
+}
+
+#bguwlmxuwi .gt_font_italic {
+  font-style: italic;
+}
+
+#bguwlmxuwi .gt_super {
+  font-size: 65%;
+}
+
+#bguwlmxuwi .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">V1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">V2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">V3</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">V4</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">`adiv`</td>
+<td class="gt_row gt_left">analyse biodiversity in ecology</td>
+<td class="gt_row gt_left">Pavoine et al. [2020](https://doi.org/10.1111/2041-210x.13430)</td>
+<td class="gt_row gt_left"></td></tr>
+    <tr><td class="gt_row gt_left">`BAT`</td>
+<td class="gt_row gt_left">measurement and estimation of alpha and beta taxon, phylogenetic and functional diversity</td>
+<td class="gt_row gt_left">@cardoso2014</td>
+<td class="gt_row gt_left"></td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">

@@ -1,0 +1,5 @@
+"author","year","lat","long","exp","species_number","sampling","initial_weight","mesh_size","litter","mycorrhiza","forest_type"
+"Zhu & Ehrenfeld",1996,39.875,-74.5083,1,1,4,1.633,1,"Leaf","ECM","Temperate"
+"Mayor & Henkel",2006,5.3013,-59.9112,1,1,3,17,1,"Leaf","ECM","Tropical"
+"Fernandez et al",2020,45.423585,-93.20181,4,2,3,2,2,"Leaf","ECM & AMF","Temperate"
+"Lang et al",2021,43.9333,-71.7667,4,4,3,1,2,"Leaf","ECM","Temperate"

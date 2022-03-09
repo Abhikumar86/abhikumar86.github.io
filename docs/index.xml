@@ -7,7 +7,17 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 27 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Threats to Biodiversity</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2022-01-05-threats-to-biodiversity</link>
+      <description>A short description of the post.</description>
+      <category>Biodiversity</category>
+      <guid>https://abhikumar86.github.io/posts/2022-01-05-threats-to-biodiversity</guid>
+      <pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/posts/2022-01-05-threats-to-biodiversity/img/number-of-described-species.png" medium="image" type="image/png" width="3400" height="2400"/>
+    </item>
     <item>
       <title>Churdhar Wildlife Sanctuary</title>
       <dc:creator>Abhishek Kumar</dc:creator>
@@ -22,6 +32,16 @@
       <media:content url="https://abhikumar86.github.io/posts/2021-10-27-churdhar-wls/churdhar-wls_files/figure-html5/unnamed-chunk-3-1.svg" medium="image" type="image/svg+xml"/>
     </item>
     <item>
+      <title>Protected areas in Indian Siwalik</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <link>https://abhikumar86.github.io/posts/2021-10-22-siwalik-pas</link>
+      <description>A short description of the post.</description>
+      <category>protected areas</category>
+      <category>siwaliks</category>
+      <guid>https://abhikumar86.github.io/posts/2021-10-22-siwalik-pas</guid>
+      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>Land Surface Temperature</title>
       <dc:creator>Abhishek Kumar</dc:creator>
       <link>https://abhikumar86.github.io/posts/2021-10-18-lst</link>
@@ -32,7 +52,7 @@
       <category>rgee</category>
       <category>time series</category>
       <guid>https://abhikumar86.github.io/posts/2021-10-18-lst</guid>
-      <pubDate>Sun, 17 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
       <media:content url="https://abhikumar86.github.io/posts/2021-10-18-lst/lst_files/figure-html5/fig1-1.svg" medium="image" type="image/svg+xml"/>
     </item>
     <item>
@@ -83,7 +103,7 @@
       <link>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</link>
       <description>A list of useful R packages for ecology, biodiversity and conservation.</description>
       <guid>https://abhikumar86.github.io/posts/2021-08-13-ecology-packages</guid>
-      <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Singrauli Map</title>

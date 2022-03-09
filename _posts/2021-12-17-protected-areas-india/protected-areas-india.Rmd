@@ -1,0 +1,80 @@
+---
+title: "Protected areas in India: Intro to `wdpar` package"
+description: |
+  A short description of the post.
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app/
+
+draft:true    
+    
+date: 2021-12-17
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r}
+# load packages
+library(wdpar)
+library(dplyr)
+library(ggmap)
+```
+
+```{r}
+# download protected area data for India
+# (excluding areas represented as point localities)
+ind_raw_pa_data <- wdpa_fetch(x = "India", wait = TRUE, 
+                              download_dir = rappdirs::user_data_dir("data")
+                              )
+
+```
+
+```{r}
+# clean Malta data
+ind_pa_data <- wdpa_clean(ind_raw_pa_data)
+```
+
+```{r}
+## ind boundary
+ind_boundary <- st_read("D:/spatial-data/admin/ind_adm1/ind_adm1.shp")
+
+# repair any geometry issues, dissolve the border, reproject to same
+# coordinate system as the protected area data, and repair the geometry again
+ind_boundary_data <- ind_boundary |> 
+  st_set_precision(1000) |>
+  sf::st_make_valid() |>
+  st_transform(st_crs(ind_pa_data)) %>%
+  sf::st_make_valid()
+```
+
+
+```{r}
+# print map
+ggmap(bg) +
+geom_sf(data = mlt_pa_data, fill = "#31A35480", inherit.aes = FALSE) +
+theme(axis.title = element_blank())
+
+ggplot() +
+  geom_sf(data = ind_boundary_data, fill = "grey98") +
+  geom_sf(data = ind_pa_data, fill = "#31A35480", inherit.aes = FALSE) +
+  theme_bw()
+```
+
+```{r}
+hist(
+  ind_pa_data$STATUS_YR,
+  main = "India's protected areas",
+  xlab = "Year established"
+)
+```
+
+
+

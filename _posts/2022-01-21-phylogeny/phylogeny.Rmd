@@ -1,0 +1,81 @@
+---
+title: "phylogeny"
+description: |
+  A short description of the post.
+author:
+  - name: Abhishek Kumar
+    url: https://akumar.netlify.app
+date: 2022-01-21
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r}
+library(rotl)
+
+## species of interest
+spp <- c("Acer saccharum", "Betula alleghaniensis", 
+         "Dicymbe corymbosa", "Fagus grandifolia", 
+         "Fraxinus americana", "Pinus rigida", 
+         "Pinus strobus", "Quercus ellipsoidalis")
+
+tree <- spp |> 
+  tnrs_match_names(context_name = "Land plants") |>
+  ott_id() |>
+  tol_induced_subtree(label_format = "name")
+
+plot(tree, cex = .8, label.offset = .1, no.margin = TRUE)
+
+```
+
+## meta-analysis
+
+```{r}
+egg_data <- system.file("extdata", "egg.csv", package = "rotl") |>
+  read.csv(stringsAsFactors = FALSE)
+
+head(egg_data)
+```
+
+```{r}
+plot(1 / sqrt(egg_data$VZr), egg_data$Zr,
+  pch = 16,
+  ylab = "Effect size (Zr)",
+  xlab = "Precision (1/SE)",
+  main = "Effect sizes for sex bias in egg size among 51 brid species"
+)
+```
+
+```{r}
+egg_data <- as.data.frame(egg_data)
+
+## Convert taxon names to lower case
+egg_data$animal <- tolower(egg_data$animal)
+
+## Let's remove the underscores (_) from the taxon names
+egg_data$animal <- gsub("_", " ", egg_data$animal)
+
+taxa <- tnrs_match_names(unique(egg_data$animal), context = "Animals")
+
+head(taxa)
+
+taxon_map <- structure(taxa$search_string, names = taxa$unique_name)
+
+taxon_map["Anser caerulescens"]
+
+tr <- tol_induced_subtree(ott_id(taxa)[is_in_tree(ott_id(taxa))])
+
+plot(tr, show.tip.label = FALSE)
+```
+
+```{r}
+
+```
+

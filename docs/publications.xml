@@ -7,7 +7,20 @@
     <description>I blog about Plant Ecology and R
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 11 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Plant ecology in Indian Siwalik range: a systematic map and its bibliometric analysis</title>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <dc:creator>Meenu Patil</dc:creator>
+      <dc:creator>Pardeep Kumar</dc:creator>
+      <dc:creator>Manoj Kumar</dc:creator>
+      <dc:creator>Anand Narain Singh</dc:creator>
+      <link>https://abhikumar86.github.io/publications/2022-abhishek-troe</link>
+      <description>We systematically identified the patterns and trends in plant ecological research of the Siwaliks</description>
+      <guid>https://abhikumar86.github.io/publications/2022-abhishek-troe</guid>
+      <pubDate>Mon, 14 Feb 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/publications/2022-abhishek-troe/2022-abhishek-troe_files/figure-html5/fig2-1.svg" medium="image" type="image/svg+xml"/>
+    </item>
     <item>
       <title>Comparative soil restoration potential of exotic and native woody plantations on coal mine spoil in a dry tropical environment of India: A case study</title>
       <dc:creator>Anand Narain Singh</dc:creator>
@@ -23,6 +36,18 @@
       <media:content url="https://abhikumar86.github.io/publications/2022-ansingh-ldd/2022-ansingh-ldd_files/figure-html5/fig1-1.svg" medium="image" type="image/svg+xml"/>
     </item>
     <item>
+      <title>Effects of mycorrhizal association on litter decomposition in the forest ecosystems: A meta-analysis</title>
+      <dc:creator>Meenu Patil</dc:creator>
+      <dc:creator>Abhishek Kumar</dc:creator>
+      <dc:creator>Pardeep Kumar</dc:creator>
+      <dc:creator>Anand Narain Singh</dc:creator>
+      <link>https://abhikumar86.github.io/publications/2021-10-22-meta-analysis</link>
+      <description>A short description of the post.</description>
+      <guid>https://abhikumar86.github.io/publications/2021-10-22-meta-analysis</guid>
+      <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://abhikumar86.github.io/publications/2021-10-22-meta-analysis/meta-analysis_files/figure-html5/fig2-1.svg" medium="image" type="image/svg+xml"/>
+    </item>
+    <item>
       <title>Ecological performances of exotic and native woody species on coal mine spoil in Indian dry tropical region</title>
       <dc:creator>Anand Narain Singh</dc:creator>
       <dc:creator>Abhishek Kumar</dc:creator>
@@ -33,7 +58,7 @@
       <category>Journal Article</category>
       <category>Ecological Engineering</category>
       <guid>https://abhikumar86.github.io/publications/2022-ansingh-ee</guid>
-      <pubDate>Sat, 10 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
       <media:content url="https://abhikumar86.github.io/publications/2022-ansingh-ee/2022-ansingh-ee_files/figure-html5/ee-fig1-1.svg" medium="image" type="image/svg+xml"/>
     </item>
     <item>
