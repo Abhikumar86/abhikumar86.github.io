@@ -9,7 +9,7 @@ categories:
 - Land Degradation & Development
 
 description: |
-  A short description of the post.
+  We compared the soil restoration potential of exotic and native plant species on coal mine. Our results suggested that native species are more beneficial for soil restoration than the exotic species.
   
 author:
   - name: Anand Narain Singh
@@ -24,12 +24,12 @@ author:
     orcid_id: 0000-0003-2252-7623
     
 journal: "Land Degradation & Development"
+
+doi: 10.1002/ldr.4286
             
 date: 02-11-2022
 
 bibliography: refs.bib
-
-draft: true
 
 reuse: false
 
@@ -37,7 +37,7 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     toc_float: true
     theme: pygments
 ---
@@ -107,6 +107,7 @@ tab_theme <- function(data, ...) {
 }
 ```
 
+> This is the original draft, which may differ from published manuscript. Please refer to https://doi.org/10.1002/ldr.4286
 
 ## Abstract
 
@@ -246,9 +247,7 @@ df |> group_by(Origin, vars) |>
 
 ### Effect of plantations on spoil physicochemical properties
 
-The primary aim of this paper was to investigate the effects of species and origin on coal mine spoil restoration.
-
-Among the spoil physical properties, soil texture parameters (clay, silt and sand content) was significantly differed due to species (Table \@ref(tab:tab1). However, bulk density, pH and water holding capacity were found similar under all species plantations (Table \@ref(tab:tab1).
+The primary aim of this paper was to investigate the effects of species and origin on coal mine spoil restoration. Among the spoil physical properties, soil texture parameters (clay, silt and sand content) was significantly differed due to species (Table \@ref(tab:tab1)). However, bulk density, pH and water holding capacity were found similar under all species plantations (Table \@ref(tab:tab1)).
 
 ```{r tab1}
 ## read the data, add secondary variables and make longer format
