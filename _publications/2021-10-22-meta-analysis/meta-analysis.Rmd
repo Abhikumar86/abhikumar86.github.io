@@ -30,6 +30,8 @@ date: 2021-10-22
 bibliography: refs.bib
 csl: mycorrhiza.csl
 
+draft: true
+
 output:
   distill::distill_article:
     self_contained: false
